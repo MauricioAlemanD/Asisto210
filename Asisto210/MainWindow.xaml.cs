@@ -66,7 +66,7 @@ namespace Asisto210
         {
             ASISTO210 aSISTO210 = new ASISTO210();
             aSISTO210.Show();
-            this.Hide();    
+            this.Close();    
         }
 
         private void txtUsuario_TextChanged(object sender, TextChangedEventArgs e)

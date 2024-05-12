@@ -15,16 +15,31 @@
     <None Remove="bloqueado.png" />
     <None Remove="calendar.png" />
     <None Remove="close.png" />
+    <None Remove="closeg.png" />
     <None Remove="file.png" />
     <None Remove="gear.png" />
     <None Remove="home.png" />
     <None Remove="logo-asisto210-ico.png" />
     <None Remove="logo-asisto210.png" />
     <None Remove="logout.png" />
+    <None Remove="maximize.png" />
     <None Remove="menu.png" />
     <None Remove="minimize-sign.png" />
     <None Remove="teacher.png" />
     <None Remove="user.png" />
+    <None Remove="wifi.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="zkemkeeper">
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>fe9ded34-e159-408e-8490-b720a5e632c7</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -37,16 +52,19 @@
     <Resource Include="bloqueado.png" />
     <Resource Include="calendar.png" />
     <Resource Include="close.png" />
+    <Resource Include="closeg.png" />
     <Resource Include="file.png" />
     <Resource Include="gear.png" />
     <Resource Include="home.png" />
     <Resource Include="logo-asisto210-ico.png" />
     <Resource Include="logo-asisto210.png" />
     <Resource Include="logout.png" />
+    <Resource Include="maximize.png" />
     <Resource Include="menu.png" />
     <Resource Include="minimize-sign.png" />
     <Resource Include="teacher.png" />
     <Resource Include="user.png" />
+    <Resource Include="wifi.png" />
   </ItemGroup>
 
 </Project>
