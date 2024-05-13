@@ -10,5 +10,6 @@ namespace Asisto210
     {
         public string Usuario {get;set; } = "Administrador";
         public zkemkeeper.CZKEMClass Biometrico = new zkemkeeper.CZKEMClass();
+
     }
 }

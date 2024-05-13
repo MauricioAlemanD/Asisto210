@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Asisto210"
         mc:Ignorable="d" WindowStartupLocation ="CenterScreen" AllowsTransparency="True" WindowState="Normal"  WindowStyle="None"
-        Title="ASISTO210" Height="900" Width="1584" FontFamily="Poppins" Icon="/logo-asisto210-ico.png" ResizeMode="NoResize">
+        Title="ASISTO210" Height="585" Width="1148" FontFamily="Poppins" Icon="/logo-asisto210-ico.png" ResizeMode="NoResize">
 
     <Window.Resources>
         <ImageBrush x:Key="tb_mouse_over"
@@ -83,21 +83,40 @@
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
             </Grid.Background>
             <Grid x:Name="PanelPrincipal" Margin="65,55,0,0">
-                <Label x:Name="lblSaludo" Content="Buen dia " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Poppins Light"/>
-                <Label x:Name="lblEstado" Content="" HorizontalAlignment="Left" Margin="255,74,0,0" VerticalAlignment="Top" Height="132" Width="139" Visibility="Hidden">
+                <Label x:Name="lblEstado" Content="" Margin="0,10,10,0" VerticalAlignment="Top" Height="32" BorderThickness="1,1,1,1" BorderBrush="#FF4E1417" HorizontalAlignment="Right" Width="32">
                     <Label.Background>
                         <ImageBrush ImageSource="/wifi.png"/>
                     </Label.Background>
                 </Label>
+                <Grid Margin="10,10,10,10">
+                    <Border BorderBrush="#FF4E1417" BorderThickness="1" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="402">
+                        <Grid>
+                            <Label Content="Últimas entradas" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FF4E1417" FontWeight="Bold"/>
+                            <ListView x:Name="lsvEntradas" d:ItemsSource="{d:SampleData ItemCount=0}" Height="469" VerticalAlignment="Top" Margin="0,39,0,0" Foreground="#FF4E1417" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <ListView.BorderBrush>
+                                    <SolidColorBrush Color="#FFCA545A" Opacity="0"/>
+                                </ListView.BorderBrush>
+                                <ListView.Background>
+                                    <SolidColorBrush Color="#FFCA545A" Opacity="0"/>
+                                </ListView.Background>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Grid>
-            <Grid x:Name="PanelUsuarios" Margin="65,55,0,0" d:IsHidden="True"/>
-            <Grid x:Name="PanelReportes" Margin="65,55,0,0" d:IsHidden="True"/>
-            <Grid x:Name="PanelAjustes" Margin="65,55,0,0" d:IsHidden="True"/>
-            <Grid x:Name="PanelRegistroDiario" Margin="65,55,0,0"/>
+            <Grid x:Name="PanelUsuarios" Margin="65,55,0,0" d:IsHidden="True" d:IsLocked="True"/>
+            <Grid x:Name="PanelReportes" Margin="65,55,0,0" d:IsHidden="True" d:IsLocked="True"/>
+            <Grid x:Name="PanelAjustes" Margin="65,55,0,0" d:IsHidden="True" d:IsLocked="True"/>
+            <Grid x:Name="PanelRegistroDiario" Margin="65,55,0,0" d:IsLocked="True"/>
             <Grid x:Name="navPanel"
                   HorizontalAlignment="Left"
                   Width="65"
-                  Background="#FF4E1417">
+                  Background="#FF4E1417" d:IsLocked="True">
 
                 <StackPanel x:Name="stp_Herramientas">
 
@@ -422,7 +441,7 @@
             </Grid>
 
         </Grid>
-        <Grid Margin="65,0,0,0" Height="54" VerticalAlignment="Top" d:IsLocked="True">
+        <Grid x:Name="barTop" Margin="65,0,0,0" Height="54" VerticalAlignment="Top" d:IsLocked="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="26*"/>
                 <RowDefinition Height="29*"/>
@@ -440,6 +459,7 @@
                     <ImageBrush ImageSource="/minimize-sign.png"/>
                 </Label.Background>
             </Label>
+            <Label x:Name="lblSaludo" Content="Buen dia " HorizontalAlignment="Right" Margin="0,20,187,0" VerticalAlignment="Top" FontSize="16" FontFamily="Poppins Thin" Height="27" Width="244" Foreground="#FFDEDEDE" FontWeight="Bold" Grid.RowSpan="2"/>
         </Grid>
     </Grid>
 </Window>
