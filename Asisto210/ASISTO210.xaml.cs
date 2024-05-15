@@ -19,6 +19,8 @@ namespace Asisto210
     /// <summary>
     /// Lógica de interacción para ASISTO210.xaml
     /// </summary>
+    /// 
+  
     public partial class ASISTO210 : Window
     {
         Global gbl = new Global();
@@ -27,7 +29,7 @@ namespace Asisto210
 
 
         List<ListaResgitro> lsRg = new List<ListaResgitro>();
-        
+
 
         public ASISTO210()
         {
@@ -48,8 +50,8 @@ namespace Asisto210
             columnaNombre.Header = "Nombre";
             columnaNombre.DisplayMemberBinding = new System.Windows.Data.Binding("Nombre");
             columnaNombre.Width = 150;
-            griw.Columns.Add(columnaNombre);  
-                       
+            griw.Columns.Add(columnaNombre);
+
             GridViewColumn columnaHRegistro = new GridViewColumn();
             columnaHRegistro.Header = "Hora de registro";
             columnaHRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("HoraRegistro");
@@ -70,14 +72,14 @@ namespace Asisto210
 
             lsvEntradas.View = griw;
 
-            
+
 
             llenadoUtilma();
         }
 
         private void estadoConexion()
         {
-            
+
             if (estado == true)
             {
                 lblEstado.Visibility = Visibility.Visible;
@@ -128,19 +130,19 @@ namespace Asisto210
                             if (idwVerifyMode.ToString() == "3")
                             {
                                 Metodo = "Pin";
-                            }else if(idwVerifyMode.ToString() == "1")
+                            } else if (idwVerifyMode.ToString() == "1")
                             {
                                 Metodo = "Huella";
-                            }else if (idwVerifyMode.ToString() == "15")
-                            { 
-                                Metodo = "Facial"; 
+                            } else if (idwVerifyMode.ToString() == "15")
+                            {
+                                Metodo = "Facial";
                             }
 
-                            lsRg.Add(new ListaResgitro(sdwEnrollNumber.ToString(), sName, fechaHora.TimeOfDay.ToString(),idwDay.ToString() + "-" + idwMonth.ToString() + "-" + idwYear.ToString(),Metodo));
+                            lsRg.Add(new ListaResgitro(sdwEnrollNumber.ToString(), sName, fechaHora.TimeOfDay.ToString(), idwDay.ToString() + "-" + idwMonth.ToString() + "-" + idwYear.ToString(), Metodo));
                             lsvEntradas.ItemsSource = lsRg;
                         }
 
-                        
+
 
                         //lsvEntradas.Items.Add(iGLCount.ToString());
                         //lsvEntradas.Items.Add(sdwEnrollNumber);//modify by Darcy on Nov.26 2009
@@ -160,27 +162,58 @@ namespace Asisto210
 
         private void ListViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //Panel de inicio
             lblContenedor.Content = "Inicio";
+            PanelPrincipal.Visibility = Visibility.Visible;
+            PanelUsuarios.Visibility = Visibility.Hidden;
+            PanelReportes.Visibility = Visibility.Hidden;
+            PanelAjustes.Visibility = Visibility.Hidden;
+            PanelRegistroDiario.Visibility = Visibility.Hidden;
         }
 
         private void ListViewItem_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
-            lblContenedor.Content = "Personal";
+            //Panel Usuarios
+            lblContenedor.Content = "Usuarios";
+            PanelPrincipal.Visibility = Visibility.Hidden;
+            PanelUsuarios.Visibility = Visibility.Visible;
+            PanelReportes.Visibility = Visibility.Hidden;
+            PanelAjustes.Visibility = Visibility.Hidden;
+            PanelRegistroDiario.Visibility = Visibility.Hidden;
+
         }
 
         private void ListViewItem_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e)
         {
+            //Panel reportes
             lblContenedor.Content = "Reportes";
+            PanelPrincipal.Visibility = Visibility.Hidden;
+            PanelUsuarios.Visibility = Visibility.Hidden;
+            PanelReportes.Visibility = Visibility.Visible;
+            PanelAjustes.Visibility = Visibility.Hidden;
+            PanelRegistroDiario.Visibility = Visibility.Hidden;
         }
 
         private void ListViewItem_MouseLeftButtonUp_3(object sender, MouseButtonEventArgs e)
         {
-            lblContenedor.Content = "Configuración";
+            //Panel Ajustes
+            lblContenedor.Content = "Ajustes";
+            PanelPrincipal.Visibility = Visibility.Hidden;
+            PanelUsuarios.Visibility = Visibility.Hidden;
+            PanelReportes.Visibility = Visibility.Visible;
+            PanelAjustes.Visibility = Visibility.Hidden;
+            PanelRegistroDiario.Visibility = Visibility.Hidden;
         }
 
         private void ListViewItem_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e)
         {
-            lblContenedor.Content = "Reporte diario";
+            //Panel Registro diario
+            lblContenedor.Content = "Registro diario";
+            PanelPrincipal.Visibility = Visibility.Hidden;
+            PanelUsuarios.Visibility = Visibility.Hidden;
+            PanelReportes.Visibility = Visibility.Hidden;
+            PanelAjustes.Visibility = Visibility.Hidden;
+            PanelRegistroDiario.Visibility = Visibility.Visible;
         }
 
         private void ListViewItem_MouseLeftButtonUp_5(object sender, MouseButtonEventArgs e)
@@ -199,6 +232,11 @@ namespace Asisto210
         private void lblMin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

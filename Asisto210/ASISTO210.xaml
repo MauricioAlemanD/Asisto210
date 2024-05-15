@@ -82,7 +82,7 @@
             <Grid.Background>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
             </Grid.Background>
-            <Grid x:Name="PanelPrincipal" Margin="65,55,0,0">
+            <Grid x:Name="PanelPrincipal" Margin="65,55,0,0" d:IsHidden="True">
                 <Label x:Name="lblEstado" Content="" Margin="0,10,10,0" VerticalAlignment="Top" Height="32" BorderThickness="1,1,1,1" BorderBrush="#FF4E1417" HorizontalAlignment="Right" Width="32">
                     <Label.Background>
                         <ImageBrush ImageSource="/wifi.png"/>
@@ -109,10 +109,36 @@
                     </Border>
                 </Grid>
             </Grid>
-            <Grid x:Name="PanelUsuarios" Margin="65,55,0,0" d:IsHidden="True" d:IsLocked="True"/>
-            <Grid x:Name="PanelReportes" Margin="65,55,0,0" d:IsHidden="True" d:IsLocked="True"/>
-            <Grid x:Name="PanelAjustes" Margin="65,55,0,0" d:IsHidden="True" d:IsLocked="True"/>
-            <Grid x:Name="PanelRegistroDiario" Margin="65,55,0,0" d:IsLocked="True"/>
+            <Grid x:Name="PanelUsuarios" Margin="65,97,574,47">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="24,0,-298,0">
+                    <DataGrid Margin="49,20,70,-20" BorderBrush="White" HorizontalGridLinesBrush="#FF4E1417" VerticalGridLinesBrush="#FF4E1417" RowBackground="#FFCA545A" AlternatingRowBackground="#FF4E1417" Foreground="White" SelectionChanged="DataGrid_SelectionChanged" FontSize="16">
+                        <DataGrid.Background>
+                            <SolidColorBrush Color="#FFF0F0F0" Opacity="0"/>
+                        </DataGrid.Background>
+                        <DataGrid.Resources>
+                            
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="#FFCA545A"/>
+                                <Setter Property="Width" Value="100"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF4E1417"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding can}"/>
+                            <DataGridTextColumn Header="Hora entrada" Binding="{Binding cas}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Grid>
+            <Grid x:Name="PanelReportes" Margin="65,55,0,0" d:IsHidden="True"/>
+            <Grid x:Name="PanelAjustes" Margin="65,55,0,0" d:IsHidden="True"/>
+            <Grid x:Name="PanelRegistroDiario" Margin="65,55,0,0" d:IsHidden="True"/>
             <Grid x:Name="navPanel"
                   HorizontalAlignment="Left"
                   Width="65"
