@@ -38,43 +38,43 @@ namespace Asisto210
             lblSaludo.Content = lblSaludo.Content + " " + gbl.Usuario;
             estadoConexion();
 
-            GridView griw = new GridView();
+           //GridView griw = new GridView();
 
-            GridViewColumn columnaId = new GridViewColumn();
-            columnaId.Header = "ID Usuario";
-            columnaId.DisplayMemberBinding = new System.Windows.Data.Binding("Id");
-            columnaId.Width = 50;
-            griw.Columns.Add(columnaId);
+            //GridViewColumn columnaId = new GridViewColumn();
+            //columnaId.Header = "ID Usuario";
+            //columnaId.DisplayMemberBinding = new System.Windows.Data.Binding("Id");
+            //columnaId.Width = 50;
+            //griw.Columns.Add(columnaId);
 
-            GridViewColumn columnaNombre = new GridViewColumn();
-            columnaNombre.Header = "Nombre";
-            columnaNombre.DisplayMemberBinding = new System.Windows.Data.Binding("Nombre");
-            columnaNombre.Width = 150;
-            griw.Columns.Add(columnaNombre);
+            //GridViewColumn columnaNombre = new GridViewColumn();
+            //columnaNombre.Header = "Nombre";
+            //columnaNombre.DisplayMemberBinding = new System.Windows.Data.Binding("Nombre");
+            //columnaNombre.Width = 150;
+            //griw.Columns.Add(columnaNombre);
 
-            GridViewColumn columnaHRegistro = new GridViewColumn();
-            columnaHRegistro.Header = "Hora de registro";
-            columnaHRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("HoraRegistro");
-            columnaHRegistro.Width = 70;
-            griw.Columns.Add(columnaHRegistro);
+            //GridViewColumn columnaHRegistro = new GridViewColumn();
+            //columnaHRegistro.Header = "Hora de registro";
+            //columnaHRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("HoraRegistro");
+            //columnaHRegistro.Width = 70;
+            //griw.Columns.Add(columnaHRegistro);
 
-            GridViewColumn columnaFRegistro = new GridViewColumn();
-            columnaFRegistro.Header = "Fecha de registro";
-            columnaFRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("FechaRegistro");
-            columnaFRegistro.Width = 70;
-            griw.Columns.Add(columnaFRegistro);
+            //GridViewColumn columnaFRegistro = new GridViewColumn();
+            //columnaFRegistro.Header = "Fecha de registro";
+            //columnaFRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("FechaRegistro");
+            //columnaFRegistro.Width = 70;
+            //griw.Columns.Add(columnaFRegistro);
 
-            GridViewColumn columnaMRegistro = new GridViewColumn();
-            columnaMRegistro.Header = "Método de registro";
-            columnaMRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("MetodoRegistro");
-            columnaMRegistro.Width = 50;
-            griw.Columns.Add(columnaMRegistro);
+            //GridViewColumn columnaMRegistro = new GridViewColumn();
+            //columnaMRegistro.Header = "Método de registro";
+            //columnaMRegistro.DisplayMemberBinding = new System.Windows.Data.Binding("MetodoRegistro");
+            //columnaMRegistro.Width = 50;
+            //griw.Columns.Add(columnaMRegistro);
 
-            lsvEntradas.View = griw;
+            //lsvEntradas.View = griw;
 
 
 
-            llenadoUtilma();
+            //llenadoUtilma();
         }
 
         private void estadoConexion()
@@ -82,138 +82,108 @@ namespace Asisto210
 
             if (estado == true)
             {
-                lblEstado.Visibility = Visibility.Visible;
+                //lblEstado.Visibility = Visibility.Visible;
                 iMachineNumber = 1;
             }
         }
 
-        private void llenadoUtilma()
-        {
-            if (estado == true)
-            {
-                string sdwEnrollNumber = "";
-                int idwVerifyMode = 0;
-                int idwInOutMode = 0;
-                int idwYear = 0;
-                int idwMonth = 0;
-                int idwDay = 0;
-                int idwHour = 0;
-                int idwMinute = 0;
-                int idwSecond = 0;
-                int idwWorkcode = 0;
+        //private void llenadoUtilma()
+        //{
+        //    if (estado == true)
+        //    {
+        //        string sdwEnrollNumber = "";
+        //        int idwVerifyMode = 0;
+        //        int idwInOutMode = 0;
+        //        int idwYear = 0;
+        //        int idwMonth = 0;
+        //        int idwDay = 0;
+        //        int idwHour = 0;
+        //        int idwMinute = 0;
+        //        int idwSecond = 0;
+        //        int idwWorkcode = 0;
 
-                string sName = "";
-                string sPassword = "";
-                int iPrivilege = 0;
-                bool bEnabled = true;
+        //        string sName = "";
+        //        string sPassword = "";
+        //        int iPrivilege = 0;
+        //        bool bEnabled = true;
 
-                int idwErrorCode = 0;
-                int iGLCount = 0;
-                int iIndex = 0;
+        //        int idwErrorCode = 0;
+        //        int iGLCount = 0;
+        //        int iIndex = 0;
 
-                lsvEntradas.Items.Clear();
+        //        lsvEntradas.Items.Clear();
 
-                gbl.Biometrico.EnableDevice(iMachineNumber, false);
+        //        gbl.Biometrico.EnableDevice(iMachineNumber, false);
 
-                if (gbl.Biometrico.ReadGeneralLogData(iMachineNumber))
-                {
-                    while (gbl.Biometrico.SSR_GetGeneralLogData(iMachineNumber, out sdwEnrollNumber, out idwVerifyMode,
-                           out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
-                    {
-                        iGLCount++;
+        //        if (gbl.Biometrico.ReadGeneralLogData(iMachineNumber))
+        //        {
+        //            while (gbl.Biometrico.SSR_GetGeneralLogData(iMachineNumber, out sdwEnrollNumber, out idwVerifyMode,
+        //                   out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+        //            {
+        //                iGLCount++;
 
-                        if (gbl.Biometrico.SSR_GetUserInfo(iMachineNumber, sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))
-                        {
-                            var fechaHora = new DateTime(idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond);
-                            String Metodo = "";
+        //                if (gbl.Biometrico.SSR_GetUserInfo(iMachineNumber, sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))
+        //                {
+        //                    var fechaHora = new DateTime(idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond);
+        //                    String Metodo = "";
 
-                            if (idwVerifyMode.ToString() == "3")
-                            {
-                                Metodo = "Pin";
-                            } else if (idwVerifyMode.ToString() == "1")
-                            {
-                                Metodo = "Huella";
-                            } else if (idwVerifyMode.ToString() == "15")
-                            {
-                                Metodo = "Facial";
-                            }
+        //                    if (idwVerifyMode.ToString() == "3")
+        //                    {
+        //                        Metodo = "Pin";
+        //                    } else if (idwVerifyMode.ToString() == "1")
+        //                    {
+        //                        Metodo = "Huella";
+        //                    } else if (idwVerifyMode.ToString() == "15")
+        //                    {
+        //                        Metodo = "Facial";
+        //                    }
 
-                            lsRg.Add(new ListaResgitro(sdwEnrollNumber.ToString(), sName, fechaHora.TimeOfDay.ToString(), idwDay.ToString() + "-" + idwMonth.ToString() + "-" + idwYear.ToString(), Metodo));
-                            lsvEntradas.ItemsSource = lsRg;
-                        }
-
-
-
-                        //lsvEntradas.Items.Add(iGLCount.ToString());
-                        //lsvEntradas.Items.Add(sdwEnrollNumber);//modify by Darcy on Nov.26 2009
-                        //lsvEntradas.Items.Add(idwVerifyMode.ToString());
-                        //lsvEntradas.Items.Add(idwInOutMode.ToString());
-                        //lsvEntradas.Items.Add(idwYear.ToString() + "-" + idwMonth.ToString() + "-" + idwDay.ToString() + " " + idwHour.ToString() + ":" + idwMinute.ToString() + ":" + idwSecond.ToString());
-                        //lsvEntradas.Items.Add(idwWorkcode.ToString());
-                        iIndex++;
-
-                        //var FechaHora = new DateTime(idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond);
+        //                    lsRg.Add(new ListaResgitro(sdwEnrollNumber.ToString(), sName, fechaHora.TimeOfDay.ToString(), idwDay.ToString() + "-" + idwMonth.ToString() + "-" + idwYear.ToString(), Metodo));
+        //                    lsvEntradas.ItemsSource = lsRg;
+        //                }
 
 
-                    }
-                }
-            }
-        }
+
+        //                //lsvEntradas.Items.Add(iGLCount.ToString());
+        //                //lsvEntradas.Items.Add(sdwEnrollNumber);//modify by Darcy on Nov.26 2009
+        //                //lsvEntradas.Items.Add(idwVerifyMode.ToString());
+        //                //lsvEntradas.Items.Add(idwInOutMode.ToString());
+        //                //lsvEntradas.Items.Add(idwYear.ToString() + "-" + idwMonth.ToString() + "-" + idwDay.ToString() + " " + idwHour.ToString() + ":" + idwMinute.ToString() + ":" + idwSecond.ToString());
+        //                //lsvEntradas.Items.Add(idwWorkcode.ToString());
+        //                iIndex++;
+
+        //                //var FechaHora = new DateTime(idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond);
+
+
+        //            }
+        //        }
+        //    }
+        //}
 
         private void ListViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //Panel de inicio
-            lblContenedor.Content = "Inicio";
-            PanelPrincipal.Visibility = Visibility.Visible;
-            PanelUsuarios.Visibility = Visibility.Hidden;
-            PanelReportes.Visibility = Visibility.Hidden;
-            PanelAjustes.Visibility = Visibility.Hidden;
-            PanelRegistroDiario.Visibility = Visibility.Hidden;
+
         }
 
         private void ListViewItem_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
-            //Panel Usuarios
-            lblContenedor.Content = "Usuarios";
-            PanelPrincipal.Visibility = Visibility.Hidden;
-            PanelUsuarios.Visibility = Visibility.Visible;
-            PanelReportes.Visibility = Visibility.Hidden;
-            PanelAjustes.Visibility = Visibility.Hidden;
-            PanelRegistroDiario.Visibility = Visibility.Hidden;
+
 
         }
 
         private void ListViewItem_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e)
         {
-            //Panel reportes
-            lblContenedor.Content = "Reportes";
-            PanelPrincipal.Visibility = Visibility.Hidden;
-            PanelUsuarios.Visibility = Visibility.Hidden;
-            PanelReportes.Visibility = Visibility.Visible;
-            PanelAjustes.Visibility = Visibility.Hidden;
-            PanelRegistroDiario.Visibility = Visibility.Hidden;
+
         }
 
         private void ListViewItem_MouseLeftButtonUp_3(object sender, MouseButtonEventArgs e)
         {
-            //Panel Ajustes
-            lblContenedor.Content = "Ajustes";
-            PanelPrincipal.Visibility = Visibility.Hidden;
-            PanelUsuarios.Visibility = Visibility.Hidden;
-            PanelReportes.Visibility = Visibility.Visible;
-            PanelAjustes.Visibility = Visibility.Hidden;
-            PanelRegistroDiario.Visibility = Visibility.Hidden;
+
         }
 
         private void ListViewItem_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e)
         {
-            //Panel Registro diario
-            lblContenedor.Content = "Registro diario";
-            PanelPrincipal.Visibility = Visibility.Hidden;
-            PanelUsuarios.Visibility = Visibility.Hidden;
-            PanelReportes.Visibility = Visibility.Hidden;
-            PanelAjustes.Visibility = Visibility.Hidden;
-            PanelRegistroDiario.Visibility = Visibility.Visible;
+   
         }
 
         private void ListViewItem_MouseLeftButtonUp_5(object sender, MouseButtonEventArgs e)

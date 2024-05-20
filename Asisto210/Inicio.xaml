@@ -1,0 +1,124 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Asisto210"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Asisto210.Inicio"
+      mc:Ignorable="d" 
+      d:DesignHeight="531" d:DesignWidth="1083"
+      Title="Inicio" Loaded="Page_Loaded">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="1083" Height="531">
+        <Calendar Margin="18,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White"  Height="174" Width="176" FontSize="80">
+            <Calendar.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Calendar.Effect>
+            <Calendar.BorderBrush>
+                <SolidColorBrush Color="#FFC57D7D" Opacity="0"/>
+            </Calendar.BorderBrush>
+        </Calendar>
+        <Label Content="Últimos ingresos" Margin="239,10,684,487" FontFamily="Global User Interface" FontSize="18"/>
+        <Border BorderThickness="1" Margin="239,39,334,10" Background="White">
+            <DataGrid x:Name="dvgUltimosRegistros" AutoGenerateColumns="False" Foreground="Black"  FontSize="10" Margin="0,-1,0,0" BorderBrush="White" AlternatingRowBackground="White" RowBackground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" CanUserResizeColumns="False" SelectionMode="Single" RowDetailsVisibilityMode="Collapsed" EnableRowVirtualization="False" IsSynchronizedWithCurrentItem="False" >
+                <DataGrid.Background>
+                    <SolidColorBrush Color="White" Opacity="100"/>
+                </DataGrid.Background>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="TextBlock.Width" Value="100"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRowHeader}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Effect>
+                    <DropShadowEffect Opacity="0.1"/>
+                </DataGrid.Effect>
+
+            </DataGrid>
+        </Border>
+        <Label Content="Calendario" Margin="18,10,905,492" FontFamily="Global User Interface" FontSize="18"/>
+        <Label Content="Hora sistema" Margin="18,251,905,251" FontFamily="Global User Interface" FontSize="18"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="18,280,0,0" VerticalAlignment="Top" Width="184">
+            <Rectangle.Effect>
+                <DropShadowEffect Opacity="0.125"/>
+            </Rectangle.Effect>
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="Black" Opacity="0"/>
+            </Rectangle.Stroke>
+            <Rectangle.Fill>
+                <SolidColorBrush Color="White" Opacity="1"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Label x:Name="lblHora" Content="00:00" HorizontalAlignment="Left" Margin="20,280,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="48" HorizontalContentAlignment="Center"/>
+        <Label Content="Hora checador" Margin="17,366,906,136" FontFamily="Global User Interface" FontSize="18"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="17,395,0,0" VerticalAlignment="Top" Width="184">
+            <Rectangle.Effect>
+                <DropShadowEffect Opacity="0.125"/>
+            </Rectangle.Effect>
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="Black" Opacity="0"/>
+            </Rectangle.Stroke>
+            <Rectangle.Fill>
+                <SolidColorBrush Color="White" Opacity="1"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Label x:Name="lblHoraChecador" Content="00:00" HorizontalAlignment="Left" Margin="19,395,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="48" HorizontalContentAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="6" Margin="20,229,0,0" Stroke="White" VerticalAlignment="Top" Width="181" Fill="Black">
+            <Rectangle.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Border BorderBrush="White" BorderThickness="1" Margin="17,484,882,12" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Border.Effect>
+            <Label Content="Sincronizar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="184" FontFamily="Poppins Black" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDown" Cursor="Hand"/>
+        </Border>
+        <Label Content="Esperando ingresos" Margin="772,10,130,487" FontFamily="Global User Interface" FontSize="18"/>
+        <Border BorderThickness="1" Margin="772,39,10,10" Background="White">
+            <DataGrid x:Name="dvgEsperandoRegistro" AutoGenerateColumns="False" Foreground="Black"  FontSize="10" Margin="0,-1,0,0" BorderBrush="White" AlternatingRowBackground="White" RowBackground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" CanUserResizeColumns="False" SelectionMode="Single" RowDetailsVisibilityMode="Collapsed" EnableRowVirtualization="False" IsSynchronizedWithCurrentItem="False" >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRowHeader}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Background>
+                    <SolidColorBrush Color="White" Opacity="100"/>
+                </DataGrid.Background>
+                <DataGrid.Effect>
+                    <DropShadowEffect Opacity="0.1"/>
+                </DataGrid.Effect>
+
+            </DataGrid>
+        </Border>
+    </Grid>
+</Page>
