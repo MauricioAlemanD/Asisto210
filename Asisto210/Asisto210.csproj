@@ -16,6 +16,7 @@
     <None Remove="calendar.png" />
     <None Remove="close.png" />
     <None Remove="closeg.png" />
+    <None Remove="dd66ec34-9767-4f21-a502-c04a593f3249.jpg" />
     <None Remove="file.png" />
     <None Remove="gear.png" />
     <None Remove="home.png" />
@@ -25,6 +26,7 @@
     <None Remove="maximize.png" />
     <None Remove="menu.png" />
     <None Remove="minimize-sign.png" />
+    <None Remove="search.png" />
     <None Remove="teacher.png" />
     <None Remove="user.png" />
     <None Remove="wifi.png" />
@@ -53,6 +55,7 @@
     <Resource Include="calendar.png" />
     <Resource Include="close.png" />
     <Resource Include="closeg.png" />
+    <Resource Include="dd66ec34-9767-4f21-a502-c04a593f3249.jpg" />
     <Resource Include="file.png" />
     <Resource Include="gear.png" />
     <Resource Include="home.png" />
@@ -62,6 +65,7 @@
     <Resource Include="maximize.png" />
     <Resource Include="menu.png" />
     <Resource Include="minimize-sign.png" />
+    <Resource Include="search.png" />
     <Resource Include="teacher.png" />
     <Resource Include="user.png" />
     <Resource Include="wifi.png" />
