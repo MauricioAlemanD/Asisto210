@@ -28,7 +28,11 @@ namespace Asisto210
             EncabezadosTablaMaterias();
             llenadoTablaMaterias();
             EncabezadosTablaHoras();
-                llenadoTablaHoras();
+            llenadoTablaHoras();
+            EncabezadosTablaHorarioProfesor();
+            llenadoTablaHorarioProfesor();
+            EncabezadosTablaCiclosEscolares();
+            llenadoTablaCiclosEscolares();
         }
 
 
@@ -83,17 +87,19 @@ namespace Asisto210
 
         private void EncabezadosTablaHorarioProfesor()
         {
-           //dvgHorarioProfesor.Columns.Add(new DataGridTextColumn { Header = "Clave Horario", Binding = new Binding("claveHorario") });
-         //   dvgHorarioProfesor.Columns.Add(new DataGridTextColumn { Header = "Ciclo Escolar", Binding = new Binding("cicloEscolar") });
+           dvgHorarioProfesor.Columns.Add(new DataGridTextColumn { Header = "Clave Horario", Binding = new Binding("claveHorario") });
+           dvgHorarioProfesor.Columns.Add(new DataGridTextColumn { Header = "Profesor", Binding = new Binding("clavePersonal") });
+           dvgHorarioProfesor.Columns.Add(new DataGridTextColumn { Header = "Ciclo Escolar", Binding = new Binding("cicloEscolar") });
+           dvgHorarioProfesor.Columns.Add(new DataGridTextColumn { Header = "Turno", Binding = new Binding("turno") });
         }
 
         private void llenadoTablaHorarioProfesor()
         {
             List<TablaHorarioProfesor> horarioProfesor = new List<TablaHorarioProfesor>
             {
-                new TablaHorarioProfesor { claveHorario = "HP001", cicloEscolar = "2023-2024" }
+                new TablaHorarioProfesor { claveHorario = "HP001", clavePersonal = "123",cicloEscolar = "2023-2024",turno = "Maturuino" }
             };
-           // dvgHorarioProfesor.ItemsSource = horarioProfesor;
+           dvgHorarioProfesor.ItemsSource = horarioProfesor;
         }
 
         private void EncabezadosTablaHorarioClases()
@@ -114,9 +120,9 @@ namespace Asisto210
 
         private void EncabezadosTablaCiclosEscolares()
         {
-           // dvgCiclosEscolares.Columns.Add(new DataGridTextColumn { Header = "Clave Ciclo Escolar", Binding = new Binding("claveCicloEscolar") });
-           // dvgCiclosEscolares.Columns.Add(new DataGridTextColumn { Header = "Año Inicio", Binding = new Binding("añoInicio") });
-          //  dvgCiclosEscolares.Columns.Add(new DataGridTextColumn { Header = "Año Fin", Binding = new Binding("añoFin") });
+           dvgCiclosEscolares.Columns.Add(new DataGridTextColumn { Header = "Clave Ciclo Escolar", Binding = new Binding("claveCicloEscolar") });
+           dvgCiclosEscolares.Columns.Add(new DataGridTextColumn { Header = "Año Inicio", Binding = new Binding("añoInicio") });
+           dvgCiclosEscolares.Columns.Add(new DataGridTextColumn { Header = "Año Fin", Binding = new Binding("añoFin") });
         }
 
         private void llenadoTablaCiclosEscolares()
@@ -125,7 +131,7 @@ namespace Asisto210
             {
                 new TablaCiclosEscolares { claveCicloEscolar = "CE2023", añoInicio = "2023", añoFin = "2024" }
             };
-            //dvgCiclosEscolares.ItemsSource = ciclosEscolares;
+            dvgCiclosEscolares.ItemsSource = ciclosEscolares;
         }
 
 
@@ -165,7 +171,9 @@ namespace Asisto210
     public class TablaHorarioProfesor
     { 
         public string claveHorario { get; set; }
+        public string clavePersonal { get; set; }
         public string cicloEscolar { get; set; }
+        public string turno { get; set; }
     }
 
     public class TablaHorarioClases
