@@ -363,7 +363,7 @@
                 <Label x:Name="lblTurno_Copiar" Content="Turno" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
                 <CheckBox x:Name="cmbMatutino_Copiar" Content="Matutino" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14"/>
                 <CheckBox x:Name="cmbVespertino_Copiar" Content="Vespertino" HorizontalAlignment="Left" Margin="100,285,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14"/>
-                <Border x:Name="bbtnElditarPersonal" BorderBrush="#FF4E1417" BorderThickness="1" Margin="0,448,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center" Width="240">
+                <Border x:Name="bbtnEditarPersonal" BorderBrush="#FF4E1417" BorderThickness="1" Margin="0,448,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center" Width="240">
                     <Label x:Name="btnEliminarPersonal1" Content="Actualizar personal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
                 </Border>
                 <Label x:Name="lblRol_editar" Content="Rol" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="176"/>

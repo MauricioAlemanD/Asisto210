@@ -26,9 +26,11 @@ namespace Asisto210
         Global gbl = new Global();
         bool estado = false;
         private int iMachineNumber = 1;
+
         private Uri pagInico = new Uri("Inicio.xaml", UriKind.Relative);
         private Uri pagPersonal = new Uri("Personal.xaml", UriKind.Relative);
         private Uri pagReportes = new Uri("Reportes.xaml", UriKind.Relative);
+        private Uri pagConfiguracion = new Uri("Configuracion.xaml", UriKind.Relative);
 
 
         List<ListaResgitro> lsRg = new List<ListaResgitro>();
@@ -186,7 +188,8 @@ namespace Asisto210
 
         private void ListViewItem_MouseLeftButtonUp_3(object sender, MouseButtonEventArgs e)
         {
-
+            frmContenido.Source = pagConfiguracion;
+            lblContenedor.Content = "Configuración";
         }
 
         private void ListViewItem_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e)
