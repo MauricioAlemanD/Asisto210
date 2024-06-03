@@ -782,6 +782,128 @@
                             <DropShadowEffect Opacity="0.1"/>
                         </Rectangle.Effect>
                     </Rectangle>
+                    <Border x:Name="dockerClases_Copiar19" BorderBrush="Transparent" BorderThickness="1" Margin="11,2679,0,0" HorizontalAlignment="Left" Width="268" Height="254" VerticalAlignment="Top" Background="White">
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.1"/>
+                        </Border.Effect>
+                        <Grid x:Name="clases15" Margin="0,0,0,-1">
+                            <Label x:Name="lbl16" Content="Agregar clase a horario" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="246" FontWeight="SemiBold" Margin="1,1,0,0"/>
+                            <Label x:Name="lbl1_Copiar38" Content="Clave del horario del profesor" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="205" FontWeight="Thin" Margin="1,30,0,0" Height="27"/>
+                            <ComboBox x:Name="cmbClavePersonal_Editar10" Text="ID" HorizontalAlignment="Left" Margin="7,57,0,0" VerticalAlignment="Top" Width="239" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <ComboBoxItem Content="Directivo"/>
+                                <ComboBoxItem Content="Administrador"/>
+                                <ComboBoxItem Content="Docente"/>
+                                <ComboBoxItem Content="Empleado"/>
+                            </ComboBox>
+                            <Label x:Name="lbl1_Copiar39" Content="Clase a agregar" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="147" FontWeight="Thin" Margin="1,91,0,0" Height="27"/>
+                            <ComboBox x:Name="cmbClavePersonal_Editar_Copiar10" Text="ID" HorizontalAlignment="Left" Margin="7,118,0,0" VerticalAlignment="Top" Width="239" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <ComboBoxItem Content="Directivo"/>
+                                <ComboBoxItem Content="Administrador"/>
+                                <ComboBoxItem Content="Docente"/>
+                                <ComboBoxItem Content="Empleado"/>
+                            </ComboBox>
+                            <Label x:Name="lbl1_Copiar40" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="111" FontWeight="Thin" Margin="1,211,0,0" Height="27"/>
+                            <Border x:Name="bbtnEditarPersonal15" BorderBrush="#FF4E1417" BorderThickness="1" Margin="6,211,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240">
+                                <Label x:Name="btnEliminarPersonal16" Content="Agregar clase a horario" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
+                            </Border>
+                            <Label x:Name="lbl1_Copiar44" Content="Dia de la clase" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="147" FontWeight="Thin" Margin="1,145,0,0" Height="27"/>
+                            <ComboBox x:Name="cmbClavePersonal_Editar_Copiar12" Text="ID" HorizontalAlignment="Left" Margin="7,172,0,0" VerticalAlignment="Top" Width="239" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <ComboBoxItem Content="Directivo"/>
+                                <ComboBoxItem Content="Administrador"/>
+                                <ComboBoxItem Content="Docente"/>
+                                <ComboBoxItem Content="Empleado"/>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border x:Name="dockerClases_Copiar22" BorderBrush="Transparent" BorderThickness="1" Margin="613,2679,0,0" HorizontalAlignment="Left" Width="425" Height="479" VerticalAlignment="Top" Background="White">
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.1"/>
+                        </Border.Effect>
+                        <Grid x:Name="clases3_Copiar5" Margin="0,9,0,9" HorizontalAlignment="Center" Width="405">
+                            <DataGrid x:Name="dvgHorarioClases" AutoGenerateColumns="False" Foreground="Black"  FontSize="10" BorderBrush="White" AlternatingRowBackground="White" RowBackground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" CanUserResizeColumns="False" SelectionMode="Single" RowDetailsVisibilityMode="Collapsed" EnableRowVirtualization="False" IsSynchronizedWithCurrentItem="False" Height="457" VerticalAlignment="Center" HorizontalAlignment="Center" Width="403" >
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Setter Property="Width" Value="100"/>
+                                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="White"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style TargetType="{x:Type DataGridRowHeader}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Setter Property="Background" Value="White"/>
+                                    </Style>
+                                    <Style TargetType="{x:Type DataGridRow}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <DataGrid.Background>
+                                    <SolidColorBrush Color="White" Opacity="100"/>
+                                </DataGrid.Background>
+
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+                    <Rectangle HorizontalAlignment="Left" Height="6" Margin="11,2652,0,0" Stroke="White" VerticalAlignment="Top" Width="1028" Fill="Black">
+                        <Rectangle.Effect>
+                            <DropShadowEffect Opacity="0.1"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Border x:Name="dockerClases_Copiar20" BorderBrush="Transparent" BorderThickness="1" Margin="310,2679,0,0" HorizontalAlignment="Left" Width="268" Height="200" VerticalAlignment="Top" Background="White">
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.1"/>
+                        </Border.Effect>
+                        <Grid x:Name="clases16">
+                            <Label x:Name="lbl17" Content="Eliminar clase en el horario" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="246" FontWeight="SemiBold" Margin="1,1,0,0"/>
+                            <Label x:Name="lbl1_Copiar41" Content="Clave del horario del profesor" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="205" FontWeight="Thin" Margin="1,30,0,0" Height="27"/>
+                            <ComboBox x:Name="cmbClavePersonal_Editar11" Text="ID" HorizontalAlignment="Left" Margin="7,57,0,0" VerticalAlignment="Top" Width="239" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <ComboBoxItem Content="Directivo"/>
+                                <ComboBoxItem Content="Administrador"/>
+                                <ComboBoxItem Content="Docente"/>
+                                <ComboBoxItem Content="Empleado"/>
+                            </ComboBox>
+                            <Label x:Name="lbl1_Copiar42" Content="Clase a eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="147" FontWeight="Thin" Margin="1,91,0,0" Height="27"/>
+                            <ComboBox x:Name="cmbClavePersonal_Editar_Copiar11" Text="ID" HorizontalAlignment="Left" Margin="7,118,0,0" VerticalAlignment="Top" Width="239" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <ComboBoxItem Content="Directivo"/>
+                                <ComboBoxItem Content="Administrador"/>
+                                <ComboBoxItem Content="Docente"/>
+                                <ComboBoxItem Content="Empleado"/>
+                            </ComboBox>
+                            <Label x:Name="lbl1_Copiar43" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="111" FontWeight="Thin" Margin="1,211,0,0" Height="27"/>
+                            <Border x:Name="bbtnEditarPersonal16" BorderBrush="#FF4E1417" BorderThickness="1" Margin="7,158,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240">
+                                <Label x:Name="btnEliminarPersonal17" Content="Eliminar clase del horario" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <Rectangle HorizontalAlignment="Left" Height="6" Margin="10,3183,0,0" Stroke="White" VerticalAlignment="Top" Width="1028" Fill="Black">
+                        <Rectangle.Effect>
+                            <DropShadowEffect Opacity="0.1"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Border x:Name="dockerClases_Copiar21" BorderBrush="Transparent" BorderThickness="1" Margin="10,3208,0,0" HorizontalAlignment="Left" Width="268" Height="145" VerticalAlignment="Top" Background="White">
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.1"/>
+                        </Border.Effect>
+                        <Grid x:Name="clases17">
+                            <Label x:Name="lbl18" Content="Configuración de ventana" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="246" FontWeight="SemiBold" Margin="1,1,0,0"/>
+                            <Label x:Name="lbl1_Copiar45" Content="Ajustar resolusión" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="205" FontWeight="Thin" Margin="1,30,0,0" Height="27"/>
+                            <ComboBox x:Name="cmbClavePersonal_Editar12" Text="ID" HorizontalAlignment="Left" Margin="7,57,0,0" VerticalAlignment="Top" Width="239" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <ComboBoxItem Content="Directivo"/>
+                                <ComboBoxItem Content="Administrador"/>
+                                <ComboBoxItem Content="Docente"/>
+                                <ComboBoxItem Content="Empleado"/>
+                            </ComboBox>
+                            <Label x:Name="lbl1_Copiar47" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.439,0.481" Width="111" FontWeight="Thin" Margin="1,211,0,0" Height="27"/>
+                            <Border x:Name="bbtnEditarPersonal17" BorderBrush="#FF4E1417" BorderThickness="1" Margin="7,99,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240">
+                                <Label x:Name="btnEliminarPersonal18" Content="Aplicar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
+                            </Border>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Border>
         </ScrollViewer>

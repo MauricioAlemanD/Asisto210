@@ -31,6 +31,7 @@ namespace Asisto210
         private Uri pagPersonal = new Uri("Personal.xaml", UriKind.Relative);
         private Uri pagReportes = new Uri("Reportes.xaml", UriKind.Relative);
         private Uri pagConfiguracion = new Uri("Configuracion.xaml", UriKind.Relative);
+        private Uri pagRegistroDiario = new Uri("RegistroDiario.xaml", UriKind.Relative);
 
 
         List<ListaResgitro> lsRg = new List<ListaResgitro>();
@@ -194,7 +195,8 @@ namespace Asisto210
 
         private void ListViewItem_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e)
         {
-   
+            frmContenido.Source = pagRegistroDiario;
+            lblContenedor.Content = "Registro diario";
         }
 
         private void ListViewItem_MouseLeftButtonUp_5(object sender, MouseButtonEventArgs e)

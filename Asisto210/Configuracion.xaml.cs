@@ -33,6 +33,8 @@ namespace Asisto210
             llenadoTablaHorarioProfesor();
             EncabezadosTablaCiclosEscolares();
             llenadoTablaCiclosEscolares();
+            EncabezadosTablaHorarioClases();
+            llenadoTablaHorarioClases();
         }
 
 
@@ -104,18 +106,18 @@ namespace Asisto210
 
         private void EncabezadosTablaHorarioClases()
         {
-            //dvgHorarioClases.Columns.Add(new DataGridTextColumn { Header = "Clave Horario Clase", Binding = new Binding("claveHorarioClase") });
-          //  dvgHorarioClases.Columns.Add(new DataGridTextColumn { Header = "Clave Horario", Binding = new Binding("claveHorario") });
-            //dvgHorarioClases.Columns.Add(new DataGridTextColumn { Header = "Clave Clase", Binding = new Binding("claveClase") });
+            dvgHorarioClases.Columns.Add(new DataGridTextColumn { Header = "Dia de clase", Binding = new Binding("diaClase") });
+            dvgHorarioClases.Columns.Add(new DataGridTextColumn { Header = "Clave Horario", Binding = new Binding("claveHorario") });
+            dvgHorarioClases.Columns.Add(new DataGridTextColumn { Header = "Clave Clase", Binding = new Binding("claveClase") });
         }
 
         private void llenadoTablaHorarioClases()
         {
             List<TablaHorarioClases> horarioClases = new List<TablaHorarioClases>
             {
-                new TablaHorarioClases { claveHorarioClase = "HC001", claveHorario = "HP001", claveClase = "001" }
+                new TablaHorarioClases { diaClase = "Lunes", claveHorario = "HP001", claveClase = "001" }
             };
-           // dvgHorarioClases.ItemsSource = horarioClases;
+            dvgHorarioClases.ItemsSource = horarioClases;
         }
 
         private void EncabezadosTablaCiclosEscolares()
@@ -138,11 +140,6 @@ namespace Asisto210
 
 
     }
-
-
-
-
-
 
     //Clases de tablas
 
@@ -178,7 +175,7 @@ namespace Asisto210
 
     public class TablaHorarioClases
     {
-        public string claveHorarioClase { get; set; }
+        public string diaClase { get; set; }
         public string claveHorario { get; set; }
         public string claveClase { get; set; }
     }
