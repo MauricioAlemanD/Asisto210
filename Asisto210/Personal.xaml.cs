@@ -79,19 +79,31 @@ namespace Asisto210
             };
             dvgBusquedaPersonal.Columns.Add(rolColumn);
         }
-        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
         private void Page_Initialized(object sender, EventArgs e)
         {
             actrualizarPersonal();
         }
         private void actrualizarPersonal()
         {
+            limpiaCampos();
             llenadoTablaPersonal();
             llenadoCMBRoles();
             llenadoCMBPErsonal();
+        }
+
+        private void limpiaCampos()
+        {
+            txtNombre.Text = "";
+            txtApellidoPaterno.Text = "";
+            txtApellidoMaterno.Text = "";
+            cmbRoles.Items.Clear();
+
+            cmbPersonal_Eliminar.Items.Clear();
+
+            cmbPersonal_Editar.Items.Clear();
+            txtNombre_Editar.Text = "";
+            txtApellidoPaterno.Text = "";
+            cmbRoles_Editar.Items.Clear();
         }
         private void txtBusquedaPersonal_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -122,6 +134,7 @@ namespace Asisto210
             }
 
             añadirPersonal(cvePersonal, nombre, apellidoPaterno, apellidoMaterno, rol);
+            actrualizarPersonal();
         }
         private void llenadoTablaPersonal()
         {
@@ -192,7 +205,6 @@ namespace Asisto210
             {
                 // Pasar el array de parámetros a ExecuteNonQuery
                 conexion.ExecuteNonQuery(query, parameters);
-                llenadoTablaPersonal();
             }
             catch (Exception ex)
             {
@@ -245,7 +257,6 @@ namespace Asisto210
 
             actrualizarPersonal();
         }
-
         private void cmbPersonal_Editar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -279,8 +290,53 @@ namespace Asisto210
                 }
             }
         }
+        private void btnEditarPersonal_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            string cve_editar = "0000";
+            string cmbEditar = "";
+            cmbEditar = cmbPersonal_Editar.SelectedItem.ToString();
+            cve_editar = cmbEditar.Substring(0, 4);
+
+            string nombre = txtNombre_Editar.Text;
+            string apellido_paterno = txtApellidoPaterno_Editar.Text;
+            string apellido_materno = txtApellidoMaterno_Editar.Text;
+            string rol = cmbPersonal_Editar.SelectedIndex.ToString();
 
 
+            actualizarPersonal(nombre, apellido_paterno, apellido_materno, rol, cve_editar);
+        }
+        private void actualizarPersonal(string nombre, string apellido_paterno, string apellido_materno, string rol, string cve_personal)
+        {
+            string query = "UPDATE personal" +
+                " SET " +
+                "nombre = @nombre" +
+                ", apelldio_pateno =  @apellido_paterno" +
+                ", apellido_materno =  @apellido_materno" +
+                ", rol_personal =  @rol" +
+                " WHERE cve_personal = @cve_personal";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@nombre", nombre),
+                new SqlParameter("@apellido_paterno", apellido_paterno),
+                new SqlParameter("@apellido_materno", apellido_materno),
+                new SqlParameter("@rol", rol),
+                new SqlParameter("@cve_personal", cve_personal),
+            };
+
+            try
+            {
+                // Pasar el array de parámetros a ExecuteNonQuery
+                conexion.ExecuteNonQuery(query, parameters);
+
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepción, mostrar el error o registrar
+                MessageBox.Show("Error al modificar personal: " + ex.Message);
+            }
+
+            actrualizarPersonal();
+        }
 
     } // End class
     }// End namespace
