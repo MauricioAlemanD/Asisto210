@@ -23,9 +23,9 @@ namespace Asisto210
   
     public partial class ASISTO210 : Window
     {
-        Global gbl = new Global();
-        bool estado = false;
-        private int iMachineNumber = 1;
+        //Global gbl = new Global();
+        //bool estado = false;
+        //private int iMachineNumber = 1;
 
         private Uri pagInico = new Uri("Inicio.xaml", UriKind.Relative);
         private Uri pagPersonal = new Uri("Personal.xaml", UriKind.Relative);
@@ -39,10 +39,8 @@ namespace Asisto210
 
         public ASISTO210()
         {
-            estado = gbl.Biometrico.Connect_Net("192.168.0.45", 4370);
-            InitializeComponent();
-            lblSaludo.Content = lblSaludo.Content + " " + gbl.Usuario;
-            estadoConexion();
+            
+            InitializeComponent();            
 
            //GridView griw = new GridView();
 
@@ -81,16 +79,6 @@ namespace Asisto210
 
 
             //llenadoUtilma();
-        }
-
-        private void estadoConexion()
-        {
-
-            if (estado == true)
-            {
-                //lblEstado.Visibility = Visibility.Visible;
-                iMachineNumber = 1;
-            }
         }
 
         //private void llenadoUtilma()
@@ -170,33 +158,33 @@ namespace Asisto210
         {
             
             frmContenido.Source = pagInico;
-            lblContenedor.Content = "Inicio";
+            lblContenedor.Content = "Asisto210 / Inicio";
         }
 
         private void ListViewItem_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
             
             frmContenido.Source = pagPersonal;
-            lblContenedor.Content = "Personal";
+            lblContenedor.Content = "Asisto210 / Personal";
 
         }
 
         private void ListViewItem_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e)
         {
             frmContenido.Source = pagReportes;
-            lblContenedor.Content = "Reportes";
+            lblContenedor.Content = "Asisto210 / Reportes";
         }
 
         private void ListViewItem_MouseLeftButtonUp_3(object sender, MouseButtonEventArgs e)
         {
             frmContenido.Source = pagConfiguracion;
-            lblContenedor.Content = "Configuración";
+            lblContenedor.Content = "Asisto210 / Configuración";
         }
 
         private void ListViewItem_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e)
         {
             frmContenido.Source = pagRegistroDiario;
-            lblContenedor.Content = "Registro diario";
+            lblContenedor.Content = "Asisto210 / Registro diario";
         }
 
         private void ListViewItem_MouseLeftButtonUp_5(object sender, MouseButtonEventArgs e)

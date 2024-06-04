@@ -23,6 +23,7 @@ namespace Asisto210
     /// </summary>
     public partial class Inicio : Page
     {
+        ConexionBiometrico conexionBiometrico = new ConexionBiometrico();
 
         private DispatcherTimer timer;
         public Inicio()
@@ -32,6 +33,8 @@ namespace Asisto210
             encabezadosER();
             llenadoUltimos();
             llenadoEspera();
+            obtenerHoraChecaador();
+            obtenderHoraSistema();
 
 
         }
@@ -67,15 +70,49 @@ namespace Asisto210
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
+        }
+
+
+        private void obtenerHoraChecaador()
+        {
+            int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0;
+            bool isTimeRetrieved = conexionBiometrico.Biometrico.GetDeviceTime(conexionBiometrico.iMachineNumber, ref year, ref month, ref day, ref hour, ref minute, ref second);
+
+            if (isTimeRetrieved)
+            {
+                DateTime deviceTime = new DateTime(year, month, day, hour, minute, second);
+                lblHoraChecador.Content = deviceTime.ToString();
+            }
+            else
+            {
+                Console.WriteLine("Error al obtener la hora del dispositivo.");
+            }
+        }
+
+        private void sicronizarHoraChecador()
+        {
+            DateTime newTime = new DateTime(2024, 6, 3, 14, 30, 0); // Establecer el 3 de junio de 2024 a las 14:30:00
+
+            bool isTimeSet = conexionBiometrico.Biometrico.SetDeviceTime2(conexionBiometrico.iMachineNumber, newTime.Year, newTime.Month, newTime.Day, newTime.Hour, newTime.Minute, newTime.Second);
+
+            if (isTimeSet)
+            {
+                Console.WriteLine("Hora del dispositivo actualizada correctamente.");
+            }
+            else
+            {
+                Console.WriteLine("Error al actualizar la hora del dispositivo.");
+            }
+            
+        }
+
+        private void obtenderHoraSistema()
+        {
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += obtencionHora;
             timer.Start();
-        }
-
-        private void Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
         }
 
         private void encabezadosER()
@@ -144,6 +181,11 @@ namespace Asisto210
     dvgUltimosRegistros.Columns.Add(metodoRegistroColumn);
         }
 
+        private void btnSincronizarChacador_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            sicronizarHoraChecador();
+            obtenerHoraChecaador();
+        }
     }
 
 

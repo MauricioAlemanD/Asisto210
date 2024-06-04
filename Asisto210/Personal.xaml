@@ -353,6 +353,11 @@
                 </Border>
             </Grid>
         </Border>
+        <Label x:Name="lblMin_Copiar" Margin="330,381,0,10" HorizontalAlignment="Left" Width="140">
+            <Label.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/checador.png"/>
+            </Label.Background>
+        </Label>
 
     </Grid>
 </Page>
