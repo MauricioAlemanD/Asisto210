@@ -63,7 +63,7 @@
                 <SolidColorBrush Color="White" Opacity="1"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="lblHora" Content="00:00" HorizontalAlignment="Left" Margin="20,280,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60"/>
+        <Label x:Name="lblHora" Content="00:00" HorizontalAlignment="Left" Margin="20,280,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60" VerticalContentAlignment="Center"/>
         <Label Content="Hora checador" Margin="17,366,906,136" FontFamily="Global User Interface" FontSize="18"/>
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="17,395,0,0" VerticalAlignment="Top" Width="184">
             <Rectangle.Effect>
@@ -76,7 +76,7 @@
                 <SolidColorBrush Color="White" Opacity="1"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="lblHoraChecador" Content="00:00" HorizontalAlignment="Left" Margin="19,395,0,0" VerticalAlignment="Top" Width="801" FontFamily="Times New Roman" FontSize="48" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblHoraChecador" Content="00:00" HorizontalAlignment="Left" Margin="19,395,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60" VerticalContentAlignment="Center"/>
         <Rectangle HorizontalAlignment="Left" Height="6" Margin="20,229,0,0" Stroke="White" VerticalAlignment="Top" Width="181" Fill="Black">
             <Rectangle.Effect>
                 <DropShadowEffect Opacity="0.1"/>

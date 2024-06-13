@@ -26,6 +26,8 @@ namespace Asisto210
         ConexionBiometrico conexionBiometrico = new ConexionBiometrico();
 
         private DispatcherTimer timer;
+        private DispatcherTimer timer1;
+
         public Inicio()
         {
             InitializeComponent();            
@@ -36,11 +38,13 @@ namespace Asisto210
             obtenerHoraChecaador();
             obtenderHoraSistema();
 
-
         }
 
         public void llenadoUltimos()
         {
+
+            bool llenadoUltimosRegistros = false;
+            llenadoUltimosRegistros = true ;
 
             List<UR> luR = new List<UR>
             {
@@ -49,8 +53,7 @@ namespace Asisto210
 
             dvgUltimosRegistros.ItemsSource = luR;
 
-        }       
-        
+        }               
         public void llenadoEspera()
         {
 
@@ -62,20 +65,22 @@ namespace Asisto210
             dvgEsperandoRegistro.ItemsSource = leR;
 
         }
-
         public void obtencionHora(object sender,EventArgs e)
         {       
-                lblHora.Content = DateTime.Now.ToString("HH:mm:ss");
+            lblHora.Content = DateTime.Now.ToString("dd/MM/yyyy"+" "+"HH:mm:ss tt"); 
+            obtenerHoraChecaador();
         }
-
+        public void obtencionHoraChecador(object sender, EventArgs e)
+        {
+            obtenerHoraChecaador();
+        }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
-
-
         private void obtenerHoraChecaador()
         {
+
             int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0;
             bool isTimeRetrieved = conexionBiometrico.Biometrico.GetDeviceTime(conexionBiometrico.iMachineNumber, ref year, ref month, ref day, ref hour, ref minute, ref second);
 
@@ -89,24 +94,30 @@ namespace Asisto210
                 Console.WriteLine("Error al obtener la hora del dispositivo.");
             }
         }
-
         private void sicronizarHoraChecador()
         {
-            DateTime newTime = new DateTime(2024, 6, 3, 14, 30, 0); // Establecer el 3 de junio de 2024 a las 14:30:00
-
-            bool isTimeSet = conexionBiometrico.Biometrico.SetDeviceTime2(conexionBiometrico.iMachineNumber, newTime.Year, newTime.Month, newTime.Day, newTime.Hour, newTime.Minute, newTime.Second);
+            DateTime currentTime = DateTime.Now;
+            
+            bool isTimeSet = conexionBiometrico.Biometrico.SetDeviceTime2(
+                conexionBiometrico.iMachineNumber,
+                currentTime.Year,
+                currentTime.Month,
+                currentTime.Day,
+                currentTime.Hour,
+                currentTime.Minute,
+                currentTime.Second
+            );
 
             if (isTimeSet)
             {
-                Console.WriteLine("Hora del dispositivo actualizada correctamente.");
+                MessageBox.Show("Hora del dispositivo actualizada correctamente.");
             }
             else
             {
-                Console.WriteLine("Error al actualizar la hora del dispositivo.");
+                MessageBox.Show("Error al actualizar la hora del dispositivo.");
             }
-            
-        }
 
+        }
         private void obtenderHoraSistema()
         {
             DispatcherTimer timer = new DispatcherTimer();
@@ -140,7 +151,6 @@ namespace Asisto210
             };
             dvgEsperandoRegistro.Columns.Add(estadoColumn);
         }
-
         private void encabezadosUR()
         {
 
@@ -180,7 +190,6 @@ namespace Asisto210
             };
     dvgUltimosRegistros.Columns.Add(metodoRegistroColumn);
         }
-
         private void btnSincronizarChacador_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             sicronizarHoraChecador();

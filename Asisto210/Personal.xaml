@@ -184,7 +184,7 @@
                 <DropShadowEffect Opacity="0.1"/>
             </Border.Effect>
             <Grid x:Name="dockBP">
-                <Label x:Name="icoBusqueda" Content="" Margin="262,14,9,445">
+                <Label x:Name="icoBusqueda" Content="" Margin="262,14,9,445" Cursor="Hand" MouseLeftButtonUp="icoBusqueda_MouseLeftButtonUp">
                     <Label.Background>
                         <ImageBrush ImageSource="/search.png"/>
                     </Label.Background>
@@ -224,6 +224,11 @@
                     </DataGrid.Resources>
 
                 </DataGrid>
+                <Label x:Name="icoReinicarBusqusqueda" Content="" Margin="262,-26,9,485" Cursor="Hand" MouseLeftButtonUp="icoReinicarBusqusqueda_MouseLeftButtonUp">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/refresh-n.png"/>
+                    </Label.Background>
+                </Label>
             </Grid>
         </Border>
         <Label x:Name="lblAañadirPersonal" Content="Añadir personal" Margin="340,12,450,492" FontFamily="Poppins" FontSize="18"/>

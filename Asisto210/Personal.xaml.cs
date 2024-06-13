@@ -160,6 +160,29 @@ namespace Asisto210
                 dvgBusquedaPersonal.ItemsSource = lTablaBusquedaPersonal;
             }
         }
+
+        private void llenadoTablaPersonalBusqueda()
+        {
+            string query = "select personal.cve_personal,personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol WHERE nombre LIKE '" + txtBusquedaPersonal.Text+ "' OR apelldio_pateno LIKE '" + txtBusquedaPersonal.Text + "' OR apellido_materno LIKE '" + txtBusquedaPersonal.Text + "'";
+            List<TablaBusquedaPersonal> lTablaBusquedaPersonal = new List<TablaBusquedaPersonal>();
+
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                while (reader.Read())
+                {
+                    lTablaBusquedaPersonal.Add(new TablaBusquedaPersonal
+                    {
+                        id = reader["cve_personal"].ToString(),
+                        nombre = reader["nombre"].ToString(),
+                        apellido_paterno = reader["apelldio_pateno"].ToString(),
+                        apellido_materno = reader["apellido_materno"].ToString(),
+                        rol = reader["descripcion"].ToString()
+                    });
+                }
+                dvgBusquedaPersonal.ItemsSource = lTablaBusquedaPersonal;
+            }
+        }
+
         private void llenadoCMBRoles()
         {
             cmbRoles.Items.Clear();
@@ -397,6 +420,16 @@ namespace Asisto210
             actrualizarPersonal();
         }
 
+        private void icoBusqueda_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            llenadoTablaPersonalBusqueda();
+        }
+
+        private void icoReinicarBusqusqueda_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            llenadoTablaPersonal();
+            txtBusquedaPersonal.Text = "";
+        }
     } // End class
 }// End namespace
 
