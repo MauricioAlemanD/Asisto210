@@ -1,24 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Collections;
-using System.Data.SqlTypes;
-using System.Data.SqlClient;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Data;
-using System.Reflection;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 
@@ -31,6 +15,7 @@ namespace Asisto210
     {
 
         Conexion conexion;
+        ConexionBiometrico conexionBiometrico = new ConexionBiometrico();
 
         public Personal()
         {
@@ -38,7 +23,7 @@ namespace Asisto210
             conexion = new Conexion();
             InitializeComponent();
             EncabezadosTablaBusquedaPersonal();
-            
+
             //llenadoBusquedaPersonal();
         }
         private void EncabezadosTablaBusquedaPersonal()
@@ -57,14 +42,14 @@ namespace Asisto210
                 Binding = new Binding("nombre"),
             };
             dvgBusquedaPersonal.Columns.Add(nombreColumn);
-            
+
             DataGridTextColumn apellidoPCoulmn = new DataGridTextColumn
             {
                 Header = " Apellido paterno ",
                 Binding = new Binding("apellido_paterno"),
             };
             dvgBusquedaPersonal.Columns.Add(apellidoPCoulmn);
-            
+
             DataGridTextColumn apellidoMaterno = new DataGridTextColumn
             {
                 Header = " Apellido materno ",
@@ -102,7 +87,8 @@ namespace Asisto210
 
             cmbPersonal_Editar.Items.Clear();
             txtNombre_Editar.Text = "";
-            txtApellidoPaterno.Text = "";
+            txtApellidoMaterno_Editar.Text = "";            
+            txtApellidoPaterno_Editar.Text = "";
             cmbRoles_Editar.Items.Clear();
         }
         private void txtBusquedaPersonal_GotFocus(object sender, RoutedEventArgs e)
@@ -111,29 +97,46 @@ namespace Asisto210
         }
         private void btnAñadir_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            string cvePersonal = "";
-            string nombre = "";
-            string apellidoPaterno = "";
-            string apellidoMaterno = "";
-            string rol = "1";
+            try
+            {
+                string cvePersonal = "";
+                string nombre = "";
+                string apellidoPaterno = "";
+                string apellidoMaterno = "";
+                string rol = "1";
+                int rolCH = 0;
 
-            cvePersonal = obtenerUltimaID();
-            nombre = txtNombre.Text;
-            apellidoPaterno = txtApellidoPaterno.Text;
-            apellidoMaterno = txtApellidoMaterno.Text;
-            rol = cmbRoles.SelectedItem.ToString();
-            
-            if (rol == "Directivo") {
-                rol = "1";
-            }else if (rol == "Administrdor")
-            {
-                rol = "2";
-            }else if (rol == "Docente")
-            {
-                rol = "3";
+                cvePersonal = obtenerUltimaID();
+                nombre = txtNombre.Text;
+                apellidoPaterno = txtApellidoPaterno.Text;
+                apellidoMaterno = txtApellidoMaterno.Text;
+                rol = cmbRoles.SelectedItem.ToString();
+
+                if (rol == "Directivo")
+                {
+                    rol = "1";
+                    rolCH = 1;
+                }
+                else if (rol == "Administrador")
+                {
+                    rol = "2";
+                    rolCH = 1;
+                }
+                else if (rol == "Docente")
+                {
+                    rol = "3";
+                    rolCH = 0;
+                }
+
+                añadirPersonal(cvePersonal, nombre, apellidoPaterno, apellidoMaterno, rol);
+                añadirPersonalChecador(Convert.ToInt32(cvePersonal), nombre + " " + apellidoPaterno + " " + apellidoMaterno, "123", rolCH, true);
+                MessageBox.Show("El usuario ha sido registrado en la base de datos y en el checador. Favor de ir al checador y registrar caracteristícas biométricas");
             }
+            catch (Exception)
+            {
 
-            añadirPersonal(cvePersonal, nombre, apellidoPaterno, apellidoMaterno, rol);
+                throw;
+            }
             actrualizarPersonal();
         }
         private void llenadoTablaPersonal()
@@ -188,6 +191,10 @@ namespace Asisto210
                 }
             }
         }
+        private void añadirPersonalChecador(int cve_personal, string nombre, string password, int rol, bool enabled)
+        {
+            bool userAdded = conexionBiometrico.Biometrico.SSR_SetUserInfo(conexionBiometrico.iMachineNumber, cve_personal.ToString(), nombre, password, rol, enabled);
+        }
         private void añadirPersonal(string cvePersonal, string nombre, string apellidoPaterno, string apellidoMaterno, string rol)
         {
             string query = "INSERT INTO personal (cve_personal, nombre, apelldio_pateno, apellido_materno, rol_personal) " +
@@ -232,80 +239,132 @@ namespace Asisto210
         }
         private void btnEliminarPersonal_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            string cve_eliminar = "0000";
-            string cmbEliminar = "";
-            cmbEliminar =  cmbPersonal_Eliminar.SelectedItem.ToString();
-            cve_eliminar = cmbEliminar.Substring(0, 4);
+            try
+            {
+                string cve_eliminar = "0000";
+                string cmbEliminar = "0";
+                cmbEliminar = cmbPersonal_Eliminar.SelectedItem.ToString();
+                cve_eliminar = cmbEliminar.Substring(0, 4);
 
-            string query = "DELETE FROM personal WHERE cve_personal = @cve_personal";
+                string query = "DELETE FROM personal WHERE cve_personal = @cve_personal";
 
-            SqlParameter[] parameters = {
+                SqlParameter[] parameters = {
                 new SqlParameter("@cve_personal", cve_eliminar)
             };
 
-            try
-            {
-                // Pasar el array de parámetros a ExecuteNonQuery
-                conexion.ExecuteNonQuery(query, parameters);
-                
+                try
+                {
+                    // Pasar el array de parámetros a ExecuteNonQuery
+                    conexion.ExecuteNonQuery(query, parameters);
+                    MessageBox.Show("Usuario eliminado. Favor de elimiar manualmente del dispositivo.");
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepción, mostrar el error o registrar
+                    MessageBox.Show("Error al eliminar personal: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            catch
             {
-                // Manejo de excepción, mostrar el error o registrar
-                MessageBox.Show("Error al eliminar personal: " + ex.Message);
-            }
 
+            }
             actrualizarPersonal();
         }
         private void cmbPersonal_Editar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            string cve_editar = "0000";
-            string cmbEditar = "";
-            cmbEditar = cmbPersonal_Editar.SelectedItem.ToString();
-            cve_editar = cmbEditar.Substring(0, 4);
+            //try
+            //{
+            //    string cve_editar = "0000";
+            //    string cmbEditar_v = "";
+            //    cmbEditar_v = cmbPersonal_Editar.SelectedItem.ToString();
+            //    cve_editar = cmbEditar_v.Substring(0, 4);
 
-            string query = "select personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol where personal.cve_personal = '"+cve_editar+"'";
+            //    string query = "select personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol where personal.cve_personal = '" + cve_editar + "'";
 
-            using (var reader = conexion.ExecuteReader(query))
-            {
-                while (reader.Read())
-                {
-                    txtNombre_Editar.Text = reader["nombre"].ToString();
-                    txtApellidoPaterno_Editar.Text = reader["apelldio_pateno"].ToString();
-                    txtApellidoMaterno_Editar.Text = reader["apellido_materno"].ToString();
-                    if (reader["descripcion"].ToString() == "Directivo")
-                    {
-                        cmbRoles_Editar.SelectedItem = 1;
-                    }
-                    else if ((reader["descripcion"].ToString()) == "Administrador")
-                    {
-                        cmbRoles_Editar.SelectedItem = 2;
-                    }
-                    else if ((reader["descripcion"].ToString()) == "Docente")
-                    {
-                        cmbRoles_Editar.SelectedItem = 3;
-                    }
-                    cmbRoles_Editar.Text = reader["descripcion"].ToString();
-                }
-            }
+            //    using (var reader = conexion.ExecuteReader(query))
+            //    {
+            //        while (reader.Read())
+            //        {
+            //            txtNombre_Editar.Text = reader["nombre"].ToString();
+            //            txtApellidoPaterno_Editar.Text = reader["apelldio_pateno"].ToString();
+            //            txtApellidoMaterno_Editar.Text = reader["apellido_materno"].ToString();
+            //            if (reader["descripcion"].ToString() == "Directivo")
+            //            {
+            //                cmbRoles_Editar.SelectedItem = 1;
+            //            }
+            //            else if ((reader["descripcion"].ToString()) == "Administrador")
+            //            {
+            //                cmbRoles_Editar.SelectedItem = 2;
+            //            }
+            //            else if ((reader["descripcion"].ToString()) == "Docente")
+            //            {
+            //                cmbRoles_Editar.SelectedItem = 3;
+            //            }
+            //            cmbRoles_Editar.Text = reader["descripcion"].ToString();
+            //        }
+            //    }
+            //}
+            //catch
+            //{
+
+            //}
         }
         private void btnEditarPersonal_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            string cve_editar = "0000";
-            string cmbEditar = "";
-            cmbEditar = cmbPersonal_Editar.SelectedItem.ToString();
-            cve_editar = cmbEditar.Substring(0, 4);
+            try
+            {
+                string cve_editar = "0000";
 
-            string nombre = txtNombre_Editar.Text;
-            string apellido_paterno = txtApellidoPaterno_Editar.Text;
-            string apellido_materno = txtApellidoMaterno_Editar.Text;
-            string rol = cmbPersonal_Editar.SelectedIndex.ToString();
+                string cmbEditar_v = cmbPersonal_Editar.SelectedItem.ToString();
+                cve_editar = cmbEditar_v.Substring(0, 4);
+                int cve_personalInt = 0;
+                cve_personalInt = Convert.ToInt32(cve_editar);               
+
+                int rol_editado = 0;
+                string nombre = txtNombre_Editar.Text;
+                string apellido_paterno = txtApellidoPaterno_Editar.Text;
+                string apellido_materno = txtApellidoMaterno_Editar.Text;
+                int rol = cmbRoles_Editar.SelectedIndex;
+
+                if (cmbRoles_Editar.SelectedIndex == 0 || cmbRoles_Editar.SelectedIndex == 1)
+                {
+
+                    rol_editado = 1;
+                }
+                else if (cmbRoles_Editar.SelectedIndex == 2)
+                {
+                    rol_editado = 0;
+                }
 
 
-            actualizarPersonal(nombre, apellido_paterno, apellido_materno, rol, cve_editar);
+                nombre = txtNombre_Editar.Text + " " + txtApellidoPaterno_Editar.Text + " " + txtApellidoMaterno_Editar.Text;
+                try
+                {
+                    bool userEdited = conexionBiometrico.Biometrico.SSR_SetUserInfo(1, cve_personalInt.ToString(), nombre, "123", rol_editado, true);
+                    MessageBox.Show("Actualizacion correcta en checador");
+                }
+                catch
+                {
+                    MessageBox.Show("Error en la actualizacion de personal en checador");
+                }
+                try
+                {
+                    editarPersonal(txtNombre_Editar.Text, apellido_paterno, apellido_materno, rol + 1, cve_personalInt);
+                    MessageBox.Show("Actualizacion correcta en base de datos");
+                }
+                catch
+                {
+                    MessageBox.Show("Error en la actualización en base de datos");
+                }
+                
+            }
+            catch
+            {
+                MessageBox.Show("Error al actualizar");
+            }
         }
-        private void actualizarPersonal(string nombre, string apellido_paterno, string apellido_materno, string rol, string cve_personal)
+        private void editarPersonal(string nombre, string apellido_paterno, string apellido_materno, int rol, int cve_personal)
         {
             string query = "UPDATE personal" +
                 " SET " +
@@ -339,15 +398,15 @@ namespace Asisto210
         }
 
     } // End class
-    }// End namespace
-       
+}// End namespace
 
 
-    public class TablaBusquedaPersonal
-    {
-        public string id { get; set; }
-        public string nombre { get; set; }
-        public string apellido_paterno { get; set; }
-        public string apellido_materno { get; set; }
-        public string rol { get; set; }
-    }
+
+public class TablaBusquedaPersonal
+{
+    public string id { get; set; }
+    public string nombre { get; set; }
+    public string apellido_paterno { get; set; }
+    public string apellido_materno { get; set; }
+    public string rol { get; set; }
+}

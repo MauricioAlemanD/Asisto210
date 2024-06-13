@@ -82,7 +82,7 @@
             <Grid.Background>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
             </Grid.Background>
-            <Grid x:Name="PanelUsuarios" Margin="65,54,0,0" Background="#FFF6F3F2" d:IsLocked="True">
+            <Grid x:Name="PanelUsuarios" Margin="65,54,0,0" Background="#FFF6F3F2">
 
                 <Frame x:Name="frmContenido" Source ="Inicio.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" >
 
@@ -434,12 +434,12 @@
                     <ImageBrush/>
                 </Label.Background>
             </Label>
-            <Label x:Name="lblClose" Margin="1059,6,0,6" HorizontalAlignment="Left" Width="14" MouseLeftButtonUp="lblClose_MouseLeftButtonUp" Height="14">
+            <Label x:Name="lblClose" Margin="1059,6,0,6" HorizontalAlignment="Left" Width="14" MouseLeftButtonUp="lblClose_MouseLeftButtonUp" Height="14" Cursor="Hand">
                 <Label.Background>
                     <ImageBrush ImageSource="/closeg.png"/>
                 </Label.Background>
             </Label>
-            <Label x:Name="lblMin" Margin="1039,6,0,5" Width="14" HorizontalAlignment="Left" MouseLeftButtonUp="lblMin_MouseLeftButtonUp" Height="14">
+            <Label x:Name="lblMin" Margin="1039,6,0,5" Width="14" HorizontalAlignment="Left" MouseLeftButtonUp="lblMin_MouseLeftButtonUp" Height="14" Cursor="Hand">
                 <Label.Background>
                     <ImageBrush ImageSource="/minimize-sign.png"/>
                 </Label.Background>

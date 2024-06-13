@@ -18,7 +18,7 @@ using static MaterialDesignThemes.Wpf.Theme;
 
 namespace Asisto210
 {
-    /// <summary>
+    /// <summary> 
     /// Lógica de interacción para Inicio.xaml
     /// </summary>
     public partial class Inicio : Page
