@@ -56,7 +56,7 @@ namespace Asisto210
 
         public void llenadoUltimos()
         {
-            List<UR> luR = new List<UR>();            
+                  
             if (conexionBiometrico.estado == true)
             {
                 string sdwEnrollNumber = "";
@@ -436,7 +436,8 @@ namespace Asisto210
             fechaBusqueda = (DateTime)calendario.SelectedDate;
             llenadoTablaUltimosBusqueda(fechaBusqueda);
         }
-        //Encabezados
+
+
     }
     public class UR
     {

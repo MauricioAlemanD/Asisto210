@@ -247,6 +247,12 @@
                 <Border x:Name="bbtnElditarPersonal_Copiar" BorderBrush="#FF4E1417" BorderThickness="1" Margin="6,434,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Grid.ColumnSpan="2" Background="#FFFFC7C7">
                     <Label x:Name="btnEliminarPersonal2" Content="Guardar reporte" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
                 </Border>
+                <ComboBox x:Name="cmbRol_Editar_Copiar" Text="ID" HorizontalAlignment="Left" Margin="0,354,0,0" VerticalAlignment="Top" Width="230" Height="20" Background="White" BorderBrush="Black" BorderThickness="1" Grid.Column="1">
+                    <ComboBoxItem Content="Diario"/>
+                    <ComboBoxItem Content="Semanal"/>
+                    <ComboBoxItem Content="Mensual"/>
+                </ComboBox>
+                <CheckBox x:Name="cmbSomo_Copiar8" Content="Personal especfíco" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Bold" BorderBrush="Black"/>
             </Grid>
         </Border>
 
