@@ -75,7 +75,6 @@ namespace Asisto210
             llenadoCMBRoles();
             llenadoCMBPErsonal();
         }
-
         private void limpiaCampos()
         {
             txtNombre.Text = "";
@@ -160,7 +159,6 @@ namespace Asisto210
                 dvgBusquedaPersonal.ItemsSource = lTablaBusquedaPersonal;
             }
         }
-
         private void llenadoTablaPersonalBusqueda()
         {
             string query = "select personal.cve_personal,personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol WHERE nombre LIKE '" + txtBusquedaPersonal.Text+ "' OR apelldio_pateno LIKE '" + txtBusquedaPersonal.Text + "' OR apellido_materno LIKE '" + txtBusquedaPersonal.Text + "'";
@@ -182,7 +180,6 @@ namespace Asisto210
                 dvgBusquedaPersonal.ItemsSource = lTablaBusquedaPersonal;
             }
         }
-
         private void llenadoCMBRoles()
         {
             cmbRoles.Items.Clear();
@@ -296,42 +293,46 @@ namespace Asisto210
         private void cmbPersonal_Editar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            //try
-            //{
-            //    string cve_editar = "0000";
-            //    string cmbEditar_v = "";
-            //    cmbEditar_v = cmbPersonal_Editar.SelectedItem.ToString();
-            //    cve_editar = cmbEditar_v.Substring(0, 4);
+            try
+            {
+                string cve_editar = "0000";
+                string cmbEditar_v = "";
+                if (cmbPersonal_Editar.SelectedItem != null)
+                {
+                    cmbEditar_v = cmbPersonal_Editar.SelectedItem.ToString();
+                    cve_editar = cmbEditar_v.Substring(0, 4);
 
-            //    string query = "select personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol where personal.cve_personal = '" + cve_editar + "'";
+                    string query = "select personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol where personal.cve_personal = '" + cve_editar + "'";
 
-            //    using (var reader = conexion.ExecuteReader(query))
-            //    {
-            //        while (reader.Read())
-            //        {
-            //            txtNombre_Editar.Text = reader["nombre"].ToString();
-            //            txtApellidoPaterno_Editar.Text = reader["apelldio_pateno"].ToString();
-            //            txtApellidoMaterno_Editar.Text = reader["apellido_materno"].ToString();
-            //            if (reader["descripcion"].ToString() == "Directivo")
-            //            {
-            //                cmbRoles_Editar.SelectedItem = 1;
-            //            }
-            //            else if ((reader["descripcion"].ToString()) == "Administrador")
-            //            {
-            //                cmbRoles_Editar.SelectedItem = 2;
-            //            }
-            //            else if ((reader["descripcion"].ToString()) == "Docente")
-            //            {
-            //                cmbRoles_Editar.SelectedItem = 3;
-            //            }
-            //            cmbRoles_Editar.Text = reader["descripcion"].ToString();
-            //        }
-            //    }
-            //}
-            //catch
-            //{
+                    using (var reader = conexion.ExecuteReader(query))
+                    {
+                        while (reader.Read())
+                        {
+                            txtNombre_Editar.Text = reader["nombre"].ToString();
+                            txtApellidoPaterno_Editar.Text = reader["apelldio_pateno"].ToString();
+                            txtApellidoMaterno_Editar.Text = reader["apellido_materno"].ToString();
+                            if (reader["descripcion"].ToString() == "Directivo")
+                            {
+                                cmbRoles_Editar.SelectedItem = 1;
+                            }
+                            else if ((reader["descripcion"].ToString()) == "Administrador")
+                            {
+                                cmbRoles_Editar.SelectedItem = 2;
+                            }
+                            else if ((reader["descripcion"].ToString()) == "Docente")
+                            {
+                                cmbRoles_Editar.SelectedItem = 3;
+                            }
+                            cmbRoles_Editar.Text = reader["descripcion"].ToString();
+                        }
+                    }
+                }
+                
+            }
+            catch
+            {
 
-            //}
+            }
         }
         private void btnEditarPersonal_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -419,12 +420,10 @@ namespace Asisto210
 
             actrualizarPersonal();
         }
-
         private void icoBusqueda_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             llenadoTablaPersonalBusqueda();
         }
-
         private void icoReinicarBusqusqueda_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             llenadoTablaPersonal();

@@ -10,7 +10,7 @@
       Title="Inicio" Loaded="Page_Loaded">
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="1083" Height="531">
-        <Calendar Margin="18,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White"  Height="174" Width="176" FontSize="80">
+        <Calendar x:Name="calendario" Margin="18,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White"  Height="188" Width="216" FontSize="80" SelectedDatesChanged="calendario_SelectedDatesChanged">
             <Calendar.Effect>
                 <DropShadowEffect Opacity="0.1"/>
             </Calendar.Effect>
@@ -52,7 +52,7 @@
         </Border>
         <Label Content="Calendario" Margin="18,10,905,492" FontFamily="Global User Interface" FontSize="18"/>
         <Label Content="Fecha y hora del sistema" Margin="18,251,849,251" FontFamily="Global User Interface" FontSize="18"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="18,280,0,0" VerticalAlignment="Top" Width="184">
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="18,280,0,0" VerticalAlignment="Top" Width="216">
             <Rectangle.Effect>
                 <DropShadowEffect Opacity="0.125"/>
             </Rectangle.Effect>
@@ -63,9 +63,9 @@
                 <SolidColorBrush Color="White" Opacity="1"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="lblHora" Content="00:00" HorizontalAlignment="Left" Margin="20,280,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblHora" Content="00:00" HorizontalAlignment="Left" Margin="20,280,0,0" VerticalAlignment="Top" Width="214" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60" VerticalContentAlignment="Center"/>
         <Label Content="Hora checador" Margin="17,366,906,136" FontFamily="Global User Interface" FontSize="18"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="17,395,0,0" VerticalAlignment="Top" Width="184">
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="17,395,0,0" VerticalAlignment="Top" Width="217">
             <Rectangle.Effect>
                 <DropShadowEffect Opacity="0.125"/>
             </Rectangle.Effect>
@@ -76,17 +76,17 @@
                 <SolidColorBrush Color="White" Opacity="1"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="lblHoraChecador" Content="00:00" HorizontalAlignment="Left" Margin="19,395,0,0" VerticalAlignment="Top" Width="182" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60" VerticalContentAlignment="Center"/>
-        <Rectangle HorizontalAlignment="Left" Height="6" Margin="20,229,0,0" Stroke="White" VerticalAlignment="Top" Width="181" Fill="Black">
+        <Label x:Name="lblHoraChecador" Content="00:00" HorizontalAlignment="Left" Margin="19,395,0,0" VerticalAlignment="Top" Width="215" FontFamily="Times New Roman" FontSize="16" HorizontalContentAlignment="Center" Height="60" VerticalContentAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="6" Margin="20,229,0,0" Stroke="White" VerticalAlignment="Top" Width="214" Fill="Black">
             <Rectangle.Effect>
                 <DropShadowEffect Opacity="0.1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Border BorderBrush="White" BorderThickness="1" Margin="17,484,882,12" Background="White">
+        <Border BorderBrush="White" BorderThickness="1" Margin="17,484,849,12" Background="White">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.1"/>
             </Border.Effect>
-            <Label x:Name="btnSincronizarChacador" Content="Sincronizar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="184" FontFamily="Poppins Black" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseLeftButtonUp="btnSincronizarChacador_MouseLeftButtonUp"/>
+            <Label x:Name="btnSincronizarChacador" Content="Sincronizar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="216" FontFamily="Poppins Black" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseLeftButtonUp="btnSincronizarChacador_MouseLeftButtonUp"/>
         </Border>
         <Label Content="Esperando ingresos" Margin="772,10,130,487" FontFamily="Global User Interface" FontSize="18"/>
         <Border BorderThickness="1" Margin="772,39,10,10" Background="White">

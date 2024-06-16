@@ -48,6 +48,30 @@ namespace Asisto210
                 }
             }
         }
-    
-}
+
+        public int ExecuteParametrizedNonQuery(string query, params SqlParameter[] parameters)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddRange(parameters);
+                    connection.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public SqlDataReader ExecuteParametrizedReader(string query, params SqlParameter[] parameters)
+        {
+            SqlConnection connection = GetConnection();
+            SqlCommand command = new SqlCommand(query, connection);
+            
+            command.Parameters.AddRange(parameters);
+
+            connection.Open();
+            return command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+        }
+
+    }
 }
