@@ -78,5 +78,6 @@
                 <Label x:Name="btnIngresar" Content="Ingresar&#xA;" HorizontalContentAlignment="Center" Padding="0,10,0,0" FontSize="18" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="168" FontWeight="Bold" MouseEnter="btnIngresar_MouseEnter" Margin="0,-5,0,0" Height="37" MouseLeave="btnIngresar_MouseLeave" Cursor="Hand" MouseDown="btnIngresar_MouseDown"/>
             </Border>
         </Grid>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="585,111,0,0" VerticalAlignment="Top" Height="243" Width="230" Click="Button_Click"/>
     </Grid>
 </Window>

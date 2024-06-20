@@ -91,7 +91,7 @@
             <Grid x:Name="navPanel"
                   HorizontalAlignment="Left"
                   Width="65"
-                  Background="#FF4E1417" d:IsLocked="True">
+                  Background="#FF4E1417">
 
                 <StackPanel x:Name="stp_Herramientas">
 
@@ -129,7 +129,7 @@
                                       Height="30"
                                       Width="30"
                                       BorderThickness ="0"
-                                      Style="{StaticResource tb_style}">
+                                      Style="{StaticResource tb_style}" Cursor="Hand">
                             <ToggleButton.Background>
                                 <ImageBrush ImageSource="/menu.png" Stretch="UniformToFill"/>
                             </ToggleButton.Background>
@@ -244,7 +244,7 @@
 
                                 <Image Source="/home.png"
                                        Stretch="Fill"
-                                       Margin="12,0,0,0" Height="30" Width="30"/>
+                                       Margin="12,0,0,0" Height="30" Width="30" Cursor="Hand"/>
 
                                 <TextBlock Text="Inicio"
                                            Margin="25,0,0,0"
@@ -275,7 +275,7 @@
 
                                 <Image Source="/teacher.png"
                                        Stretch="Fill"
-                                       Margin="12,0,0,0" Width="30" Height="30"/>
+                                       Margin="12,0,0,0" Width="30" Height="30" Cursor="Hand"/>
 
                                 <TextBlock Text="Personal"
                                            Margin="25,0,0,0"
@@ -306,7 +306,7 @@
 
                                 <Image Source="/file.png"
                                        Stretch="Fill"
-                                       Margin="12,0,0,0" Width="30" Height="30"/>
+                                       Margin="12,0,0,0" Width="30" Height="30" Cursor="Hand"/>
 
                                 <TextBlock Text="Reportes"
                                            Margin="25,0,0,0"
@@ -337,7 +337,7 @@
 
                                 <Image Source="/gear.png"
                                        Stretch="Fill"
-                                       Margin="12,0,0,0" Width="30" Height="30"/>
+                                       Margin="12,0,0,0" Width="30" Height="30" Cursor="Hand"/>
 
                                 <TextBlock Text="Configuración"
                                            Margin="25,0,0,0"
@@ -368,7 +368,7 @@
 
                                 <Image Source="/calendar.png"
                                        Stretch="Fill"
-                                       Margin="12,0,0,0" Width="30" Height="30"/>
+                                       Margin="12,0,0,0" Width="30" Height="30" Cursor="Hand"/>
 
                                 <TextBlock Text="Registro diario"
                                            Margin="25,0,0,0"
@@ -399,7 +399,7 @@
 
                                 <Image Source="/logout.png"
                                        Stretch="Fill"
-                                       Margin="12,0,0,0" Width="30" Height="30"/>
+                                       Margin="12,0,0,0" Width="30" Height="30" Cursor="Hand"/>
 
                                 <TextBlock Text="Cerrar sesión"
                                            Margin="25,0,0,0"
@@ -416,7 +416,7 @@
             </Grid>
 
         </Grid>
-        <Grid x:Name="barTop" Margin="65,0,0,0" Height="54" VerticalAlignment="Top">
+        <Grid x:Name="barTop" Margin="65,0,0,0" Height="54" VerticalAlignment="Top" d:IsLocked="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="26*"/>
                 <RowDefinition Height="29*"/>

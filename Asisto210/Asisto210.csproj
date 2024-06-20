@@ -33,6 +33,7 @@
     <None Remove="search.png" />
     <None Remove="teacher.png" />
     <None Remove="user.png" />
+    <None Remove="warning.png" />
     <None Remove="wifi.png" />
   </ItemGroup>
 
@@ -78,6 +79,7 @@
     <Resource Include="search.png" />
     <Resource Include="teacher.png" />
     <Resource Include="user.png" />
+    <Resource Include="warning.png" />
     <Resource Include="wifi.png" />
   </ItemGroup>
 
