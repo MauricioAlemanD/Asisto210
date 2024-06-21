@@ -29,10 +29,12 @@
     <None Remove="maximize.png" />
     <None Remove="menu.png" />
     <None Remove="minimize-sign.png" />
+    <None Remove="plus-symbol-button.png" />
     <None Remove="refresh-n.png" />
     <None Remove="search.png" />
     <None Remove="teacher.png" />
     <None Remove="user.png" />
+    <None Remove="view.png" />
     <None Remove="warning.png" />
     <None Remove="wifi.png" />
   </ItemGroup>
@@ -75,10 +77,12 @@
     <Resource Include="maximize.png" />
     <Resource Include="menu.png" />
     <Resource Include="minimize-sign.png" />
+    <Resource Include="plus-symbol-button.png" />
     <Resource Include="refresh-n.png" />
     <Resource Include="search.png" />
     <Resource Include="teacher.png" />
     <Resource Include="user.png" />
+    <Resource Include="view.png" />
     <Resource Include="warning.png" />
     <Resource Include="wifi.png" />
   </ItemGroup>

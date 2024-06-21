@@ -8,7 +8,416 @@
       d:DesignHeight="491" d:DesignWidth="1083"
       Title="HorarioProfesor">
 
+    <Page.Resources>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+                x:Name="Border" 
+                Grid.ColumnSpan="2"
+                CornerRadius="0"
+                Background="Black"
+                BorderBrush="Black"
+                BorderThickness="1" />
+                <Border 
+                Grid.Column="0"
+                CornerRadius="0" 
+                Margin="1" 
+                Background="White" 
+                BorderBrush="Black"
+                BorderThickness="0,0,1,0" />
+                <Path 
+                x:Name="Arrow"
+                Grid.Column="1"     
+                Fill="White"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+              />
+            </Grid>
+            <!--<ControlTemplate.Triggers>
+          <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+              <Setter TargetName="Border" Property="Background" Value="#808080" />
+          </Trigger>
+          <Trigger Property="ToggleButton.IsChecked" Value="true">
+              <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+          </Trigger>
+          <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+              <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+              <Setter Property="Foreground" Value="#888888"/>
+              <Setter TargetName="Arrow" Property="Fill" Value="#888888" />
+          </Trigger>
+      </ControlTemplate.Triggers>-->
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                          Name="ToggleButton" 
+                          Template="{StaticResource ComboBoxToggleButton}" 
+                          Grid.Column="2" 
+                          Focusable="false"
+                          IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                          ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                          Margin="3,3,23,3"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                          Style="{x:Null}" 
+                          Template="{StaticResource ComboBoxTextBox}" 
+                          HorizontalAlignment="Left" 
+                          VerticalAlignment="Center" 
+                          Margin="3,3,23,3"
+                          Focusable="True" 
+                          Background="Black"
+                          Foreground="Black"
+                          Visibility="Hidden"
+                          IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+                          Name="Popup"
+                          Placement="Bottom"
+                          IsOpen="{TemplateBinding IsDropDownOpen}"
+                          AllowsTransparency="True" 
+                          Focusable="False"
+                          PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                            SnapsToDevicePixels="True"                
+                            MinWidth="{TemplateBinding ActualWidth}"
+                            MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                              x:Name="DropDownBorder"
+                              Background="White"
+
+                              BorderThickness="1"
+                              BorderBrush="Black" CornerRadius="10,10,10,10"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                            Padding="2"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FFB5B5B5"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
     <Grid>
-        
+        <Border x:Name="CAjustesHorario" BorderThickness="1" Background="White" Margin="10,10,783,10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Border.Effect>
+            <Grid x:Name="GAjustesHorario">
+                <Label x:Name="btnCNH" Content="Crear nuevo horario" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
+                <Label x:Name="btnRH" Content="Revisar horario" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
+                <Label x:Name="lblDocente" Content="Docente" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
+                <ComboBox x:Name="cmbDocente" Margin="10,264,10,185" Height="20"/>
+                <Label x:Name="lblDocente_Copiar" Content="Ciclo escolar" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
+                <Border x:Name="ctxtAñoInicio" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,337,0,0" >
+                    <TextBox x:Name="txtAñoInicio" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                </Border>
+                <Border x:Name="ctxtAñoFin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="118" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="160,337,0,0" >
+                    <TextBox x:Name="txtAñoFin" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                </Border>
+                <Label x:Name="lbl" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontSize="22" Width="35" FontWeight="Bold" Padding="0,0,0,0" Height="27" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="125,334,0,0"/>
+                <Label x:Name="lblDocente_Copiar1" Content="Turno" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
+                <ComboBox x:Name="cmbTurnos" Margin="10,399,10,50" Height="20"/>
+                <Label x:Name="btnAñadirAsignatura" Content="Crear horario" HorizontalAlignment="Center" Height="20" Width="268" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,439,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAñadirAsignatura_MouseLeftButtonUp"/>
+                <Label x:Name="lblDocente_Copiar2" Content="Clave de horario" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
+                <ComboBox x:Name="cmbDocente_Copiar" Margin="10,112,10,337" Height="20"/>
+                <Label x:Name="btnAñadirAsignatura_Copiar" Content="Editar horario" HorizontalAlignment="Center" Height="20" Width="268" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,154,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAñadirAsignatura_MouseLeftButtonUp"/>
+            </Grid>
+        </Border>
+        <Border x:Name="CHorario" BorderThickness="1" Background="White" Margin="325,10,10,10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Border.Effect>
+            <Grid x:Name="GHorario">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border BorderThickness="1" Grid.Row="0" Grid.Column="0"/>
+                <Border x:Name="CLunes" BorderThickness="1" Grid.Row="0" Grid.Column="1" Background="#FF4E1417">
+                    <Label Content="Lunes" FontWeight="Bold" FontFamily="Poppins Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border x:Name="CMartes" BorderThickness="1" Grid.Row="0" Grid.Column="2" Background="#FF4E1417">
+                    <Label Content="Martes" FontWeight="Bold" FontFamily="Poppins Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border x:Name="CMiercoles" BorderThickness="1" Grid.Row="0" Grid.Column="3" Background="#FF4E1417">
+                    <Label Content="Miercoles" FontWeight="Bold" FontFamily="Poppins Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border x:Name="CJueves" BorderThickness="1" Grid.Row="0" Grid.Column="4" Background="#FF4E1417">
+                    <Label Content="Jueves" FontWeight="Bold" FontFamily="Poppins Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border x:Name="CViernes" BorderThickness="1" Grid.Row="0" Grid.Column="5" Background="#FF4E1417">
+                    <Label Content="Viernes" FontWeight="Bold" FontFamily="Poppins Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+
+                <Border x:Name="H1" BorderThickness="1" Grid.Row="1" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora1" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora1_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H2" BorderThickness="1" Grid.Row="2" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora2" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora2_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H3" BorderThickness="1" Grid.Row="3" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora3" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora3_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H4" BorderThickness="1" Grid.Row="4" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora4" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" MouseLeftButtonUp="Hora4_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H5" BorderThickness="1" Grid.Row="5" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora5" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora5_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H6" BorderThickness="1" Grid.Row="6" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora6" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora6_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H7" BorderThickness="1" Grid.Row="7" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora7" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora7_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H8" BorderThickness="1" Grid.Row="8" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora8" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora8_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H9" BorderThickness="1" Grid.Row="9" Grid.Column="0" Background="#FFCA545A">
+                    <Label x:Name="Hora9" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" MouseLeftButtonUp="Hora9_MouseLeftButtonUp"/>
+                </Border>
+                <!--Primeras horas-->
+                <Border x:Name="H1Lunes" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                    <Label x:Name="Hora1Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10" Margin="0,0,0,12" MouseLeftButtonUp="Hora1Lunes_MouseLeftButtonUp"/>
+                </Border>
+                <Border x:Name="H1Martes" BorderThickness="1" Grid.Row="1" Grid.Column="2">
+                    <Label x:Name="Hora1Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H1Miercoles" BorderThickness="1" Grid.Row="1" Grid.Column="3">
+                    <Label x:Name="Hora1Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H1Jueves" BorderThickness="1" Grid.Row="1" Grid.Column="4">
+                    <Label x:Name="Hora1Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H1Viernes" BorderThickness="1" Grid.Row="1" Grid.Column="5">
+                    <Label x:Name="Hora1Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Sgundas horas-->
+                <Border x:Name="H2Lunes" BorderThickness="1" Grid.Row="2" Grid.Column="1">
+                    <Label x:Name="Hora2Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H2Martes" BorderThickness="1" Grid.Row="2" Grid.Column="2">
+                    <Label x:Name="Hora2Martes" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H2Miercoles" BorderThickness="1" Grid.Row="2" Grid.Column="3">
+                    <Label x:Name="Hora2Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H2Jueves" BorderThickness="1" Grid.Row="2" Grid.Column="4">
+                    <Label x:Name="Hora2Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H2Viernes" BorderThickness="1" Grid.Row="2" Grid.Column="5">
+                    <Label x:Name="Hora2Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Ternceras horas-->
+                <Border x:Name="H3Lunes" BorderThickness="1" Grid.Row="3" Grid.Column="1">
+                    <Label x:Name="Hora3Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H3Martes" BorderThickness="1" Grid.Row="3" Grid.Column="2">
+                    <Label x:Name="Hora3Martes" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H3Miercoles" BorderThickness="1" Grid.Row="3" Grid.Column="3">
+                    <Label x:Name="Hora3Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H3Jueves" BorderThickness="1" Grid.Row="3" Grid.Column="4">
+                    <Label x:Name="Hora3Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H3Viernes" BorderThickness="1" Grid.Row="3" Grid.Column="5">
+                    <Label x:Name="Hora3Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Cuartas horas-->
+                <Border x:Name="H4Lunes" BorderThickness="1" Grid.Row="4" Grid.Column="1">
+                    <Label x:Name="Hora4Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H4Martes" BorderThickness="1" Grid.Row="4" Grid.Column="2">
+                    <Label x:Name="Hora4Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H4Miercoles" BorderThickness="1" Grid.Row="4" Grid.Column="3">
+                    <Label x:Name="Hora4Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H4Jueves" BorderThickness="1" Grid.Row="4" Grid.Column="4">
+                    <Label x:Name="Hora4Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H4Viernes" BorderThickness="1" Grid.Row="4" Grid.Column="5">
+                    <Label x:Name="Hora4Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Quintas horas-->
+                <Border x:Name="H5Lunes" BorderThickness="1" Grid.Row="5" Grid.Column="1">
+                    <Label x:Name="Hora5Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H5Martes" BorderThickness="1" Grid.Row="5" Grid.Column="2">
+                    <Label x:Name="Hora5Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H5Miercoles" BorderThickness="1" Grid.Row="5" Grid.Column="3">
+                    <Label x:Name="Hora5Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H5Jueves" BorderThickness="1" Grid.Row="5" Grid.Column="4">
+                    <Label x:Name="Hora5Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H5Viernes" BorderThickness="1" Grid.Row="5" Grid.Column="5">
+                    <Label x:Name="Hora5Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Sextas horas-->
+                <Border x:Name="H6Lunes" BorderThickness="1" Grid.Row="6" Grid.Column="1">
+                    <Label x:Name="Hora6Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H6Martes" BorderThickness="1" Grid.Row="6" Grid.Column="2">
+                    <Label x:Name="Hora6Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H6Miercoles" BorderThickness="1" Grid.Row="6" Grid.Column="3">
+                    <Label x:Name="Hora6Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H6Jueves" BorderThickness="1" Grid.Row="6" Grid.Column="4">
+                    <Label x:Name="Hora6Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H6Viernes" BorderThickness="1" Grid.Row="6" Grid.Column="5">
+                    <Label x:Name="Hora6Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Septimas horas-->
+                <Border x:Name="H7Lunes" BorderThickness="1" Grid.Row="7" Grid.Column="1">
+                    <Label x:Name="Hora7Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H7Martes" BorderThickness="1" Grid.Row="7" Grid.Column="2">
+                    <Label x:Name="Hora7Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H7Miercoles" BorderThickness="1" Grid.Row="7" Grid.Column="3">
+                    <Label x:Name="Hora7Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H7Jueves" BorderThickness="1" Grid.Row="7" Grid.Column="4">
+                    <Label x:Name="Hora7Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H7Viernes" BorderThickness="1" Grid.Row="7" Grid.Column="5">
+                    <Label x:Name="Hora7Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <!--Primeras horas-->
+                <Border x:Name="H8Lunes" BorderThickness="1" Grid.Row="8" Grid.Column="1">
+                    <Label x:Name="Hora8Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H8Martes" BorderThickness="1" Grid.Row="8" Grid.Column="2">
+                    <Label x:Name="Hora8Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H8Miercoles" BorderThickness="1" Grid.Row="8" Grid.Column="3">
+                    <Label x:Name="Hora8Miercoles" Content="Ingresa hora" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H8Jueves" BorderThickness="1" Grid.Row="8" Grid.Column="4">
+                    <Label x:Name="Hora8Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H8Viernes" BorderThickness="1" Grid.Row="8" Grid.Column="5">
+                    <Label x:Name="Hora8Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+
+
+                <Border x:Name="H9Lunes" BorderThickness="1" Grid.Row="9" Grid.Column="1">
+                    <Label x:Name="Hora9Lunes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H9Martes" BorderThickness="1" Grid.Row="9" Grid.Column="2">
+                    <Label x:Name="Hora9Martes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H9Miercoles" BorderThickness="1" Grid.Row="9" Grid.Column="3">
+                    <Label x:Name="Hora9Miercoles" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H9Jueves" BorderThickness="1" Grid.Row="9" Grid.Column="4">
+                    <Label x:Name="Hora9Jueves" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+                <Border x:Name="H9Viernes" BorderThickness="1" Grid.Row="9" Grid.Column="5">
+                    <Label x:Name="Hora9Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10"/>
+                </Border>
+
+            </Grid>
+        </Border>
     </Grid>
 </Page>

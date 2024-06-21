@@ -1,0 +1,19 @@
+﻿<Window x:Class="Asisto210.InputMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Asisto210"
+        mc:Ignorable="d"
+        Title="Ingresa hora" Height="145" Width="200" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Width="180" Height="110">
+        <Label x:Name="lblOrden" Content="Ingresa la hora de inicio de clase:&#xA;Ejemplo: 07:15 AM, 14:15 PM." HorizontalAlignment="Center" VerticalAlignment="Top" Width="180" Padding="0,5,0,5"/>
+        <Border x:Name="InpHora" HorizontalAlignment="Center" Margin="0,47,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" >
+            <TextBox x:Name="txtInputHora" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" KeyDown="txtInputHora_KeyDown" />
+        </Border>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,73,0,0" Height="35" VerticalAlignment="Top">
+            <Label x:Name="btnAceptar" Content="Aceptar" Margin="5" Height="20" Width="60" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAceptar_MouseLeftButtonUp"/>
+            <Label x:Name="btnCancelar" Content="Cancelar" Margin="5" Height="20" Width="60" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnCancelar_MouseLeftButtonUp"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -269,13 +269,6 @@ namespace Asisto210
         public string horaFin { get; set; }
     }
 
-    public class TablaMaterias
-    {
-        public string claveMateria { get; set; }
-        public string nombreMateria { get; set; }
-        public string acrMateria { get; set; }
-    }
-
     public class TablaHoras
     {
         public string claveHora { get; set; }

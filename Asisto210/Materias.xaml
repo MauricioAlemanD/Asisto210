@@ -194,14 +194,42 @@
                 <Border x:Name="CtxtAbreviaturaMateria" HorizontalAlignment="Left" Margin="18,228,0,0" VerticalAlignment="Top" Width="400" BorderBrush="Black" BorderThickness="1,1,1,1" >
                     <TextBox x:Name="txtAbreviaturaMateria" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
                 </Border>
-                <Label x:Name="btnAñadirAsignatura" Content="Añadir asignatura" HorizontalAlignment="Center" Height="20" Width="400" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,279,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
+                <Label x:Name="btnAñadirAsignatura" Content="Añadir asignatura" HorizontalAlignment="Center" Height="20" Width="400" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,279,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAñadirAsignatura_MouseLeftButtonUp"/>
             </Grid>
         </Border>
         <Border x:Name="borderIngresarMateria_Tabla" BorderThickness="1" Margin="485,10,10,10" Background="White">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.1"/>
             </Border.Effect>
-            <Grid/>
+            <Grid>
+                <DataGrid x:Name="dvgAsugnaturas" AutoGenerateColumns="False" Foreground="Black"  FontSize="10" Margin="10,10,10,10" BorderBrush="White" AlternatingRowBackground="White" RowBackground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" CanUserResizeColumns="False" SelectionMode="Single" RowDetailsVisibilityMode="Collapsed" EnableRowVirtualization="False" IsSynchronizedWithCurrentItem="False" >
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="Width" Value="100"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Background>
+                        <SolidColorBrush Color="White" Opacity="100"/>
+                    </DataGrid.Background>
+
+                </DataGrid>
+            </Grid>
         </Border>
         <Border x:Name="borderIEliminarMateria" BorderThickness="1" Margin="10,340,643,10" Background="White">
             <Border.Effect>
@@ -210,7 +238,7 @@
             <Grid>
                 <Label Content="Añadir una nueva asignatura" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
                 <Label Content="Calve de asignatura" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
-                <Label x:Name="btnAñadirAsignatura1" Content="Eliminar asignatura" HorizontalAlignment="Left" Height="20" Width="400" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,109,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
+                <Label x:Name="btnEliminarAsignatura" Content="Eliminar asignatura" HorizontalAlignment="Left" Height="20" Width="400" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,109,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnEliminarAsignatura_MouseLeftButtonUp"/>
                 <ComboBox x:Name="cmbAsignaturas" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="400" Height="20" Background="White" BorderBrush="Black" BorderThickness="1"/>
             </Grid>
         </Border>
