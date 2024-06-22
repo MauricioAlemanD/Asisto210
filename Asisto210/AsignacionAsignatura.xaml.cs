@@ -33,9 +33,16 @@ namespace Asisto210
 
         private void btnAceptar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            String asig = cmbAsignaturas.SelectedItem.ToString();
-            this.AsignaturaSeleccionada = asig;
-            this.DialogResult = true;
+            try
+            {
+                String asig = cmbAsignaturas.SelectedItem.ToString();
+                this.AsignaturaSeleccionada = asig;
+                this.DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Selecciona una asignatura");
+            }
         }
 
         private void btnCancelar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
