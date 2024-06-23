@@ -197,9 +197,14 @@
                 <ComboBox x:Name="cmbTurnos" Margin="10,399,10,50" Height="20"/>
                 <Label x:Name="btnAñadirAsignatura" Content="Crear horario" HorizontalAlignment="Center" Height="20" Width="268" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,439,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAñadirAsignatura_MouseLeftButtonUp"/>
                 <Label x:Name="lblDocente_Copiar2" Content="Clave de horario" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
-                <ComboBox x:Name="cmbDocente_Copiar" Margin="10,112,10,337" Height="20"/>
-                <Label x:Name="btnAñadirAsignatura_Copiar" Content="Editar horario" HorizontalAlignment="Center" Height="20" Width="268" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,154,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAñadirAsignatura_MouseLeftButtonUp"/>
+                <ComboBox x:Name="cmbHorarioProfesor" Margin="10,112,10,337" Height="20" SelectionChanged="cmbHorarioProfesor_SelectionChanged"/>
+                <Label x:Name="btnEditarAsignatura" Content="Editar horario" HorizontalAlignment="Center" Height="20" Width="268" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,154,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnEditarAsignatura_MouseLeftButtonUp"/>
                 <Button Content="Button" HorizontalAlignment="Left" Margin="209,234,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+                <Label x:Name="btnEliminarHorario" Content="" HorizontalAlignment="Left" Margin="262,85,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" Width="16" Height="16" Cursor="Hand" MouseLeftButtonUp="btnEliminarHorario_MouseLeftButtonUp">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/trash-can1.png"/>
+                    </Label.Background>
+                </Label>
             </Grid>
         </Border>
         <Border x:Name="CHorario" BorderThickness="1" Background="White" Margin="325,10,10,10">

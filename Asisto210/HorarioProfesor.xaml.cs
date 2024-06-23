@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using Microsoft.Identity.Client;
 
 namespace Asisto210
 {
@@ -23,6 +24,8 @@ namespace Asisto210
     /// </summary>
     public partial class HorarioProfesor : Page
     {
+
+        public bool confirmacion = false;
 
         public String SHora1 = "";
         public String SHora2 = "";
@@ -96,11 +99,43 @@ namespace Asisto210
             InitializeComponent();
             llenarCMBPersonal();
             llenarCMBTurnos();
+            llenarCMBHorarios();
         }
 
         private void btnAñadirAsignatura_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             revisionHorario();
+        }
+
+        private void cmbHorarioProfesor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string cve_horario_editar = "";
+            cve_horario_editar = cmbHorarioProfesor.SelectedItem.ToString().Substring(9, 4);
+
+            llenadoHorarioSeleccionado(cve_horario_editar);
+        }
+
+        private void btnEditarAsignatura_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            llenadoHorarioSeleccionado("0001");
+        }
+
+        private void btnEliminarHorario_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+
+                MessageBoxPersonalizado("Confirma que desea eliminar el horiario: " + cmbHorarioProfesor.SelectedItem.ToString().Substring(9, 4) + ".", "Alerta");
+                if (confirmacion)
+                {
+                    MessageBoxPersonalizado("Se elimino el horario: " + cmbHorarioProfesor.SelectedItem.ToString().Substring(9, 4) + ".", "Alerta");
+                }
+
+            }
+            catch
+            {
+                MessageBoxPersonalizado("No se ha seleccionado ningun horario para eliminar.","Alerta");
+            }
         }
 
         private void revisionHorario()
@@ -154,7 +189,98 @@ namespace Asisto210
                                     //Insertar clase a horario profesor
 
                                     //Clase Hora 1 Lunes
-                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno,"Lunes",TimeSpan.ParseExact(SHora1.Substring(0, 5), @"hh\:mm",null),SHora1,SHora1Lunes.Substring(0,4));
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora1.Substring(0, 5), @"hh\:mm",null),SHora1,SHora1Lunes.Substring(0,4));
+                                    //Clase Hora 2 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora2.Substring(0, 5), @"hh\:mm", null), SHora2, SHora2Lunes.Substring(0, 4));
+                                    //Clase Hora 3 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora3.Substring(0, 5), @"hh\:mm", null), SHora3, SHora3Lunes.Substring(0, 4));
+                                    //Clase Hora 4 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora4.Substring(0, 5), @"hh\:mm", null), SHora4, SHora4Lunes.Substring(0, 4));
+                                    //Clase Hora 5 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora5.Substring(0, 5), @"hh\:mm", null), SHora5, SHora5Lunes.Substring(0, 4));
+                                    //Clase Hora 6 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora6.Substring(0, 5), @"hh\:mm", null), SHora6, SHora6Lunes.Substring(0, 4));
+                                    //Clase Hora 7 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora7.Substring(0, 5), @"hh\:mm", null), SHora7, SHora7Lunes.Substring(0, 4));
+                                    //Clase Hora 8 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora8.Substring(0, 5), @"hh\:mm", null), SHora8, SHora8Lunes.Substring(0, 4));
+                                    //Clase Hora 9 Lunes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Lunes", TimeSpan.ParseExact(SHora9.Substring(0, 5), @"hh\:mm", null), SHora9, SHora9Lunes.Substring(0, 4));
+                                    //Clase Hora 1 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora1.Substring(0, 5), @"hh\:mm", null), SHora1, SHora1Martes.Substring(0, 4));
+                                    //Clase Hora 2 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora2.Substring(0, 5), @"hh\:mm", null), SHora2, SHora2Martes.Substring(0, 4));
+                                    //Clase Hora 3 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora3.Substring(0, 5), @"hh\:mm", null), SHora3, SHora3Martes.Substring(0, 4));
+                                    //Clase Hora 4 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora4.Substring(0, 5), @"hh\:mm", null), SHora4, SHora4Martes.Substring(0, 4));
+                                    //Clase Hora 5 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora5.Substring(0, 5), @"hh\:mm", null), SHora5, SHora5Martes.Substring(0, 4));
+                                    //Clase Hora 6 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora6.Substring(0, 5), @"hh\:mm", null), SHora6, SHora6Martes.Substring(0, 4));
+                                    //Clase Hora 7 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora7.Substring(0, 5), @"hh\:mm", null), SHora7, SHora7Martes.Substring(0, 4));
+                                    //Clase Hora 8 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora8.Substring(0, 5), @"hh\:mm", null), SHora8, SHora8Martes.Substring(0, 4));
+                                    //Clase Hora 9 Martes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Martes", TimeSpan.ParseExact(SHora9.Substring(0, 5), @"hh\:mm", null), SHora9, SHora9Martes.Substring(0, 4));
+                                    //Clase Hora 1 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora1.Substring(0, 5), @"hh\:mm", null), SHora1, SHora1Miercoles.Substring(0, 4));
+                                    //Clase Hora 2 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora2.Substring(0, 5), @"hh\:mm", null), SHora2, SHora2Miercoles.Substring(0, 4));
+                                    //Clase Hora 3 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora3.Substring(0, 5), @"hh\:mm", null), SHora3, SHora3Miercoles.Substring(0, 4));
+                                    //Clase Hora 4 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora4.Substring(0, 5), @"hh\:mm", null), SHora4, SHora4Miercoles.Substring(0, 4));
+                                    //Clase Hora 5 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora5.Substring(0, 5), @"hh\:mm", null), SHora5, SHora5Miercoles.Substring(0, 4));
+                                    //Clase Hora 6 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora6.Substring(0, 5), @"hh\:mm", null), SHora6, SHora6Miercoles.Substring(0, 4));
+                                    //Clase Hora 7 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora7.Substring(0, 5), @"hh\:mm", null), SHora7, SHora7Miercoles.Substring(0, 4));
+                                    //Clase Hora 8 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora8.Substring(0, 5), @"hh\:mm", null), SHora8, SHora8Miercoles.Substring(0, 4));
+                                    //Clase Hora 9 Miercoles
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Miercoles", TimeSpan.ParseExact(SHora9.Substring(0, 5), @"hh\:mm", null), SHora9, SHora9Miercoles.Substring(0, 4));                                    
+                                    //Clase Hora 1 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora1.Substring(0, 5), @"hh\:mm", null), SHora1, SHora1Jueves.Substring(0, 4));
+                                    //Clase Hora 2 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora2.Substring(0, 5), @"hh\:mm", null), SHora2, SHora2Jueves.Substring(0, 4));
+                                    //Clase Hora 3 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora3.Substring(0, 5), @"hh\:mm", null), SHora3, SHora3Jueves.Substring(0, 4));
+                                    //Clase Hora 4 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora4.Substring(0, 5), @"hh\:mm", null), SHora4, SHora4Jueves.Substring(0, 4));
+                                    //Clase Hora 5 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora5.Substring(0, 5), @"hh\:mm", null), SHora5, SHora5Jueves.Substring(0, 4));
+                                    //Clase Hora 6 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora6.Substring(0, 5), @"hh\:mm", null), SHora6, SHora6Jueves.Substring(0, 4));
+                                    //Clase Hora 7 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora7.Substring(0, 5), @"hh\:mm", null), SHora7, SHora7Jueves.Substring(0, 4));
+                                    //Clase Hora 8 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora8.Substring(0, 5), @"hh\:mm", null), SHora8, SHora8Jueves.Substring(0, 4));
+                                    //Clase Hora 9 Jueves
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Jueves", TimeSpan.ParseExact(SHora9.Substring(0, 5), @"hh\:mm", null), SHora9, SHora9Jueves.Substring(0, 4));
+                                    //Clase Hora 1 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora1.Substring(0, 5), @"hh\:mm", null), SHora1, SHora1Viernes.Substring(0, 4));
+                                    //Clase Hora 2 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora2.Substring(0, 5), @"hh\:mm", null), SHora2, SHora2Viernes.Substring(0, 4));
+                                    //Clase Hora 3 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora3.Substring(0, 5), @"hh\:mm", null), SHora3, SHora3Viernes.Substring(0, 4));
+                                    //Clase Hora 4 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora4.Substring(0, 5), @"hh\:mm", null), SHora4, SHora4Viernes.Substring(0, 4));
+                                    //Clase Hora 5 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora5.Substring(0, 5), @"hh\:mm", null), SHora5, SHora5Viernes.Substring(0, 4));
+                                    //Clase Hora 6 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora6.Substring(0, 5), @"hh\:mm", null), SHora6, SHora6Viernes.Substring(0, 4));
+                                    //Clase Hora 7 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora7.Substring(0, 5), @"hh\:mm", null), SHora7, SHora7Viernes.Substring(0, 4));
+                                    //Clase Hora 8 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora8.Substring(0, 5), @"hh\:mm", null), SHora8, SHora8Viernes.Substring(0, 4));
+                                    //Clase Hora 9 Viernes
+                                    añadirHorarioProfesorClases(cve_horario_profesor, ciclo_escolar_ed, cve_docente, turno, "Viernes", TimeSpan.ParseExact(SHora9.Substring(0, 5), @"hh\:mm", null), SHora9, SHora9Viernes.Substring(0, 4));
+
+                                    MessageBoxPersonalizado("Se añadieron las clases al horario." + cve_horario_profesor + ".", "Confimación");
+                                    llenarCMBHorarios();
 
                                 }
                                 catch (Exception ex)
@@ -444,7 +570,7 @@ namespace Asisto210
 
         private void añadirHorarioProfesorClases(string cve_horario_profesor, string ciclo_escolar, string cve_profesor, string turno,string dia_clase, TimeSpan hora_clase,string hora_clase_formateada, string cve_clase)
         {
-            string query = "INSERT INTO [dbo].[horario_profesor_clases_v2] ([cve_horario_profesor],[ciclo_escolar],[cve_profesor],[turno],[dia_clase],[hora_clase],[hora_clase_formateada],[cve_clase])" +
+            string query = "INSERT INTO [dbo].[horario_profesor_clases_v3] ([cve_horario_profesor],[ciclo_escolar],[cve_profesor],[turno],[dia_clase],[hora_clase],[hora_clase_formateada],[cve_clase])" +
             "VALUES (@cve_horario_profesor, @ciclo_escolar,@cve_profesor,@turno,@dia_clase,@hora_clase,@hora_clase_formateada,@cve_clase)";
 
             SqlParameter[] parameters = {
@@ -462,7 +588,7 @@ namespace Asisto210
             {
                 // Pasar el array de parámetros a ExecuteNonQuery
                 conexion.ExecuteNonQuery(query, parameters);
-                MessageBoxPersonalizado("Se añadieron las clases al horario." + cve_horario_profesor + ".", "Confimación");
+                
             }
             catch (Exception ex)
             {
@@ -484,17 +610,593 @@ namespace Asisto210
 
         public void MessageBoxPersonalizado(string mensajealerta, string titulo)
         {
+            confirmacion = false;
             MensajePersonalizado messageBox = new MensajePersonalizado(mensajealerta, titulo);
             bool? result = messageBox.ShowDialog();
 
             if (result == true)
             {
-
+                confirmacion = true;
             }
             else
             {
-
+                confirmacion = false;
             }
+        }
+
+        private void llenadoHorarioSeleccionado(string cve_horario_profesor)
+        {
+            string ciclo_escolar = "";
+            string cve_profesor  ="";
+            string turno = "";
+
+            string query = "select horario_profesor.cve_horario_profesor,horario_profesor.cve_profesor,horario_profesor.ciclo_escolar,horario_profesor.turno from horario_profesor where cve_horario_profesor = '" + cve_horario_profesor + "'";
+
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    ciclo_escolar = reader["ciclo_escolar"].ToString();
+                    cve_profesor = reader["cve_profesor"].ToString();
+                    turno = reader["turno"].ToString();
+
+                    
+                }
+            }
+
+            SHora1 = "";
+            SHora2 = "";
+            SHora3 = "";
+            SHora4 = "";
+            SHora5 = "";
+            SHora6 = "";
+            SHora7 = "";
+            SHora8 = "";
+            SHora9 = "";
+
+            query = "WITH CTE AS (" +
+                "SELECT [cve_horario_profesor]" +
+                ",[ciclo_escolar]" +
+                ",[cve_profesor]" +
+                ",[turno],[dia_clase]" +
+                ",[hora_clase]" +
+                ",[hora_clase_formateada]" +
+                ",[cve_clase]," +
+                "ROW_NUMBER() OVER (PARTITION BY [hora_clase] ORDER BY [cve_horario_profesor])" +
+                " AS rn FROM [dbo].[horario_profesor_clases_v3]" +
+                ") " +
+                "SELECT [cve_horario_profesor]" +
+                ",[ciclo_escolar]" +
+                ",[cve_profesor]" +
+                ",[turno],[dia_clase]" +
+                ",[hora_clase]" +
+                ",[hora_clase_formateada]" +
+                ",[cve_clase] " +
+                "FROM CTE " +
+                "WHERE rn = 1 AND [cve_horario_profesor] = '" + cve_horario_profesor + "'";
+
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                int count = 0;
+                while (reader.Read() && count < 9)
+                {
+                    string horaFormateada = reader["hora_clase_formateada"].ToString();
+
+                    // Asignar valores a variables
+                    switch (count)
+                    {
+                        case 0: SHora1 = horaFormateada; break;
+                        case 1: SHora2 = horaFormateada; break;
+                        case 2: SHora3 = horaFormateada; break;
+                        case 3: SHora4 = horaFormateada; break;
+                        case 4: SHora5 = horaFormateada; break;
+                        case 5: SHora6 = horaFormateada; break;
+                        case 6: SHora7 = horaFormateada; break;
+                        case 7: SHora8 = horaFormateada; break;
+                        case 8: SHora9 = horaFormateada; break;
+                    }
+                    count++;
+                }
+            }
+
+            completarHorasHorario();
+
+            //Hora1Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '"+cve_horario_profesor+"' and dia_clase = 'Lunes' and hora_clase_formateada = '"+SHora1+"'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora1Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora2Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora2 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora2Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora3Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora3 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora3Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora4Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora4 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora4Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora5Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora5 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora5Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora6Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora6 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora6Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora7Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora7 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora7Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora8Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora8 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora8Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora9Lunes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Lunes' and hora_clase_formateada = '" + SHora9 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora9Lunes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+
+            //Hora1Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora1 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora1Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora2Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora2 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora2Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora3Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora3 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora3Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora4Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora4 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora4Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora5Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora5 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora5Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora6Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora6 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora6Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora7Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora7 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora7Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora8Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora8 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora8Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora9Martes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Martes' and hora_clase_formateada = '" + SHora9 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora9Martes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+
+            //Hora1Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora1 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora1Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora2Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora2 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora2Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora3Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora3 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora3Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora4Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora4 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora4Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora5Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora5 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora5Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora6Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora6 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora6Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora7Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora7 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora7Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora8Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora8 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora8Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora9Miercoles
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Miercoles' and hora_clase_formateada = '" + SHora9 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora9Miercoles = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+
+            //Hora1Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora1 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora1Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora2Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora2 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora2Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora3Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora3 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora3Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora4Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora4 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora4Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora5Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora5 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora5Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora6Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora6 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora6Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora7Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora7 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora7Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora8Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora8 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora8Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }//Hora9Jueves
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Jueves' and hora_clase_formateada = '" + SHora9 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora9Jueves = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+
+            //Hora1Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora1 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora1Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora2Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora2 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora2Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora3Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora3 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora3Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora4Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora4 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora4Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora5Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora5 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora5Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora6Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora6 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora6Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora7Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora7 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora7Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora8Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora8 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora8Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+            //Hora9Viernes
+            query = "select horario_profesor_clases_v3.cve_clase, meterias.nombre_materia from horario_profesor_clases_v3 inner join meterias on horario_profesor_clases_v3.cve_clase = meterias.cve_materia where cve_horario_profesor = '" + cve_horario_profesor + "' and dia_clase = 'Viernes' and hora_clase_formateada = '" + SHora9 + "'";
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    SHora9Viernes = reader["cve_clase"].ToString() + " " + reader["nombre_materia"].ToString();
+                }
+            }
+
+
+            completarAsignaturasHorario();
+        }
+
+        private void completarHorasHorario()
+        {
+            Hora1.Content =SHora1;
+            Hora2.Content = SHora2;
+            Hora3.Content = SHora3;
+            Hora4.Content = SHora4;
+            Hora5.Content = SHora5;
+            Hora6.Content = SHora6;
+            Hora7.Content = SHora7;
+            Hora8.Content = SHora8;
+            Hora9.Content = SHora9;
+        }
+
+        private void completarAsignaturasHorario()
+        {
+            Hora1Lunes.Content = SHora1Lunes;
+            Hora2Lunes.Content = SHora2Lunes;
+            Hora3Lunes.Content = SHora3Lunes;
+            Hora4Lunes.Content = SHora4Lunes;
+            Hora5Lunes.Content = SHora5Lunes;
+            Hora6Lunes.Content = SHora6Lunes;
+            Hora7Lunes.Content = SHora7Lunes;
+            Hora8Lunes.Content = SHora8Lunes;
+            Hora9Lunes.Content = SHora9Lunes;
+
+            Hora1Martes.Content = SHora1Martes;
+            Hora2Martes.Content = SHora2Martes;
+            Hora3Martes.Content = SHora3Martes;
+            Hora4Martes.Content = SHora4Martes;
+            Hora5Martes.Content = SHora5Martes;
+            Hora6Martes.Content = SHora6Martes;
+            Hora7Martes.Content = SHora7Martes;
+            Hora8Martes.Content = SHora8Martes;
+            Hora9Martes.Content = SHora9Martes;
+
+            Hora1Miercoles.Content = SHora1Miercoles;
+            Hora2Miercoles.Content = SHora2Miercoles;
+            Hora3Miercoles.Content = SHora3Miercoles;
+            Hora4Miercoles.Content = SHora4Miercoles;
+            Hora5Miercoles.Content = SHora5Miercoles;
+            Hora6Miercoles.Content = SHora6Miercoles;
+            Hora7Miercoles.Content = SHora7Miercoles;
+            Hora8Miercoles.Content = SHora8Miercoles;
+            Hora9Miercoles.Content = SHora9Miercoles;
+
+            Hora1Jueves.Content = SHora1Jueves;
+            Hora2Jueves.Content = SHora2Jueves;
+            Hora3Jueves.Content = SHora3Jueves;
+            Hora4Jueves.Content = SHora4Jueves;
+            Hora5Jueves.Content = SHora5Jueves;
+            Hora6Jueves.Content = SHora6Jueves;
+            Hora7Jueves.Content = SHora7Jueves;
+            Hora8Jueves.Content = SHora8Jueves;
+            Hora9Jueves.Content = SHora9Jueves;
+
+            Hora1Viernes.Content = SHora1Viernes;
+            Hora2Viernes.Content = SHora2Viernes;
+            Hora3Viernes.Content = SHora3Viernes;
+            Hora4Viernes.Content = SHora4Viernes;
+            Hora5Viernes.Content = SHora5Viernes;
+            Hora6Viernes.Content = SHora6Viernes;
+            Hora7Viernes.Content = SHora7Viernes;
+            Hora8Viernes.Content = SHora8Viernes;
+            Hora9Viernes.Content = SHora9Viernes; 
         }
 
         private void llenarCMBPersonal()
@@ -518,6 +1220,23 @@ namespace Asisto210
         {
             cmbTurnos.Items.Add("Matutino");
             cmbTurnos.Items.Add("Vespertino");
+        }
+
+        private void llenarCMBHorarios()
+        {
+            cmbHorarioProfesor.Items.Clear();
+            string query = "select horario_profesor.cve_horario_profesor,horario_profesor.cve_profesor,personal.nombre,personal.apelldio_pateno,personal.apellido_materno,horario_profesor.ciclo_escolar,horario_profesor.turno from horario_profesor inner join personal on personal.cve_personal = horario_profesor.cve_profesor";
+
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                string horaioProfesor = "";
+                while (reader.Read())
+                {
+                    horaioProfesor = "";
+                    horaioProfesor = "Hoariio: " + reader["cve_horario_profesor"].ToString() + " Docente: " + reader["cve_profesor"] +"-"+ reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString() + " Ciclo escolar: [" + reader["ciclo_escolar"] + "] Turno: " + reader["turno"];
+                    cmbHorarioProfesor.Items.Add(horaioProfesor);
+                }
+            }
         }
 
         private void Hora1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -1325,66 +2044,68 @@ namespace Asisto210
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SHora1 = "2";
-            SHora2 = "2";
-            SHora3 = "2";
-            SHora4 = "2";
-            SHora5 = "2";
-            SHora6 = "2";
-            SHora7 = "2";
-            SHora8 = "2";
-            SHora9 = "2";
+            SHora1 = "07:00 AM";
+            SHora2 = "08:00 AM";
+            SHora3 = "09:00 AM";
+            SHora4 = "10:00 AM";
+            SHora5 = "11:00 AM";
+            SHora6 = "12:00 PM";
+            SHora7 = "13:00 PM";
+            SHora8 = "14:00 PM";
+            SHora9 = "15:00 PM";
 
-            SHora1Lunes = "2";
-            SHora2Lunes = "2";
-            SHora3Lunes = "2";
-            SHora4Lunes = "2";
-            SHora5Lunes = "2";
-            SHora6Lunes = "2";
-            SHora7Lunes = "2";
-            SHora8Lunes = "2";
-            SHora9Lunes = "2";
+            SHora1Lunes = "0001 Español II";
+            SHora2Lunes = "0001 Español II";
+            SHora3Lunes = "0001 Español II";
+            SHora4Lunes = "0001 Español II";
+            SHora5Lunes = "0001 Español II";
+            SHora6Lunes = "0001 Español II";
+            SHora7Lunes = "0001 Español II";
+            SHora8Lunes = "0001 Español II";
+            SHora9Lunes = "0001 Español II";
 
-            SHora1Martes = "2";
-            SHora2Martes = "2";
-            SHora3Martes = "2";
-            SHora4Martes = "2";
-            SHora5Martes = "2";
-            SHora6Martes = "2";
-            SHora7Martes = "2";
-            SHora8Martes = "2";
-            SHora9Martes = "2";
+            SHora2Martes = "0001 Español II";
+            SHora3Martes = "0001 Español II";
+            SHora4Martes = "0001 Español II";
+            SHora5Martes = "0001 Español II";
+            SHora6Martes = "0001 Español II";
+            SHora1Martes = "0001 Español II";
+            SHora9Martes = "0001 Español II";
+            SHora7Martes = "0001 Español II";
+            SHora8Martes = "0001 Español II";
 
-            SHora1Miercoles = "2";
-            SHora2Miercoles = "2";
-            SHora3Miercoles = "2";
-            SHora4Miercoles = "2";
-            SHora5Miercoles = "2";
-            SHora6Miercoles = "2";
-            SHora7Miercoles = "2";
-            SHora8Miercoles = "2";
-            SHora9Miercoles = "2";
+            SHora1Miercoles = "0001 Español II";
+            SHora2Miercoles = "0001 Español II";
+            SHora3Miercoles = "0001 Español II";
+            SHora4Miercoles = "0001 Español II";
+            SHora5Miercoles = "0001 Español II";
+            SHora6Miercoles = "0001 Español II";
+            SHora7Miercoles = "0001 Español II";
+            SHora8Miercoles = "0001 Español II";
+            SHora9Miercoles = "0001 Español II";
 
-            SHora1Jueves = "2";
-            SHora2Jueves = "2";
-            SHora3Jueves = "2";
-            SHora4Jueves = "2";
-            SHora5Jueves = "2";
-            SHora6Jueves = "2";
-            SHora7Jueves = "2";
-            SHora8Jueves = "2";
-            SHora9Jueves = "2";
+            SHora1Jueves = "0001 Español II";
+            SHora2Jueves = "0001 Español II";
+            SHora3Jueves = "0001 Español II";
+            SHora4Jueves = "0001 Español II";
+            SHora5Jueves = "0001 Español II";
+            SHora6Jueves = "0001 Español II";
+            SHora7Jueves = "0001 Español II";
+            SHora8Jueves = "0001 Español II";
+            SHora9Jueves = "0001 Español II";
 
-            SHora1Viernes = "2";
-            SHora2Viernes = "2";
-            SHora3Viernes = "2";
-            SHora4Viernes = "2";
-            SHora5Viernes = "2";
-            SHora6Viernes = "2";
-            SHora7Viernes = "2";
-            SHora8Viernes = "2";
-            SHora9Viernes = "2";
+            SHora1Viernes = "0001 Español II";
+            SHora2Viernes = "0001 Español II";
+            SHora3Viernes = "0001 Español II";
+            SHora4Viernes = "0001 Español II";
+            SHora5Viernes = "0001 Español II";
+            SHora6Viernes = "0001 Español II";
+            SHora7Viernes = "0001 Español II";
+            SHora8Viernes = "0001 Español II";
+            SHora9Viernes = "0001 Español II";
 
         }
+
+        
     }
 }
