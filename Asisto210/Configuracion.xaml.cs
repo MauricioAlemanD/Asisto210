@@ -20,7 +20,7 @@ namespace Asisto210
     /// </summary>
     public partial class Configuracion : Page
     {
-        string config = "clases";
+        string config = "materias";
         Color colorRojo = (Color)ColorConverter.ConvertFromString("#FF4E1417");
         Color colorRosa = (Color)ColorConverter.ConvertFromString("#FFCA545A");
 
@@ -32,7 +32,7 @@ namespace Asisto210
         public Configuracion()
         {
             InitializeComponent();
-            lblMaterias.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            lblMaterias.BorderBrush = new SolidColorBrush(colorRojo);
             lblHorarioProfesor.BorderBrush = new SolidColorBrush(Colors.Transparent);
             lblMas.BorderBrush = new SolidColorBrush(Colors.Transparent);
             lblClases.BorderBrush = new SolidColorBrush(colorRojo);

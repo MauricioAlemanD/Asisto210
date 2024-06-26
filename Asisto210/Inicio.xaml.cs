@@ -187,7 +187,7 @@ namespace Asisto210
                         id = reader["cve_personal"].ToString(),
                         nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
                         horaRegistro = reader["hora_registro"].ToString(),
-                        fechaRegistro = reader["fecha_registro"].ToString(),
+                        fechaRegistro = reader["fecha_registro"].ToString().Substring(0, 10),
                         metodoRegistro = reader["metodo_verificacion"].ToString()
                     });
                     n++;

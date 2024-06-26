@@ -68,7 +68,6 @@ namespace Asisto210
         private void llenadoCMBAsignatura()
         {
             cmbAsignaturas.Items.Clear();
-            cmbAsignaturas.Items.Add("Libre");
             string query = "Select * from meterias";
 
             using (var reader = conexion.ExecuteReader(query))

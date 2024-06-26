@@ -38,6 +38,9 @@ namespace Asisto210
         {
             llenadoTablaMaterias();
             llenadoCMBAsignatura();
+            txtClaveMateria.Text = "";
+            txtNombreMateria.Text = "";
+            txtAbreviaturaMateria.Text = "";
         }
 
         private void EncabezadosTablaMaterias()
@@ -143,7 +146,14 @@ namespace Asisto210
 
         private void btnAñadirAsignatura_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            añadirMateria(txtClaveMateria.Text.ToString(),txtNombreMateria.Text.ToString(),txtAbreviaturaMateria.Text.ToString());
+            if (txtClaveMateria.Text != "" && txtNombreMateria.Text != "" && txtAbreviaturaMateria.Text != "")
+            {
+                añadirMateria(txtClaveMateria.Text.ToString(), txtNombreMateria.Text.ToString(), txtAbreviaturaMateria.Text.ToString());
+            }
+            else {
+                MessageBox.Show("Revisa los que campos se encuentren completos.");
+            }
+                
         }
 
         private void btnEliminarAsignatura_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
