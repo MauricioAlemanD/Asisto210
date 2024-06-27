@@ -27,16 +27,28 @@ namespace Asisto210
             Title = titulo;
         }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private void btnAcpetar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             this.DialogResult = true;
             this.Close();
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void btnCancelar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             this.DialogResult = false;
             this.Close();
         }
+
+        //private void OkButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.DialogResult = true;
+        //    this.Close();
+        //}
+
+        //private void CancelButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.DialogResult = false;
+        //    this.Close();
+        //}
     }
 }

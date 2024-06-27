@@ -10,6 +10,12 @@
       Title="Mas">
 
     <Grid>
-       
+        <Border x:Name="panelIZquierdo" BorderThickness="1" Margin="10,10,873,10" Background="White">
+            <Grid/>
+        </Border>
+        <Border x:Name="panelIZquierdo_Copiar" BorderThickness="1" Margin="230,10,10,10" Background="White">
+            <Grid/>
+        </Border>
+
     </Grid>
 </Page>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Asisto210"
         mc:Ignorable="d"
-        Title="Alerta" Height="200" Width="400"  WindowStartupLocation="CenterScreen" Icon="/warning.png">
+        Title="Alerta" Height="200" Width="400"  WindowStartupLocation="CenterScreen" Icon="/warning.png" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
@@ -20,9 +20,9 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBlock.RenderTransform></TextBlock>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60,0,0,10" Grid.Column="1">
-            <Button Name="OkButton" Content="OK" Width="75" Margin="5" Click="OkButton_Click" Background="#FFCB5457" BorderBrush="{x:Null}" Foreground="White" FontFamily="Poppins"/>
-            <Button Name="CancelButton" Content="Cancel" Width="75" Margin="5" Click="CancelButton_Click" Background="#FF4D1417" Foreground="White" FontFamily="Poppins"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,104,0,0" Grid.Column="1" Width="222">
+            <Label x:Name="btnAcpetar" Content =" Aceptar" Width="100" HorizontalContentAlignment="Center" Margin="5" Background="#5A0C10" Foreground="White" FontFamily="Poppins" FontSize="14" MouseLeftButtonUp="btnAcpetar_MouseLeftButtonUp" Cursor="Hand"/>
+            <Label x:Name="btnCancelar" Content="Cancelar" Width="100" HorizontalContentAlignment="Center" Margin="5" Background="#CA545A" FontFamily="Poppins" FontSize="14" Foreground="White" MouseLeftButtonUp="btnCancelar_MouseLeftButtonUp" Cursor="Hand"/>
         </StackPanel>
     </Grid>
 </Window>

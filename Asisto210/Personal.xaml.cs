@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -96,47 +97,56 @@ namespace Asisto210
         }
         private void btnAñadir_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
+
+            if( ValidarTexto(txtNombre.Text) && ValidarTexto(txtApellidoPaterno.Text) && ValidarTexto(txtApellidoMaterno.Text))
             {
-                string cvePersonal = "";
-                string nombre = "";
-                string apellidoPaterno = "";
-                string apellidoMaterno = "";
-                string rol = "1";
-                int rolCH = 0;
-
-                cvePersonal = obtenerUltimaID();
-                nombre = txtNombre.Text;
-                apellidoPaterno = txtApellidoPaterno.Text;
-                apellidoMaterno = txtApellidoMaterno.Text;
-                rol = cmbRoles.SelectedItem.ToString();
-
-                if (rol == "Directivo")
+                try
                 {
-                    rol = "1";
-                    rolCH = 1;
-                }
-                else if (rol == "Administrador")
-                {
-                    rol = "2";
-                    rolCH = 1;
-                }
-                else if (rol == "Docente")
-                {
-                    rol = "3";
-                    rolCH = 0;
-                }
+                    string cvePersonal = "";
+                    string nombre = "";
+                    string apellidoPaterno = "";
+                    string apellidoMaterno = "";
+                    string rol = "1";
+                    int rolCH = 0;
 
-                añadirPersonal(cvePersonal, nombre, apellidoPaterno, apellidoMaterno, rol);
-                añadirPersonalChecador(Convert.ToInt32(cvePersonal), nombre + " " + apellidoPaterno + " " + apellidoMaterno, "123", rolCH, true);
-                MessageBox.Show("El usuario ha sido registrado en la base de datos y en el checador. Favor de ir al checador y registrar caracteristícas biométricas");
+                    cvePersonal = obtenerUltimaID();
+                    nombre = txtNombre.Text;
+                    apellidoPaterno = txtApellidoPaterno.Text;
+                    apellidoMaterno = txtApellidoMaterno.Text;
+                    rol = cmbRoles.SelectedItem.ToString();
+
+                    if (rol == "Directivo")
+                    {
+                        rol = "1";
+                        rolCH = 1;
+                    }
+                    else if (rol == "Administrador")
+                    {
+                        rol = "2";
+                        rolCH = 1;
+                    }
+                    else if (rol == "Docente")
+                    {
+                        rol = "3";
+                        rolCH = 0;
+                    }
+
+                    añadirPersonal(cvePersonal, nombre, apellidoPaterno, apellidoMaterno, rol);
+                    añadirPersonalChecador(Convert.ToInt32(cvePersonal), nombre + " " + apellidoPaterno + " " + apellidoMaterno, "123", rolCH, true);
+                    MessageBox.Show("El usuario ha sido registrado en la base de datos y en el checador. Favor de ir al checador y registrar caracteristícas biométricas");
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                actrualizarPersonal();
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                MessageBox.Show("Algno de los campos contiene carácteres no soportados.");
             }
-            actrualizarPersonal();
+            
         }
         private void llenadoTablaPersonal()
         {
@@ -286,7 +296,7 @@ namespace Asisto210
             }
             catch
             {
-
+                MessageBox.Show("Selecciona a alguien del personal");
             }
             actrualizarPersonal();
         }
@@ -336,57 +346,66 @@ namespace Asisto210
         }
         private void btnEditarPersonal_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (ValidarTexto(txtNombre_Editar.Text) && ValidarTexto(txtApellidoPaterno_Editar.Text) && ValidarTexto(txtApellidoMaterno.Text))
             {
-                string cve_editar = "0000";
-
-                string cmbEditar_v = cmbPersonal_Editar.SelectedItem.ToString();
-                cve_editar = cmbEditar_v.Substring(0, 4);
-                int cve_personalInt = 0;
-                cve_personalInt = Convert.ToInt32(cve_editar);               
-
-                int rol_editado = 0;
-                string nombre = txtNombre_Editar.Text;
-                string apellido_paterno = txtApellidoPaterno_Editar.Text;
-                string apellido_materno = txtApellidoMaterno_Editar.Text;
-                int rol = cmbRoles_Editar.SelectedIndex;
-
-                if (cmbRoles_Editar.SelectedIndex == 0 || cmbRoles_Editar.SelectedIndex == 1)
-                {
-
-                    rol_editado = 1;
-                }
-                else if (cmbRoles_Editar.SelectedIndex == 2)
-                {
-                    rol_editado = 0;
-                }
-
-
-                nombre = txtNombre_Editar.Text + " " + txtApellidoPaterno_Editar.Text + " " + txtApellidoMaterno_Editar.Text;
                 try
                 {
-                    bool userEdited = conexionBiometrico.Biometrico.SSR_SetUserInfo(1, cve_personalInt.ToString(), nombre, "123", rol_editado, true);
-                    MessageBox.Show("Actualizacion correcta en checador");
+                    string cve_editar = "0000";
+
+                    string cmbEditar_v = cmbPersonal_Editar.SelectedItem.ToString();
+                    cve_editar = cmbEditar_v.Substring(0, 4);
+                    int cve_personalInt = 0;
+                    cve_personalInt = Convert.ToInt32(cve_editar);
+
+                    int rol_editado = 0;
+                    string nombre = txtNombre_Editar.Text;
+                    string apellido_paterno = txtApellidoPaterno_Editar.Text;
+                    string apellido_materno = txtApellidoMaterno_Editar.Text;
+                    int rol = cmbRoles_Editar.SelectedIndex;
+
+                    if (cmbRoles_Editar.SelectedIndex == 0 || cmbRoles_Editar.SelectedIndex == 1)
+                    {
+
+                        rol_editado = 1;
+                    }
+                    else if (cmbRoles_Editar.SelectedIndex == 2)
+                    {
+                        rol_editado = 0;
+                    }
+
+
+                    nombre = txtNombre_Editar.Text + " " + txtApellidoPaterno_Editar.Text + " " + txtApellidoMaterno_Editar.Text;
+                    try
+                    {
+                        bool userEdited = conexionBiometrico.Biometrico.SSR_SetUserInfo(1, cve_personalInt.ToString(), nombre, "123", rol_editado, true);
+                        MessageBox.Show("Actualizacion correcta en checador");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error en la actualizacion de personal en checador");
+                    }
+                    try
+                    {
+                        editarPersonal(txtNombre_Editar.Text, apellido_paterno, apellido_materno, rol + 1, cve_personalInt);
+                        MessageBox.Show("Actualizacion correcta en base de datos");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error en la actualización en base de datos");
+                    }
+
                 }
                 catch
                 {
-                    MessageBox.Show("Error en la actualizacion de personal en checador");
+                    MessageBox.Show("Error al actualizar");
                 }
-                try
-                {
-                    editarPersonal(txtNombre_Editar.Text, apellido_paterno, apellido_materno, rol + 1, cve_personalInt);
-                    MessageBox.Show("Actualizacion correcta en base de datos");
-                }
-                catch
-                {
-                    MessageBox.Show("Error en la actualización en base de datos");
-                }
-                
             }
-            catch
+            else
             {
-                MessageBox.Show("Error al actualizar");
+                MessageBox.Show("Revisa los campos de texto, no se puede actualizar el personal debido a que no se soprtan los carácteres.");
             }
+
+            
         }
         private void editarPersonal(string nombre, string apellido_paterno, string apellido_materno, int rol, int cve_personal)
         {
@@ -429,6 +448,14 @@ namespace Asisto210
             llenadoTablaPersonal();
             txtBusquedaPersonal.Text = "";
         }
+
+        private bool ValidarTexto(string texto)
+        {
+            // Expresión regular para letras de la a a la z con acentos, minúsculas y mayúsculas
+            string pattern = @"^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$";
+            return Regex.IsMatch(texto, pattern);
+        }
+
     } // End class
 }// End namespace
 

@@ -10,6 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="arrow-down-sign-to-navigate.png" />
+    <None Remove="arrow-down-sign-to-navigateN.png" />
+    <None Remove="arrow-down-sign-to-navigateW.png" />
     <None Remove="back-2-login.png" />
     <None Remove="back-login.png" />
     <None Remove="bloqueado.png" />
@@ -30,6 +33,7 @@
     <None Remove="menu.png" />
     <None Remove="minimize-sign.png" />
     <None Remove="plus-symbol-button.png" />
+    <None Remove="plus-symbol-buttonW.png" />
     <None Remove="refresh-n.png" />
     <None Remove="search.png" />
     <None Remove="teacher.png" />
@@ -60,6 +64,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="arrow-down-sign-to-navigate.png" />
+    <Resource Include="arrow-down-sign-to-navigateN.png" />
+    <Resource Include="arrow-down-sign-to-navigateW.png" />
     <Resource Include="back-2-login.png" />
     <Resource Include="back-login.png" />
     <Resource Include="bloqueado.png" />
@@ -80,6 +87,7 @@
     <Resource Include="menu.png" />
     <Resource Include="minimize-sign.png" />
     <Resource Include="plus-symbol-button.png" />
+    <Resource Include="plus-symbol-buttonW.png" />
     <Resource Include="refresh-n.png" />
     <Resource Include="search.png" />
     <Resource Include="teacher.png" />

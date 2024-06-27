@@ -183,7 +183,7 @@
             <Grid x:Name="GAjustesHorario">
                 <Label x:Name="btnCNH" Content="Crear nuevo horario" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
                 <Label x:Name="btnRH" Content="Revisar horario" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
-                <Label x:Name="lblDocente" Content="Docente" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
+                <Label x:Name="lblDocente" Content="Profesor" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
                 <ComboBox x:Name="cmbDocente" Margin="10,264,10,185" Height="20"/>
                 <Label x:Name="lblDocente_Copiar" Content="Ciclo escolar" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
                 <Border x:Name="ctxtAñoInicio" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,337,0,0" >
@@ -199,7 +199,6 @@
                 <Label x:Name="lblDocente_Copiar2" Content="Clave de horario" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
                 <ComboBox x:Name="cmbHorarioProfesor" Margin="10,112,10,337" Height="20" SelectionChanged="cmbHorarioProfesor_SelectionChanged"/>
                 <Label x:Name="btnEditarAsignatura" Content="Editar horario" HorizontalAlignment="Center" Height="20" Width="268" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,154,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnEditarAsignatura_MouseLeftButtonUp"/>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="209,234,0,0" VerticalAlignment="Top" Click="Button_Click"/>
                 <Label x:Name="btnEliminarHorario" Content="" HorizontalAlignment="Left" Margin="262,85,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" Width="16" Height="16" Cursor="Hand" MouseLeftButtonUp="btnEliminarHorario_MouseLeftButtonUp">
                     <Label.Background>
                         <ImageBrush ImageSource="/trash-can1.png"/>
@@ -233,7 +232,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border BorderThickness="1" Grid.Row="0" Grid.Column="0"/>
+                <Border x:Name="Plantilla" BorderThickness="1" Grid.Row="0" Grid.Column="0" Background="Black">
+                    <Label x:Name="btnPlantillaHorario" Content="Plantilla de horario" VerticalContentAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="White" Cursor="Hand" HorizontalContentAlignment="Center" MouseLeftButtonUp="btnPlantillaHorario_MouseLeftButtonUp"/>
+                </Border>
                 <Border x:Name="CLunes" BorderThickness="1" Grid.Row="0" Grid.Column="1" Background="#FF4E1417">
                     <Label Content="Lunes" FontWeight="Bold" FontFamily="Poppins Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
                 </Border>
@@ -423,6 +424,24 @@
                     <Label x:Name="Hora9Viernes" Content="Asignatura" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="Black" Cursor="Hand" FontSize="10" MouseLeftButtonUp="Hora9Viernes_MouseLeftButtonUp"/>
                 </Border>
 
+            </Grid>
+        </Border>
+        <Border x:Name="CPlantillaHorario" BorderBrush="White" BorderThickness="1" Margin="326,58,633,301" Background="Black" Visibility="Hidden">
+            <Grid x:Name="GCP">
+                <Label Content="Hora inicial" Foreground="White" FontFamily="Poppins" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="btnContraer" Content="" FontFamily="Poppins" Cursor="Hand" Margin="1,111,-1,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" MouseLeftButtonUp="btnContraer_MouseLeftButtonUp" Height="16">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/arrow-down-sign-to-navigateN.png" Stretch="Uniform"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="btnAplicarPlantilla" Content="Aplicar plantilla" HorizontalAlignment="Center" Height="20" Width="116"  HorizontalContentAlignment="Center" Foreground="White" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,86,0,0" BorderBrush="White" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnAplicarPlantilla_MouseLeftButtonUp"/>
+                <Label x:Name="btnNuevaPlantilla" Content="" FontFamily="Poppins" Cursor="Hand" Margin="80,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Height="16" MouseLeftButtonUp="btnNuevaPlantilla_MouseLeftButtonUp">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/plus-symbol-buttonW.png" Stretch="Uniform"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Nueva" Foreground="White" FontFamily="Poppins" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                <ComboBox x:Name="cmbPlantillaHorario" Margin="0,24,3,86" Height="20"/>
             </Grid>
         </Border>
     </Grid>
