@@ -10,11 +10,45 @@
       Title="Mas">
 
     <Grid>
-        <Border x:Name="panelIZquierdo" BorderThickness="1" Margin="10,10,873,10" Background="White">
-            <Grid/>
+        <Border x:Name="panelIzquierdo" BorderThickness="1" Margin="10,10,828,10" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Border.Effect>
+            <Grid HorizontalAlignment="Center" Height="451" VerticalAlignment="Center">
+                <Label x:Name="btnCCD" Content="Configuración de dispositivo " FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" MouseLeftButtonUp="btnCCD_MouseLeftButtonUp" Cursor="Hand"/>
+                <Label x:Name="btnCCS" Content="Configuración de sistema" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,32,0,0" MouseLeftButtonUp="btnCCS_MouseLeftButtonUp" Cursor="Hand"/>
+            </Grid>
         </Border>
-        <Border x:Name="panelIZquierdo_Copiar" BorderThickness="1" Margin="230,10,10,10" Background="White">
-            <Grid/>
+        <Border x:Name="panelDerecho" BorderThickness="1" Margin="260,10,10,10" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.1"/>
+            </Border.Effect>
+            <Grid>
+                <Border x:Name="CCD" BorderThickness="1" Margin="0,0,2,2">
+                    <Grid>
+                        <Label Content="Configuración de dispositivo biométrico" FontFamily="Poppins" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Content="Direccíon IP" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
+                        <Border x:Name="ctxtIP" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,53,0,0" >
+                            <TextBox x:Name="txtIP" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                        </Border>
+                        <Border x:Name="ctxtPuerto" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,117,0,0" >
+                            <TextBox x:Name="txtPuerto" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                        </Border>
+                        <Label Content="Puerto TCP" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="btnAñadirAsignatura" Content="Guardar configuracón" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,162,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="CCS" BorderThickness="1" Visibility="Hidden" Margin="0,0,2,2">
+                    <Grid>
+                        <Label Content="Configuración de sitema" FontFamily="Poppins" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Content="Resolución de pantalla" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
+                        <Border x:Name="ctxtIP_Copiar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,53,0,0" >
+                            <TextBox x:Name="txtIP1" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                        </Border>
+                        <Label x:Name="btnAñadirAsignatura_Copiar" Content="Guardar configuracón" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,92,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Grid>
         </Border>
 
     </Grid>

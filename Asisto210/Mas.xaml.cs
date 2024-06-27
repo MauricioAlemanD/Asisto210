@@ -24,5 +24,31 @@ namespace Asisto210
         {
             InitializeComponent();
         }
+
+        private void btnCCD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (CCD.Visibility == Visibility.Hidden)
+            {
+                CCD.Visibility = Visibility.Visible;
+                CCS.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                CCD.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnCCS_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (CCS.Visibility == Visibility.Hidden)
+            {
+                CCS.Visibility = Visibility.Visible;
+                CCD.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                CCS.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
