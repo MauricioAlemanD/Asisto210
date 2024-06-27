@@ -121,20 +121,21 @@ namespace Asisto210
                 cve_horario_editar = cmbHorarioProfesor.SelectedItem.ToString().Substring(9, 4);
 
                 if (cve_horario_editar != ""){
-                    llenadoHorarioSeleccionado(cve_horario_editar);
 
+                    llenadoHorarioSeleccionado(cve_horario_editar);
+                    G_cve_horario_profesor = cmbHorarioProfesor.SelectedItem.ToString().Substring(9, 4);
                 }
             }
             catch
             {
-
+                G_cve_horario_profesor = "";
             }
         }
 
         private void btnEditarAsignatura_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             
-            if (G_cve_horario_profesor != "" && G_ciclo_escolar != "" && G_cve_profesor !="" && G_turno != "" && cmbHorarioProfesor.SelectedItem == null )
+            if (G_cve_horario_profesor != "" && G_ciclo_escolar != "" && G_cve_profesor !="" && G_turno != "" )
             {
 
                 MessageBoxPersonalizado("Estas seguro de actualizar el horario " + G_cve_horario_profesor, "Alerta");
@@ -161,8 +162,6 @@ namespace Asisto210
                             // Pasar el array de parámetros a ExecuteNonQuery
                             conexion.ExecuteNonQuery(query, parameters);
 
-
-                            limpiarTablaHorarios();
                         }
                         catch (Exception ex)
                         {
