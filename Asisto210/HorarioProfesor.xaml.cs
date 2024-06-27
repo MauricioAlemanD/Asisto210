@@ -122,6 +122,7 @@ namespace Asisto210
 
                 if (cve_horario_editar != ""){
                     llenadoHorarioSeleccionado(cve_horario_editar);
+
                 }
             }
             catch
@@ -132,7 +133,8 @@ namespace Asisto210
 
         private void btnEditarAsignatura_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (G_cve_horario_profesor != "" && G_ciclo_escolar != "" && G_cve_profesor !="" && G_turno != "" )
+            
+            if (G_cve_horario_profesor != "" && G_ciclo_escolar != "" && G_cve_profesor !="" && G_turno != "" && cmbHorarioProfesor.SelectedItem == null )
             {
 
                 MessageBoxPersonalizado("Estas seguro de actualizar el horario " + G_cve_horario_profesor, "Alerta");
@@ -172,95 +174,95 @@ namespace Asisto210
 
 
                         //Clase Hora 1 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora1, Hora1Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora1.Content.ToString(), Hora1Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 2 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora2, Hora2Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora2.Content.ToString(), Hora2Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 3 Lune
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora3, Hora3Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora3.Content.ToString(), Hora3Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 4 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora4, Hora4Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora4.Content.ToString(), Hora4Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 5 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora5, Hora5Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora5.Content.ToString(), Hora5Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 6 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora6, Hora6Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora6.Content.ToString(), Hora6Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 7 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora7, Hora7Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora7.Content.ToString(), Hora7Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 8 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora8, Hora8Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora8.Content.ToString(), Hora8Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 9 Lunes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora9, Hora9Lunes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Lunes", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora9.Content.ToString(), Hora9Lunes.Content.ToString().Substring(0, 4));
                         //Clase Hora 1 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora1, Hora1Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora1.Content.ToString(), Hora1Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 2 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora2, Hora2Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora2.Content.ToString(), Hora2Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 3 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora3, Hora3Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora3.Content.ToString(), Hora3Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 4 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora4, Hora4Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora4.Content.ToString(), Hora4Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 5 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora5, Hora5Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora5.Content.ToString(), Hora5Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 6 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora6, Hora6Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora6.Content.ToString(), Hora6Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 7 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora7, Hora7Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora7.Content.ToString(), Hora7Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 8 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora8, Hora8Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora8.Content.ToString(), Hora8Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 9 Martes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora9, Hora9Martes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Martes", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora9.Content.ToString(), Hora9Martes.Content.ToString().Substring(0, 4));
                         //Clase Hora 1 MiercolesG_turno
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora1, Hora1Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora1.Content.ToString(), Hora1Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 2 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora2, Hora2Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora2.Content.ToString(), Hora2Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 3 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora3, Hora3Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora3.Content.ToString(), Hora3Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 4 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora4, Hora4Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora4.Content.ToString(), Hora4Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 5 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora5, Hora5Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora5.Content.ToString(), Hora5Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 6 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora6, Hora6Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora6.Content.ToString(), Hora6Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 7 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora7, Hora7Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora7.Content.ToString(), Hora7Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 8 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora8, Hora8Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora8.Content.ToString(), Hora8Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 9 Miercoles
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora9, Hora9Miercoles.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Miercoles", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora9.Content.ToString(), Hora9Miercoles.Content.ToString().Substring(0, 4));
                         //Clase Hora 1 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora1, Hora1Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora1.Content.ToString(), Hora1Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 2 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora2, Hora2Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora2.Content.ToString(), Hora2Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 3 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora3, Hora3Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora3.Content.ToString(), Hora3Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 4 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora4, Hora4Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora4.Content.ToString(), Hora4Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 5 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora5, Hora5Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora5.Content.ToString(), Hora5Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 6 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora6, Hora6Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora6.Content.ToString(), Hora6Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 7 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora7, Hora7Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora7.Content.ToString(), Hora7Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 8 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora8, Hora8Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora8.Content.ToString(), Hora8Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 9 Jueves
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora9, Hora9Jueves.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Jueves", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora9.Content.ToString(), Hora9Jueves.Content.ToString().Substring(0, 4));
                         //Clase Hora 1 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora1, Hora1Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora1.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora1.Content.ToString(), Hora1Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 2 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora2, Hora2Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora2.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora2.Content.ToString(), Hora2Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 3 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora3, Hora3Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora3.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora3.Content.ToString(), Hora3Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 4 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora4, Hora4Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora4.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora4.Content.ToString(), Hora4Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 5 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora5, Hora5Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora5.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora5.Content.ToString(), Hora5Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 6 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora6, Hora6Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora6.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora6.Content.ToString(), Hora6Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 7 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora7, Hora7Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora7.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora7.Content.ToString(), Hora7Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 8 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora8, Hora8Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora8.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora8.Content.ToString(), Hora8Viernes.Content.ToString().Substring(0, 4));
                         //Clase Hora 9 Viernes
-                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), SHora9, Hora9Viernes.Content.ToString().Substring(0, 4));
+                        añadirHorarioProfesorClases(G_cve_horario_profesor, G_ciclo_escolar, G_cve_profesor, G_turno, "Viernes", TimeSpan.ParseExact(Hora9.Content.ToString().Substring(0, 5), @"hh\:mm", null), Hora9.Content.ToString(), Hora9Viernes.Content.ToString().Substring(0, 4));
 
                         MessageBoxPersonalizado("Se actualizaron las clases al horario." + G_cve_horario_profesor + ".", "Confimación");
 
