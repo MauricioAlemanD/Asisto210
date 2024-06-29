@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Asisto210
 {
@@ -20,11 +22,20 @@ namespace Asisto210
     /// </summary>
     public partial class Page1 : Page
     {
+
+        //Filtros
+        bool fechaNueva = false;
+
+
+        string fechaSistema = DateTime.Now.ToString("yyyy-MM-dd");
+        Conexion conexion;
+        List<TablaRegistroDiario> registrosDiarios = new List<TablaRegistroDiario>();
         public Page1()
         {
+            conexion = new Conexion();
             InitializeComponent();
-            EncabezadosTablaRegistroDiario();
-            llenadoTablaRegistroDiario();
+            EncabezadosTablaRegistroDiario();            
+            llenadoTablaRegistroDiario(fechaSistema);
         }
 
         private void EncabezadosTablaRegistroDiario()
@@ -37,30 +48,52 @@ namespace Asisto210
             dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Estado del Registro", Binding = new Binding("estadoRegistro") });
         }
 
-        private void llenadoTablaRegistroDiario()
+        private void llenadoTablaRegistroDiario(string fecha_dia)
         {
-            List<TablaRegistroDiario> registrosDiarios = new List<TablaRegistroDiario>
+
+            string query = "\t\t   SELECT \r\n    ui.cve_personal,\r\n    p.nombre,\r\n    p.apelldio_pateno,\r\n    p.apellido_materno,\r\n    ui.fecha_registro,\r\n    ui.hora_registro AS hora_entrada,\r\n    LEAD(ui.hora_registro) OVER (PARTITION BY ui.cve_personal, ui.fecha_registro ORDER BY ui.hora_registro) AS hora_salida,\r\n    e.descripcion_estado\r\nFROM \r\n    ultimos_ingresos ui\r\nINNER JOIN \r\n    personal p ON ui.cve_personal = p.cve_personal\r\nINNER JOIN \r\n    estados e ON ui.estado_asistencia = e.cve_estado\r\nWHERE \r\n    ui.fecha_registro = @fechaBusqueda\r\nORDER BY \r\n    ui.cve_personal, ui.fecha_registro, ui.hora_registro;\r\n";
+
+            // Parámetro para la fecha
+            SqlParameter parameter = new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date);
+            parameter.Value = fecha_dia;
+
+            List<TablaRegistroDiario> registrosDiarios = new List<TablaRegistroDiario>();
+
+            // Ejecutar la consulta con parámetros
+            using (var reader = conexion.ExecuteParametrizedReader(query, parameter))
             {
-                new TablaRegistroDiario
+                while (reader.Read())
                 {
-                    id = "001",
-                    nombre = "Juan Pérez",
-                    fechaRegistro = "2024-05-28",
-                    horaRegistroIngreso = "08:00",
-                    horaRegistroSalida = "17:00",
-                    estadoRegistro = "Presente"
-                },
-                new TablaRegistroDiario
-                {
-                    id = "002",
-                    nombre = "María García",
-                    fechaRegistro = "2024-05-28",
-                    horaRegistroIngreso = "08:15",
-                    horaRegistroSalida = "17:10",
-                    estadoRegistro = "Presente"
+                    registrosDiarios.Add(new TablaRegistroDiario
+                    {
+                        id = reader["cve_personal"].ToString(),
+                        nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
+                        fechaRegistro = reader["fecha_registro"].ToString(),
+                        horaRegistroIngreso = reader["hora_entrada"].ToString(),
+                        horaRegistroSalida = reader["hora_salida"].ToString(),
+                        estadoRegistro = reader["descripcion_estado"].ToString()
+                    });
                 }
-            };
-            dvgRegistroDiario.ItemsSource = registrosDiarios;
+                dvgRegistroDiario.ItemsSource = registrosDiarios;
+            }
+            
+        }
+
+        private void dtpBusqueda_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            fechaNueva = true;
+        }
+
+        private void btnAplicarFiltros_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (fechaNueva)
+            {
+                fechaSistema = dtpBusqueda.SelectedDate.Value.ToString("yyyy-MM-dd").Substring(0, 10);
+                llenadoTablaRegistroDiario(fechaSistema);
+
+            }
+
+            MessageBox.Show("Se aplicó el filtro");
         }
     }
 

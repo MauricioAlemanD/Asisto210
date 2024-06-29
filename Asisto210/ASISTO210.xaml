@@ -416,7 +416,7 @@
             </Grid>
 
         </Grid>
-        <Grid x:Name="barTop" Margin="65,0,0,0" Height="54" VerticalAlignment="Top" d:IsLocked="True">
+        <Grid x:Name="barTop" Margin="65,0,0,0" Height="54" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="26*"/>
                 <RowDefinition Height="29*"/>
@@ -424,9 +424,11 @@
             <Border BorderBrush="#FFDDDDDD" BorderThickness="3,0,0,0" Background="#FF4E1417" Grid.RowSpan="2" >
                 <Grid Margin="696,0,73,0">
                     <Ellipse Margin="2,0,0,9" Fill="#FFDEDEDE" HorizontalAlignment="Left" Width="35" Height="36" VerticalAlignment="Bottom"/>
-                    <Label x:Name="lblInicalesUsuario" Content="AD" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Foreground="#FF4E1417"/>
-                    <Label x:Name="lblNombreUsuario" Content="Mauricio Leonardo Aleman Díaz" Margin="37,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="#FFDEDEDE" Width="264"/>
-                    <Label x:Name="lblRolUsuario" Content="Directivo" Margin="37,22,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="#FFDEDEDE" Width="210"/>
+                    <Grid HorizontalAlignment="Left" Height="36" Margin="2,0,0,0" VerticalAlignment="Center" Width="35">
+                        <Label x:Name="lblInicalesUsuario" Content="AD" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="#FF4E1417" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Grid>
+                    <Label x:Name="lblNombreUsuario" Content="" Margin="41,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="#FFDEDEDE" Width="264"/>
+                    <Label x:Name="lblRolUsuario" Content="" Margin="41,22,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="#FFDEDEDE" Width="210"/>
                 </Grid>
             </Border>
             <Label x:Name="lblContenedor" Content="Asisto210 / Inicio" Foreground="#ddd" FontSize="20" FontWeight="Bold" BorderThickness="3,0,0,0" VerticalContentAlignment="Center" Padding="10,5,5,5" HorizontalAlignment="Left" Width="305" Margin="30,10,0,-10" Grid.RowSpan="2">

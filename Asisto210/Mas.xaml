@@ -17,6 +17,7 @@
             <Grid HorizontalAlignment="Center" Height="451" VerticalAlignment="Center">
                 <Label x:Name="btnCCD" Content="Configuración de dispositivo " FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" MouseLeftButtonUp="btnCCD_MouseLeftButtonUp" Cursor="Hand"/>
                 <Label x:Name="btnCCS" Content="Configuración de sistema" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,32,0,0" MouseLeftButtonUp="btnCCS_MouseLeftButtonUp" Cursor="Hand"/>
+                <Label x:Name="btnCCU" Content="Configuración de sistema" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,64,0,0" MouseLeftButtonUp="btnCCU_MouseLeftButtonUp" Cursor="Hand"/>
             </Grid>
         </Border>
         <Border x:Name="panelDerecho" BorderThickness="1" Margin="260,10,10,10" Background="White">
@@ -38,14 +39,33 @@
                         <Label x:Name="btnAñadirAsignatura" Content="Guardar configuracón" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,162,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
                     </Grid>
                 </Border>
-                <Border x:Name="CCS" BorderThickness="1" Visibility="Hidden" Margin="0,0,2,2">
+                <Border x:Name="CCS" BorderThickness="1" Margin="0,0,2,2" Visibility="Hidden">
                     <Grid>
-                        <Label Content="Configuración de sitema" FontFamily="Poppins" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Content="Configuración de sistema" FontFamily="Poppins" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <Label Content="Resolución de pantalla" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
                         <Border x:Name="ctxtIP_Copiar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,53,0,0" >
                             <TextBox x:Name="txtIP1" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
                         </Border>
                         <Label x:Name="btnAñadirAsignatura_Copiar" Content="Guardar configuracón" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,92,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="CCU" BorderThickness="1" Margin="0,0,2,2" IsVisibleChanged="CCU_IsVisibleChanged" Visibility="Hidden">
+                    <Grid>
+                        <Label x:Name="lblClavePersonal" Content="Clave de personal:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lblNombrePersonal" Content="Nombre de personal:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lblRolPersonal" Content="Rol: " HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lblNombreUsuario" Content="Usuario:" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Configuración de usuario" FontFamily="Poppins" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Content="Actualizar nombre de usuario" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
+                        <Border x:Name="ctxtIP_Copiar1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,159,0,0" >
+                            <TextBox x:Name="txtActualizarNUsuario" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                        </Border>
+                        <Label x:Name="btnActualizarNUsuario" Content="Actualizar nombre de usuario" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,194,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnActualizarNUsuario_MouseLeftButtonUp"/>
+                        <Label Content="Actualizar contraseña" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top"/>
+                        <Border x:Name="ctxtIP_Copiar2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="10,244,0,0" >
+                            <PasswordBox x:Name="txtActualizarCUsuaio" SelectionBrush="{x:Null}" FontFamily="Poppins" FontSize="14" BorderThickness="0,0,0,0"/>
+                        </Border>
+                        <Label x:Name="btnActualizarCUsuario" Content="Actualizar contraseña" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,279,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnActualizarCUsuario_MouseLeftButtonUp"/>
                     </Grid>
                 </Border>
             </Grid>

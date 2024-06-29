@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 
 namespace Asisto210
 {
@@ -17,9 +22,12 @@ namespace Asisto210
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        Conexion conexion;
         
         public MainWindow()
         {
+            conexion = new Conexion();
             InitializeComponent();
         }
 
@@ -74,9 +82,9 @@ namespace Asisto210
                 MessageBoxPersonalizado("Por favor, ingrese el usuario y la contraseña.","Alerta inicio de sesón");
             }
             else
-            {
-                // Aquí puedes agregar la lógica para manejar la autenticación
-                if (usuario == "admin" && contraseña == "password")
+            {                
+
+                if (acceso(usuario,contraseña))
                 {
                     ASISTO210 aSISTO210 = new ASISTO210();
                     aSISTO210.Show();
@@ -114,6 +122,60 @@ namespace Asisto210
             ASISTO210 aSISTO210 = new ASISTO210();
             aSISTO210.Show();
             this.Close();
+        }
+
+        private bool acceso(String usuario,String contraseña)
+        {
+            bool bandera = false;
+            string query = "SELECT cve_personal, nombre_usuario, contraseña FROM usuarios_c";
+
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                while (reader.Read())
+                {
+                    if (reader["nombre_usuario"].ToString() == usuario && reader["contraseña"].ToString() == contraseña)
+                    {
+                        Global.Global_CVE = reader["cve_personal"].ToString();
+                        bandera = true;
+                        break;
+                    }
+                    else
+                    {
+                        bandera = false;
+                    }
+                }
+            }
+
+            return bandera;
+
+
+        }
+
+        private void btnAyuda_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            string pdfPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Asisto210-361.pdf");
+
+            if (File.Exists(pdfPath))
+            {
+                try
+                {
+                    // Leer el PDF en memoria
+                    byte[] pdfBytes = File.ReadAllBytes(pdfPath);
+
+                    // Guardar el PDF en una ubicación temporal y abrirlo con el visor predeterminado
+                    string tempPath = System.IO.Path.GetTempFileName() + ".pdf";
+                    File.WriteAllBytes(tempPath, pdfBytes);
+                    Process.Start(new ProcessStartInfo(tempPath) { UseShellExecute = true });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al abrir el PDF: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo PDF no se encontró.");
+            }
         }
     }
 }

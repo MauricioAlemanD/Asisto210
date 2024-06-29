@@ -13,6 +13,7 @@
     <None Remove="arrow-down-sign-to-navigate.png" />
     <None Remove="arrow-down-sign-to-navigateN.png" />
     <None Remove="arrow-down-sign-to-navigateW.png" />
+    <None Remove="Asisto210-361.pdf" />
     <None Remove="back-2-login.png" />
     <None Remove="back-login.png" />
     <None Remove="bloqueado.png" />
@@ -55,6 +56,12 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Asisto210-361.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

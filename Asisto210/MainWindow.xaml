@@ -36,7 +36,7 @@
                 <ImageBrush ImageSource="/minimize-sign.png"/>
             </Label.Background>
         </Label>
-        <Label Content="¿Necesitas ayuda para iniciar sesión?" HorizontalAlignment="Left" Margin="88,459,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="16" RenderTransformOrigin="0.512,0.554" FontFamily="Poppins" Cursor="Hand"/>
+        <Label x:Name="btnAyuda" Content="¿Necesitas ayuda para iniciar sesión?" HorizontalAlignment="Left" Margin="88,459,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="16" RenderTransformOrigin="0.512,0.554" FontFamily="Poppins" Cursor="Hand" MouseLeftButtonUp="btnAyuda_MouseLeftButtonUp"/>
         <Grid x:Name="gUsuario" Margin="48,206,0,273" HorizontalAlignment="Left" Width="348">
             <Border BorderBrush="Black" Background="#FFCA545A" CornerRadius="0,20,20,0" Margin="42,0,0,0"/>
             <Border BorderBrush="Black" Background="#FF4E1417" Margin="0,0,306,0" CornerRadius="20,0,0,20">
@@ -67,15 +67,15 @@
                     </Label.Background>
                 </Label>
             </Border>
-            <Label x:Name="lblContraseña" Content="Contraseña" Padding="0,0,0,0" Margin="52,0,10,0" Foreground="White" FontSize="18" VerticalContentAlignment="Center" MouseDown="Label_MouseDown" ForceCursor="True" Cursor="IBeam">
+            <Label x:Name="lblContraseña" Content="Contraseña" Padding="0,0,0,0" Margin="52,1,10,-1" Foreground="White" FontSize="18" VerticalContentAlignment="Center" MouseDown="Label_MouseDown" ForceCursor="True" Cursor="IBeam">
                 <Label.Background>
                     <ImageBrush/>
                 </Label.Background>
             </Label>
         </Grid>
         <Grid x:Name="gBtnIngresar" Margin="48,352,0,138" HorizontalAlignment="Left" Width="348">
-            <Border x:Name="bBtnIngresar" CornerRadius="20,20,20,20" Background="#FF4E1417" Margin="115,0,115,0">
-                <Label x:Name="btnIngresar" Content="Ingresar&#xA;" HorizontalContentAlignment="Center" Padding="0,10,0,0" FontSize="18" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="168" FontWeight="Bold" MouseEnter="btnIngresar_MouseEnter" Margin="0,-5,0,0" Height="37" MouseLeave="btnIngresar_MouseLeave" Cursor="Hand" MouseDown="btnIngresar_MouseDown"/>
+            <Border x:Name="bBtnIngresar" CornerRadius="20,20,20,20" Background="#FF4E1417" Margin="115,-6,115,-6">
+                <Label x:Name="btnIngresar" Content="Ingresar&#xA;" HorizontalContentAlignment="Center" Padding="0,10,0,0" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="118" FontWeight="Bold" MouseEnter="btnIngresar_MouseEnter" Height="44" MouseLeave="btnIngresar_MouseLeave" Cursor="Hand" MouseDown="btnIngresar_MouseDown"/>
             </Border>
         </Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="585,111,0,0" VerticalAlignment="Top" Height="243" Width="230" Click="Button_Click"/>

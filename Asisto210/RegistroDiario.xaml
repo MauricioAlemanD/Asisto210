@@ -221,15 +221,15 @@
                     </Border.Effect>
                     <Grid x:Name="dockFiltro">
                         <Label x:Name="lblFiltrosGeneracion" Content="Filtro de vista de registro" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="244" Margin="10,10,0,0"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="17,54,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="25" Foreground="Black" FontFamily="Poppins"/>
+                        <DatePicker x:Name="dtpBusqueda" HorizontalAlignment="Left" Margin="17,54,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="25" Foreground="Black" FontFamily="Poppins" SelectedDateChanged="dtpBusqueda_SelectedDateChanged"/>
                         <Border x:Name="bbtnEditarPersonal" BorderBrush="#FF4E1417" BorderThickness="1" Margin="17,163,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="480">
-                            <Label x:Name="btnEliminarPersonal1" Content="Aplicar filtros" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="479" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
+                            <Label x:Name="btnAplicarFiltros" Content="Aplicar filtros" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="479" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" MouseLeftButtonUp="btnAplicarFiltros_MouseLeftButtonUp"/>
                         </Border>
                         <Label Content="Buscar personal" Margin="17,114,330,56" FontFamily="Poppins" FontSize="14"/>
                         <CheckBox x:Name="cmbMatutino_Copiar" Content="En espera" HorizontalAlignment="Left" Margin="122,0,0,0" VerticalAlignment="Center" FontFamily="Poppins" FontSize="14"/>
                         <CheckBox x:Name="cmbMatutino_Copiar1" Content="Registrado" HorizontalAlignment="Left" Margin="17,0,0,0" VerticalAlignment="Center" FontFamily="Poppins" FontSize="14"/>
-                        <CheckBox x:Name="cmbMatutino_Copiar2" Content="Sin registrar" HorizontalAlignment="Left" Margin="328,59,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14"/>
-                        <Label Content="Estado de asistencia" Margin="187,53,160,109" FontFamily="Poppins" FontSize="14"/>
+                        <CheckBox x:Name="cmbMatutino_Copiar2" Content="Sin registrar" HorizontalAlignment="Left" Margin="333,59,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14"/>
+                        <Label Content="Estado de asistencia" Margin="187,53,179,109" FontFamily="Poppins" FontSize="14"/>
                         <ComboBox x:Name="cmbRoles" HorizontalAlignment="Left" Margin="132,116,0,0" VerticalAlignment="Top" Width="365" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
                             <ComboBoxItem Content="Directivo"/>
                             <ComboBoxItem Content="Administrador"/>

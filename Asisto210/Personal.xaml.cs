@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 
@@ -133,6 +134,7 @@ namespace Asisto210
 
                     añadirPersonal(cvePersonal, nombre, apellidoPaterno, apellidoMaterno, rol);
                     añadirPersonalChecador(Convert.ToInt32(cvePersonal), nombre + " " + apellidoPaterno + " " + apellidoMaterno, "123", rolCH, true);
+                    añadirUsuario(cvePersonal,rol);
                     MessageBox.Show("El usuario ha sido registrado en la base de datos y en el checador. Favor de ir al checador y registrar caracteristícas biométricas");
                 }
                 catch (Exception)
@@ -247,6 +249,31 @@ namespace Asisto210
             {
                 // Manejo de excepción, mostrar el error o registrar
                 MessageBox.Show("Error al añadir personal: " + ex.Message);
+            }
+        }
+        private void añadirUsuario(string cvePersonal,string rol)
+        {
+            string pass = "cambiame";
+            if (rol == "1" || rol == "2")
+            {
+                string query = "INSERT INTO usuarios_c (cve_personal,nombre_usuario, contraseña) " +
+                   "VALUES (@cve_personal, @cve_personal,@pass)";
+
+                SqlParameter[] parameters = {
+                   new SqlParameter("@cve_personal", cvePersonal),
+                   new SqlParameter("@pass", pass),
+                };
+
+                try
+                {
+                    // Pasar el array de parámetros a ExecuteNonQuery
+                    conexion.ExecuteNonQuery(query, parameters);
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepción, mostrar el error o registrar
+                    MessageBox.Show("Error al añadir usuario: " + ex.Message);
+                }
             }
         }
         private string obtenerUltimaID()

@@ -34,6 +34,7 @@ namespace Asisto210
         public DateTime fechaBusqueda;        
 
         List<UR> lUR = new List<UR>();
+        List<ER> lER = new List<ER>();
 
         private DispatcherTimer timer;
         private DispatcherTimer timer1;        
@@ -161,14 +162,53 @@ namespace Asisto210
         }               
         public void llenadoEspera()
         {
+            
+            string query = "select ultimos_ingresos.cve_personal,personal.nombre,personal.apelldio_pateno,personal.apellido_materno,estados.descripcion_estado from ultimos_ingresos inner join personal on ultimos_ingresos.cve_personal = personal.cve_personal inner join estados on ultimos_ingresos.estado_asistencia = estados.cve_estado";
 
-            List<ER> leR = new List<ER>
+
+            using (var reader = conexion.ExecuteReader(query))
             {
-                new ER { id = "1", nombre = "Mauricio Leoanrdo Aleman Diaz", estadoRegistro = "Ausente"},
-            };
 
-            dvgEsperandoRegistro.ItemsSource = leR;
+                while (reader.Read())
+                {
+                    lER.Add(new ER
+                    {                        
+                        id = reader["cve_personal"].ToString(),
+                        nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
+                        estadoRegistro = reader["descripcion_estado"].ToString()
+                    });
+                    
+                }
+                dvgEsperandoRegistro.ItemsSource = lER;
+            }
 
+        }
+        public void llenadoTablaEsperaBusqueda(DateTime fecha_seleccionada_busqueda)
+        {            
+            string query = "select ultimos_ingresos.cve_personal, personal.nombre, personal.apelldio_pateno, personal.apellido_materno, estados.descripcion_estado  from ultimos_ingresos inner join personal on ultimos_ingresos.cve_personal = personal.cve_personal inner join estados on ultimos_ingresos.estado_asistencia = estados.cve_estado" +                           
+                           " WHERE ultimos_ingresos.fecha_registro = @fechaBusqueda";
+
+            // Parámetro para la fecha
+            SqlParameter parameter = new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date);
+            parameter.Value = fecha_seleccionada_busqueda;
+
+            // Lista para almacenar los resultados
+            List<ER> lER = new List<ER>();
+
+            // Ejecutar la consulta con parámetros
+            using (var reader = conexion.ExecuteParametrizedReader(query, parameter))
+            {
+                while (reader.Read())
+                {
+                    lER.Add(new ER  
+                    {
+                        id = reader["cve_personal"].ToString(),
+                        nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
+                        estadoRegistro = reader["descripcion_estado"].ToString()
+                    });
+                }
+                dvgEsperandoRegistro.ItemsSource = lER;
+            }
         }
         public void llenadoTablaUltimos()
         {
@@ -221,7 +261,7 @@ namespace Asisto210
                         id = reader["cve_personal"].ToString(),
                         nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
                         horaRegistro = reader["hora_registro"].ToString(),
-                        fechaRegistro = reader["fecha_registro"].ToString(),
+                        fechaRegistro = reader["fecha_registro"].ToString().Substring(0,10),
                         metodoRegistro = reader["metodo_verificacion"].ToString()
                     });
                 }
@@ -290,13 +330,11 @@ namespace Asisto210
             }
 
         }
-
         private void btnSincronizarChacador_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             sicronizarHoraChecador();
             obtenerHoraChecaador();
         }
-
         private void cargaRegistros(string cvePersonal, TimeSpan hora_registro, DateTime fecha_registro, string metodo_verificacion, string estado_asistencia)
         {
             string query = "INSERT INTO ultimos_ingresos (cve_personal, hora_registro, fecha_registro, metodo_verificacion, estado_asistencia) " +
@@ -435,8 +473,8 @@ namespace Asisto210
         {
             fechaBusqueda = (DateTime)calendario.SelectedDate;
             llenadoTablaUltimosBusqueda(fechaBusqueda);
+            llenadoTablaEsperaBusqueda(fechaBusqueda);
         }
-
 
     }
     public class UR
