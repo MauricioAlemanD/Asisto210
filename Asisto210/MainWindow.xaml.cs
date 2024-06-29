@@ -27,13 +27,14 @@ namespace Asisto210
         
         public MainWindow()
         {
+
             conexion = new Conexion();
             InitializeComponent();
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //this.DragMove();
+            
         }
 
         private void txtUsuario_GotFocus(object sender, RoutedEventArgs e)
