@@ -14,6 +14,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Reflection;
 
 namespace Asisto210
 {
@@ -27,9 +28,10 @@ namespace Asisto210
         
         public MainWindow()
         {
-
+            
             conexion = new Conexion();
             InitializeComponent();
+            obtenciónIPTCP();
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -146,10 +148,21 @@ namespace Asisto210
                     }
                 }
             }
-
             return bandera;
+        }
 
+        public void obtenciónIPTCP()
+        {
+            string query = "SELECT ip, puerto FROM cBiometrico";
 
+            using (var reader = conexion.ExecuteReader(query))
+            {
+                while (reader.Read())
+                {
+                    Global.Global_IP = reader["ip"].ToString();
+                    Global.Global_TCP = reader["puerto"].ToString();
+                }
+            }
         }
 
         private void btnAyuda_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

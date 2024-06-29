@@ -172,5 +172,69 @@ namespace Asisto210
                 MessageBox.Show("Error al actualizar la contraseña: " + ex.Message);
             }
         }
+
+        private bool IsValidIPv4(string ip)
+        {
+            System.Net.IPAddress ipAddress;
+            return System.Net.IPAddress.TryParse(ip, out ipAddress) && ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork;
+        }
+
+        private bool IsValidPort(string port)
+        {
+            int portNumber;
+            return int.TryParse(port, out portNumber) && portNumber >= 0 && portNumber <= 65535;
+        }
+
+
+        private void btnGuardarCD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtIP.Text) && !string.IsNullOrEmpty(txtPuerto.Text))
+            {
+                string ip = txtIP.Text;
+                string tcp = txtPuerto.Text;
+
+                if (IsValidIPv4(ip) && IsValidPort(tcp))
+                {
+
+                    string query = "UPDATE [dbo].[cBiometrico]   SET [ip] = @ip ,[puerto] = @tcp WHERE dispositivo = '1'";
+
+                    SqlParameter[] parameters = {
+                   new SqlParameter("@ip", ip),
+                   new SqlParameter("@tcp", tcp),
+                };
+
+                    try
+                    {
+                        // Pasar el array de parámetros a ExecuteNonQuery
+                        conexion.ExecuteNonQuery(query, parameters);
+                        MessageBox.Show("Se actualizó la IP y el puerto TCP: " + ip + "," + tcp);
+                        MainWindow mw = new MainWindow();
+                        mw.obtenciónIPTCP();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejo de excepción, mostrar el error o registrar
+                        MessageBox.Show("Error al actualizar la IP y el puerto TCP: " + ex.Message);
+                    }
+
+                }
+                else
+                {
+                    // Muestra un mensaje de error o maneja el caso de IP/puerto inválidos
+                    MessageBox.Show("La dirección IP o el puerto TCP no son válidos.");
+                }
+            }
+            else
+            {
+                // Muestra un mensaje de error si los campos están vacíos
+                MessageBox.Show("Por favor, ingresa una dirección IP y un puerto TCP.");
+            }
+        }
+
+        private void CCD_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtIP.Text = Global.Global_IP;
+            txtPuerto.Text = Global.Global_TCP;
+        }
     }
 }

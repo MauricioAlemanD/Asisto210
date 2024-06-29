@@ -17,7 +17,9 @@
             <Grid HorizontalAlignment="Center" Height="451" VerticalAlignment="Center">
                 <Label x:Name="btnCCD" Content="Configuración de dispositivo " FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" MouseLeftButtonUp="btnCCD_MouseLeftButtonUp" Cursor="Hand"/>
                 <Label x:Name="btnCCS" Content="Configuración de sistema" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,32,0,0" MouseLeftButtonUp="btnCCS_MouseLeftButtonUp" Cursor="Hand"/>
-                <Label x:Name="btnCCU" Content="Configuración de sistema" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,64,0,0" MouseLeftButtonUp="btnCCU_MouseLeftButtonUp" Cursor="Hand"/>
+                <Label x:Name="btnCCU" Content="Configuración de usuario" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderBrush="Gray" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,64,0,0" MouseLeftButtonUp="btnCCU_MouseLeftButtonUp" Cursor="Hand"/>
+                <Label x:Name="disclamer" Content="Asito210 Versión: alpha 0.1.0" FontFamily="Poppins" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,414,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label x:Name="disclamer_Copiar" Content="Todos los derechos reservados © Asisto210" FontFamily="Poppins" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top" Width="245" BorderThickness="0,0,0,3" Padding="5,5,5,2" Margin="0,434,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Grid>
         </Border>
         <Border x:Name="panelDerecho" BorderThickness="1" Margin="260,10,10,10" Background="White">
@@ -25,7 +27,7 @@
                 <DropShadowEffect Opacity="0.1"/>
             </Border.Effect>
             <Grid>
-                <Border x:Name="CCD" BorderThickness="1" Margin="0,0,2,2">
+                <Border x:Name="CCD" BorderThickness="1" Margin="0,0,2,2" Loaded="CCD_Loaded">
                     <Grid>
                         <Label Content="Configuración de dispositivo biométrico" FontFamily="Poppins" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <Label Content="Direccíon IP" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
@@ -36,7 +38,7 @@
                             <TextBox x:Name="txtPuerto" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
                         </Border>
                         <Label Content="Puerto TCP" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="btnAñadirAsignatura" Content="Guardar configuracón" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,162,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center"/>
+                        <Label x:Name="btnGuardarCD" Content="Guardar configuracón" HorizontalAlignment="Left" Height="20" Width="264" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,162,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnGuardarCD_MouseLeftButtonUp"/>
                     </Grid>
                 </Border>
                 <Border x:Name="CCS" BorderThickness="1" Margin="0,0,2,2" Visibility="Hidden">

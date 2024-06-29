@@ -303,7 +303,7 @@ namespace Asisto210
                 cmbEliminar = cmbPersonal_Eliminar.SelectedItem.ToString();
                 cve_eliminar = cmbEliminar.Substring(0, 4);
 
-                string query = "DELETE FROM personal WHERE cve_personal = @cve_personal";
+                string query = "DELETE FROM usuarios_c Where cve_personal = @cve_personal; DELETE FROM personal WHERE cve_personal = @cve_personal ";
 
                 SqlParameter[] parameters = {
                 new SqlParameter("@cve_personal", cve_eliminar)

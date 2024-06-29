@@ -17,7 +17,7 @@ namespace Asisto210
 
         public ConexionBiometrico()
         {
-            estado = Biometrico.Connect_Net("192.168.0.45", 4370);
+            estado = Biometrico.Connect_Net(Global.Global_IP, Convert.ToInt32(Global.Global_TCP));
         }
 
         public void estadoConexionBiometico()
