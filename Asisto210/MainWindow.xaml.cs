@@ -82,7 +82,7 @@ namespace Asisto210
 
             if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contraseña))
             {
-                MessageBoxPersonalizado("Por favor, ingrese el usuario y la contraseña.","Alerta inicio de sesón");
+                MessageBoxPersonalizado("Por favor, ingrese el usuario y la contraseña.","Alerta inicio de sesión");
             }
             else
             {                
@@ -95,7 +95,7 @@ namespace Asisto210
                 }
                 else
                 {
-                    MessageBoxPersonalizado("Por favor, ingrese el usuario y la contraseña correctos.","Alerta inicio de sesón");
+                    MessageBoxPersonalizado("Por favor, ingrese el usuario y la contraseña correctos.","Alerta inicio de sesión");
                 }
             }
         }

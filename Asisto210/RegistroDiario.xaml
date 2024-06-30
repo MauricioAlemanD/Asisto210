@@ -230,41 +230,28 @@
                         <CheckBox x:Name="cmbMatutino_Copiar1" Content="Registrado" HorizontalAlignment="Left" Margin="17,0,0,0" VerticalAlignment="Center" FontFamily="Poppins" FontSize="14"/>
                         <CheckBox x:Name="cmbMatutino_Copiar2" Content="Sin registrar" HorizontalAlignment="Left" Margin="333,59,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14"/>
                         <Label Content="Estado de asistencia" Margin="187,53,179,109" FontFamily="Poppins" FontSize="14"/>
-                        <ComboBox x:Name="cmbRoles" HorizontalAlignment="Left" Margin="132,116,0,0" VerticalAlignment="Top" Width="365" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
-                            <ComboBoxItem Content="Directivo"/>
-                            <ComboBoxItem Content="Administrador"/>
-                            <ComboBoxItem Content="Docente"/>
-                            <ComboBoxItem Content="Empleado"/>
+                        <ComboBox x:Name="cmbCVE_Filtro" HorizontalAlignment="Left" Margin="132,116,0,0" VerticalAlignment="Top" Width="365" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
                         </ComboBox>
                     </Grid>
                 </Border>
-                <Border x:Name="dockerJustificacionFaltas" BorderThickness="1" Margin="542,255,32,0" Background="White" Height="206" VerticalAlignment="Top">
+                <Border x:Name="dockerJustificacionFaltas" BorderThickness="1" Margin="542,245,33,0" Background="White" Height="206" VerticalAlignment="Top">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.1"/>
                     </Border.Effect>
                     <Grid x:Name="dockJustificacion">
                         <Label x:Name="lblFiltrosGeneracion_Copiar" Content="Justificar/Contemplar inasistencia" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="327" Margin="10,10,0,0"/>
                         <Label x:Name="lblNombre" Content="Clave de personal" HorizontalAlignment="Left" Margin="17,50,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="302,84,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="25" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1"/>
-                        <Label x:Name="lblNombre_Copiar" Content="Fecha de justificación" HorizontalAlignment="Left" Margin="302,50,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
-                        <Border x:Name="bbtnEditarPersonal_Copiar" BorderBrush="#FF4E1417" BorderThickness="1" Margin="17,173,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="480">
-                            <Label x:Name="btnEliminarPersonal2" Content="Justificar inasistencia" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="479" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
-                        </Border>
-                        <Border x:Name="btxtApellidos" BorderBrush="Black" BorderThickness="1" Margin="17,139,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="480">
-                            <TextBox x:Name="txtNombre1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="460" Height="18" FontFamily="Poppins" BorderThickness="0,0,0,0" FontSize="14" Margin="0,2,0,0">
-                                <TextBox.Background>
-                                    <SolidColorBrush Color="White" Opacity="0"/>
-                                </TextBox.Background>
-                                <TextBox.SelectionBrush>
-                                    <SolidColorBrush Color="#FF63676B" Opacity="1"/>
-                                </TextBox.SelectionBrush>
-                                <TextBox.BorderBrush>
-                                    <SolidColorBrush Color="#FFABADB3" Opacity="0"/>
-                                </TextBox.BorderBrush>
-                            </TextBox>
-                        </Border>
+                        <DatePicker x:Name="dtpJustificacion" HorizontalAlignment="Left" Margin="179,85,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="26" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1"/>
+                        <Label x:Name="lblNombre_Copiar" Content="Fecha de justificación" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
                         <Label x:Name="lblNombre_Copiar1" Content="Motivo" HorizontalAlignment="Left" Margin="17,110,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.499,0.514"/>
-                        <ComboBox x:Name="cmbPersonalJ" HorizontalAlignment="Left" Margin="560,400,0,0" VerticalAlignment="Top" Width="300" Height="20" Background="White" BorderBrush="Black" BorderThickness="1"/>
+                        <Label x:Name="lblNombre_Copiar2" Content="Turno" HorizontalAlignment="Left" Margin="354,50,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <ComboBox x:Name="cmbCVE_PersonalJust" HorizontalAlignment="Left" Margin="17,88,0,0" VerticalAlignment="Top" Width="157" Height="20" Background="White" BorderBrush="Black" BorderThickness="1"/>
+                        <ComboBox x:Name="cmbTurno_Jus" HorizontalAlignment="Left" Margin="354,88,0,0" VerticalAlignment="Top" Width="143" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                        </ComboBox>
+                        <Border x:Name="ctxtIP" HorizontalAlignment="Left" VerticalAlignment="Top" Width="480" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="17,139,0,0" >
+                            <TextBox x:Name="txtJustificacon" TextWrapping="Wrap" FontFamily="Poppins" FontSize="14" SelectionBrush="#FFCA545A" BorderBrush="{x:Null}" SelectionTextBrush="Black" Height="19" BorderThickness="0,0,0,0" />
+                        </Border>
+                        <Label x:Name="btnGuardarJustificante" Content="Aplicar justificante" HorizontalAlignment="Left" Height="20" Width="480" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="17,174,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnGuardarJustificante_MouseLeftButtonUp"/>
                     </Grid>
                 </Border>
                 <Border x:Name="CHorario" BorderThickness="1" Background="White" Margin="10,550,325,0" Height="471" VerticalAlignment="Top">
@@ -493,6 +480,21 @@
                         <Label x:Name="lblFiltrosGeneracion_Copiar3" Content="Sin asistencia" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.502,0.562" Width="256" Margin="0,87,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFC2504B"/>
                         <Label x:Name="lblFiltrosGeneracion_Copiar4" Content="Turno completo" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.502,0.562" Width="256" Margin="0,132,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FF93BC52"/>
                         <Label x:Name="lblFiltrosGeneracion_Copiar5" Content="Inasistencia justificada" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.502,0.562" Width="256" Margin="0,177,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFCF9C45"/>
+                        <Label x:Name="lblFechaSeleccionada" Content="Fecha seleccionada: " HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <Label x:Name="lblDiaSemana" Content="Día de la semana: " HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <Label x:Name="lblHoraEntrada" Content="Hora entrada: " HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <Label x:Name="lblHoraSalida" Content="Hora salida: " HorizontalAlignment="Left" Margin="9,322,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <Label x:Name="lblJustificante" Content="Justificante" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="dockerHorarioPersonalizado" BorderThickness="1" Background="White" Margin="542,456,0,0" HorizontalAlignment="Left" Width="508" VerticalAlignment="Top" Height="70">
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.12"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Label x:Name="lblFiltrosGeneracion_Copiar6" Content="Asistencia rápida" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="147" Margin="10,5,0,0"/>
+                        <ComboBox x:Name="cmbHorarioProfesor" Margin="10,38,228,10" Height="20"/>
+                        <DatePicker x:Name="dtpDiaAsistenciaRapida" HorizontalAlignment="Left" Margin="312,35,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="26" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1" SelectedDateChanged="dtpDiaAsistenciaRapida_SelectedDateChanged"/>
                     </Grid>
                 </Border>
             </Grid>

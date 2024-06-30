@@ -178,7 +178,7 @@
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
-        <Label x:Name="lblBuscarPersonal" Content="Búsqueda de personal" Margin="18,10,772,492" FontFamily="Poppins" FontSize="18"/>
+        <Label x:Name="lblBuscarPersonal" Content="Búsqueda de personal" Margin="0,0,790,502" FontFamily="Poppins" FontSize="18"/>
         <Border x:Name="dockerBusquedaPersonal" BorderThickness="1" Margin="18,40,772,10" Background="White">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.1"/>
@@ -224,14 +224,14 @@
                     </DataGrid.Resources>
 
                 </DataGrid>
-                <Label x:Name="icoReinicarBusqusqueda" Content="" Margin="262,-26,9,485" Cursor="Hand" MouseLeftButtonUp="icoReinicarBusqusqueda_MouseLeftButtonUp">
+                <Label x:Name="icoReinicarBusqusqueda" Content="" Margin="271,-26,0,485" Cursor="Hand" MouseLeftButtonUp="icoReinicarBusqusqueda_MouseLeftButtonUp">
                     <Label.Background>
                         <ImageBrush ImageSource="/refresh-n.png"/>
                     </Label.Background>
                 </Label>
             </Grid>
         </Border>
-        <Label x:Name="lblAañadirPersonal" Content="Añadir personal" Margin="340,12,450,492" FontFamily="Poppins" FontSize="18"/>
+        <Label x:Name="lblAañadirPersonal" Content="Añadir personal" Margin="340,0,450,504" FontFamily="Poppins" FontSize="18"/>
         <Border x:Name="dockerAñadirPersonal" BorderThickness="1" Margin="340,39,303,291" Background="White">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.1"/>
@@ -288,7 +288,7 @@
 
             </Grid>
         </Border>
-        <Label x:Name="lblEliminarPersonal" Content="Eliminar personal" Margin="340,251,450,251" FontFamily="Poppins" FontSize="18"/>
+        <Label x:Name="lblEliminarPersonal" Content="Eliminar personal" Margin="340,246,450,256" FontFamily="Poppins" FontSize="18"/>
         <Border x:Name="dockerEliminarPersonal" BorderThickness="1" Margin="340,280,303,171" Background="White">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.1"/>
@@ -302,7 +302,7 @@
                 </Border>
             </Grid>
         </Border>
-        <Label x:Name="lblEditarPersonal" Content="Editar personal" Margin="810,10,36,492" FontFamily="Poppins" FontSize="18"/>
+        <Label x:Name="lblEditarPersonal" Content="Editar personal" Margin="810,0,36,502" FontFamily="Poppins" FontSize="18"/>
         <Border x:Name="dockerEditarPersonal" BorderThickness="1" Margin="810,40,11,10" Background="White">
             <Grid x:Name="dockEdP">
                 <Label x:Name="lblCalvePersonal" Content="Clave del personal" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="176"/>

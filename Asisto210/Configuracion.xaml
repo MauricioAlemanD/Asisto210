@@ -177,8 +177,8 @@
 
     <Grid>
         <Border x:Name="header" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="35" Width="1083">
-            <Grid x:Name="bridHeader">
-                <Label x:Name="lblConfiguración" Content="Configuración" FontFamily="Global User Interface" FontSize="18" VerticalAlignment="Center" Margin="10,0,917,0" />
+            <Grid x:Name="bridHeader" Margin="-1,-1,0,0">
+                <Label x:Name="lblConfiguración" Content="Configuración" FontFamily="Global User Interface" FontSize="18" VerticalAlignment="Center" Margin="0,0,927,0" Height="34" />
                 <Label x:Name="lblClases"  Content="Clases" FontFamily="Global User Interface" FontSize="18" Margin="664,0,337,0" HorizontalContentAlignment="Center" BorderThickness="0,0,0,5" BorderBrush="#FF4E1417" Padding="5,5,5,0" Cursor="Hand" MouseEnter="lblClases_MouseEnter" MouseLeave="lblClases_MouseLeave" MouseLeftButtonUp="lblClases_MouseLeftButtonUp" Height="31" VerticalAlignment="Center" Visibility="Hidden"/>
                 <Label x:Name="lblMaterias" Content="Asignaturas" FontFamily="Global User Interface" FontSize="18" Margin="749,0,220,0" HorizontalContentAlignment="Center" BorderThickness="0,0,0,5" BorderBrush="#FF4E1417" Padding="5,5,5,0" Cursor="Hand" Height="31" VerticalAlignment="Center" MouseEnter="lblMaterias_MouseEnter" MouseLeftButtonUp="lblMaterias_MouseLeftButtonUp" MouseLeave="lblMaterias_MouseLeave"/>
                 <Label x:Name="lblHorarioProfesor" Content="Horario profesor" FontFamily="Global User Interface" FontSize="18" VerticalAlignment="Top" Margin="866,2,65,0" HorizontalContentAlignment="Center" BorderBrush="#FF4E1417" BorderThickness="0,0,0,5" Padding="5,5,5,0" Cursor="Hand" MouseEnter="lblHorarioProfesor_MouseEnter" MouseLeave="lblHorarioProfesor_MouseLeave" MouseLeftButtonUp="lblHorarioProfesor_MouseLeftButtonUp"/>

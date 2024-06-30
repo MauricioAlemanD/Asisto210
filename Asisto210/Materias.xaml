@@ -236,7 +236,7 @@
                 <DropShadowEffect Opacity="0.1"/>
             </Border.Effect>
             <Grid>
-                <Label Content="Añadir una nueva asignatura" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Eliminar asignatura" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" FontWeight="Bold"/>
                 <Label Content="Calve de asignatura" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16"/>
                 <Label x:Name="btnEliminarAsignatura" Content="Eliminar asignatura" HorizontalAlignment="Left" Height="20" Width="400" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="10,109,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnEliminarAsignatura_MouseLeftButtonUp"/>
                 <ComboBox x:Name="cmbAsignaturas" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="400" Height="20" Background="White" BorderBrush="Black" BorderThickness="1"/>

@@ -176,7 +176,7 @@
 
 
     <Grid x:Name="mainGrid">
-        <Label x:Name="lblReporte" Content="Reporte" Margin="18,10,772,492" FontFamily="Poppins" FontSize="18"/>
+        <Label x:Name="lblReporte" Content="Reporte" Margin="0,0,790,502" FontFamily="Poppins" FontSize="18"/>
 
         <Border x:Name="dockerReporte" BorderThickness="1" Margin="18,40,283,10" Background="White">
             <Border.Effect>
@@ -232,7 +232,6 @@
                 <Label x:Name="lblFiltrosGeneracion_Copiar" Content="Mostrar" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176" Grid.Column="1"/>
                 <CheckBox x:Name="cmbSomo_Copiar" Content="Administradores" HorizontalAlignment="Left" Margin="106,83,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
                 <CheckBox x:Name="cmbSomo_Copiar1" Content="Docentes" HorizontalAlignment="Left" Margin="3,104,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <CheckBox x:Name="cmbSomo_Copiar3" Content="Empleados" HorizontalAlignment="Left" Margin="106,104,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
                 <Label x:Name="lblFiltrosGeneracion_Copiar1" Content="Turno" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176" Grid.Column="1"/>
                 <CheckBox x:Name="cmbSomo_Copiar2" Content="Matutino" HorizontalAlignment="Left" Margin="3,157,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
                 <CheckBox x:Name="cmbSomo_Copiar4" Content="Vespertino" HorizontalAlignment="Left" Margin="106,157,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
