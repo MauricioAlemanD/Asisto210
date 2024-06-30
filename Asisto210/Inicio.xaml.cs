@@ -37,7 +37,8 @@ namespace Asisto210
         List<ER> lER = new List<ER>();
 
         private DispatcherTimer timer;
-        private DispatcherTimer timer1;        
+        private DispatcherTimer timer1;    
+        
 
         public Inicio()
         {
@@ -47,9 +48,9 @@ namespace Asisto210
             encabezadosER();
             obtenerUltimoRegistro();
             llenadoUltimos();
-            llenadoEspera();
+            //llenadoEspera();
             obtenerDia();
-            llenadoTablaUltimos();
+            //llenadoTablaUltimos();
             obtenerHoraChecaador();
             obtenderHoraSistema();
 
@@ -112,52 +113,15 @@ namespace Asisto210
                             if (iIndex > n_ultimo_registro_bd || n_ultimo_registro_bd == 0)
                             {
                                 cargaRegistros(nuevaId, TimeSpan.Parse(fechaHora.ToString("HH:mm:ss")), DateTime.Parse($"{idwDay}-{idwMonth}-{idwYear}"), Metodo, "ESS");
-                            }
-                            
-
-
-                            //luR.Add(new UR
-                            //{
-                            //    id = sdwEnrollNumber,
-                            //    nombre = sName,
-                            //    horaRegistro = fechaHora.ToString("HH:mm:ss"),
-                            //    fechaRegistro = $"{idwDay}-{idwMonth}-{idwYear}",
-                            //    metodoRegistro = Metodo
-                            //});
-                                                        
+                            }                                                        
                         }
-
-
-
-                        //lsvEntradas.Items.Add(iGLCount.ToString());
-                        //lsvEntradas.Items.Add(sdwEnrollNumber);//modify by Darcy on Nov.26 2009
-                        //lsvEntradas.Items.Add(idwVerifyMode.ToString());
-                        //lsvEntradas.Items.Add(idwInOutMode.ToString());
-                        //lsvEntradas.Items.Add(idwYear.ToString() + "-" + idwMonth.ToString() + "-" + idwDay.ToString() + " " + idwHour.ToString() + ":" + idwMinute.ToString() + ":" + idwSecond.ToString());
-                        //lsvEntradas.Items.Add(idwWorkcode.ToString());
-                        iIndex++;
-
-                        //var FechaHora = new DateTime(idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond);
-                        
-                        
-
+                        iIndex++;                       
                     }
 
                     //Guardar el ultimo registro del checador
-                    guardaUltimoRegistro(iIndex-1);
+                    guardaUltimoRegistro(iGLCount);
                 }
-            }
-
-
-            //bool llenadoUltimosRegistros = false;
-            //llenadoUltimosRegistros = true ;
-
-            //List<UR> luR2 = new List<UR>
-            //{
-            //    new UR { id = "123", nombre = "Mauricio Leoanrdo Aleman Diaz", horaRegistro = "22:00:35",fechaRegistro = "28-05-2024", metodoRegistro = "Huella digital"},
-            //};
-            
-            //////dvgUltimosRegistros.ItemsSource = luR;           
+            }         
 
         }               
         public void llenadoEspera()
@@ -184,9 +148,21 @@ namespace Asisto210
 
         }
         public void llenadoTablaEsperaBusqueda(DateTime fecha_seleccionada_busqueda)
-        {            
-            string query = "select ultimos_ingresos.cve_personal, personal.nombre, personal.apelldio_pateno, personal.apellido_materno, estados.descripcion_estado  from ultimos_ingresos inner join personal on ultimos_ingresos.cve_personal = personal.cve_personal inner join estados on ultimos_ingresos.estado_asistencia = estados.cve_estado" +                           
-                           " WHERE ultimos_ingresos.fecha_registro = @fechaBusqueda";
+        {
+            string query = @"
+        SELECT 
+            personal.cve_personal,
+            personal.nombre,
+            personal.apelldio_pateno,
+            personal.apellido_materno,
+            entradas_salidas.turno,
+            CASE 
+                WHEN entradas_salidas.hora_salida IS NULL THEN 'Esperando salida'
+                ELSE 'Completo'
+            END AS estado_registro
+        FROM entradas_salidas 
+        INNER JOIN personal ON personal.cve_personal = entradas_salidas.cve_personal 
+        WHERE fecha = @fechaBusqueda";
 
             // Parámetro para la fecha
             SqlParameter parameter = new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date);
@@ -200,11 +176,12 @@ namespace Asisto210
             {
                 while (reader.Read())
                 {
-                    lER.Add(new ER  
+                    lER.Add(new ER
                     {
                         id = reader["cve_personal"].ToString(),
-                        nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
-                        estadoRegistro = reader["descripcion_estado"].ToString()
+                        nombre = $"{reader["nombre"]} {reader["apelldio_pateno"]} {reader["apellido_materno"]}",
+                        turno = reader["turno"].ToString(),
+                        estadoRegistro = reader["estado_registro"].ToString()
                     });
                 }
                 dvgEsperandoRegistro.ItemsSource = lER;
@@ -361,7 +338,7 @@ namespace Asisto210
         }
         private void guardaUltimoRegistro(int ultimo_registro_bd)
         {
-            string query = "INSERT INTO ultimo_registro_bd (ultimo_registro_bd) " +
+            string query = "TRUNCATE TABLE ultimo_registro_bd ; INSERT INTO ultimo_registro_bd (ultimo_registro_bd) " +
                    "VALUES (@ultimo_registro_bd)";
 
             SqlParameter[] parameters = {
@@ -376,7 +353,7 @@ namespace Asisto210
             catch (Exception ex)
             {
                 // Manejo de excepción, mostrar el error o registrar
-                MessageBox.Show("Error al añadir registros a la tabla: " + ex.Message);
+                MessageBox.Show("Error al establecer el ultimo ingreso a la tabla: " + ex.Message);
             }
         }
         private void obtenerUltimoRegistro()
@@ -413,6 +390,13 @@ namespace Asisto210
                 Binding = new Binding("nombre"),
             };
             dvgEsperandoRegistro.Columns.Add(nombreColumn);
+
+            DataGridTextColumn turno = new DataGridTextColumn
+            {
+                Header = " Turno ",
+                Binding = new Binding("turno"),
+            };
+            dvgEsperandoRegistro.Columns.Add(turno);
 
             DataGridTextColumn estadoColumn = new DataGridTextColumn
             {
@@ -469,9 +453,105 @@ namespace Asisto210
             dvgUltimosRegistros.Columns.Add(metodoRegistroColumn);
         }
         //Encabezados
+        public void logicaHorarios(string fecha_dia)
+        {
+            string queryPersonal = "SELECT DISTINCT cve_personal FROM ultimos_ingresos WHERE fecha_registro = @fechaBusqueda; DELETE FROM [dbo].[entradas_salidas] WHERE fecha = @fechaBusqueda;";
+            string queryHoras = "SELECT hora_registro FROM ultimos_ingresos WHERE fecha_registro = @fechaBusqueda AND cve_personal = @cvePersonal";
+            string queryInsert = "INSERT INTO [dbo].[entradas_salidas] ([cve_personal], [fecha], [hora_entrada], [hora_salida], [turno]) VALUES (@cve_personal, @fecha, @hora_entrada, @hora_salida, @turno)";
+
+            using (var connection = conexion.GetConnection())
+            {
+                connection.Open();
+
+                List<string> personal_registrado_dia = new List<string>();
+
+                // Obtener la lista de personal registrado en el día
+                using (var commandPersonal = new SqlCommand(queryPersonal, connection))
+                {
+                    commandPersonal.Parameters.Add(new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date) { Value = fecha_dia });
+
+                    using (var reader = commandPersonal.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            personal_registrado_dia.Add(reader["cve_personal"].ToString());
+                        }
+                    }
+                }
+
+                foreach (var cvePersonal in personal_registrado_dia)
+                {
+                    List<string> horas_personal_registrado_dia = new List<string>();
+
+                    // Obtener las horas de registro para el personal actual
+                    using (var commandHoras = new SqlCommand(queryHoras, connection))
+                    {
+                        commandHoras.Parameters.Add(new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date) { Value = fecha_dia });
+                        commandHoras.Parameters.Add(new SqlParameter("@cvePersonal", System.Data.SqlDbType.VarChar) { Value = cvePersonal });
+
+                        using (var horasReader = commandHoras.ExecuteReader())
+                        {
+                            while (horasReader.Read())
+                            {
+                                horas_personal_registrado_dia.Add(horasReader["hora_registro"].ToString());
+                            }
+                        }
+                    }
+
+                    // Insertar registros según las horas obtenidas
+                    if (horas_personal_registrado_dia.Count >= 1)
+                    {
+                        using (var commandInsertMatutino = new SqlCommand(queryInsert, connection))
+                        {
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@cve_personal", System.Data.SqlDbType.VarChar) { Value = cvePersonal });
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@fecha", System.Data.SqlDbType.Date) { Value = fecha_dia });
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@hora_entrada", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[0] });
+
+                            if (horas_personal_registrado_dia.Count >= 2)
+                            {
+                                commandInsertMatutino.Parameters.Add(new SqlParameter("@hora_salida", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[1] });
+                            }
+                            else
+                            {
+                                commandInsertMatutino.Parameters.Add(new SqlParameter("@hora_salida", DBNull.Value));
+                            }
+
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@turno", System.Data.SqlDbType.VarChar) { Value = "Matutino" });
+                            commandInsertMatutino.ExecuteNonQuery(); // Ejecutar la inserción
+                        }
+                    }
+
+                    if (horas_personal_registrado_dia.Count >= 3)
+                    {
+                        using (var commandInsertVespertino = new SqlCommand(queryInsert, connection))
+                        {
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@cve_personal", System.Data.SqlDbType.VarChar) { Value = cvePersonal });
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@fecha", System.Data.SqlDbType.Date) { Value = fecha_dia });
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@hora_entrada", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[2] });
+
+                            if (horas_personal_registrado_dia.Count >= 4)
+                            {
+                                commandInsertVespertino.Parameters.Add(new SqlParameter("@hora_salida", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[3] });
+                            }
+                            else
+                            {
+                                commandInsertVespertino.Parameters.Add(new SqlParameter("@hora_salida", DBNull.Value));
+                            }
+
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@turno", System.Data.SqlDbType.VarChar) { Value = "Vespertino" });
+                            commandInsertVespertino.ExecuteNonQuery(); // Ejecutar la inserción
+                        }
+                    }
+                }
+            }
+        }
+
+
         private void calendario_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             fechaBusqueda = (DateTime)calendario.SelectedDate;
+            
+            logicaHorarios(fechaBusqueda.ToString());
             llenadoTablaUltimosBusqueda(fechaBusqueda);
             llenadoTablaEsperaBusqueda(fechaBusqueda);
         }
@@ -490,6 +570,7 @@ namespace Asisto210
     {
         public string id { get; set; }
         public string nombre { get; set; }
+        public string turno { get; set; }
         public string estadoRegistro { get; set; }
     }
 }

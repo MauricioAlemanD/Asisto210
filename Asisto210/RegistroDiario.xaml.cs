@@ -33,26 +33,28 @@ namespace Asisto210
         public Page1()
         {
             conexion = new Conexion();
-            InitializeComponent();
-            EncabezadosTablaRegistroDiario();            
+            InitializeComponent();            
+            EncabezadosTablaRegistroDiario();
+            logicaHorarios(fechaSistema);
             llenadoTablaRegistroDiario(fechaSistema);
         }
 
         private void EncabezadosTablaRegistroDiario()
         {
-            dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "ID", Binding = new Binding("id") });
+            dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Clave de personal", Binding = new Binding("id") });
             dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Nombre", Binding = new Binding("nombre") });
             dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Fecha de Registro", Binding = new Binding("fechaRegistro") });
             dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Hora de Ingreso", Binding = new Binding("horaRegistroIngreso") });
             dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Hora de Salida", Binding = new Binding("horaRegistroSalida") });
-            dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Estado del Registro", Binding = new Binding("estadoRegistro") });
+            dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Turno", Binding = new Binding("turno") });
+            dvgRegistroDiario.Columns.Add(new DataGridTextColumn { Header = "Justificante", Binding = new Binding("justificante") });
+            
         }
 
         private void llenadoTablaRegistroDiario(string fecha_dia)
         {
-
-            string query = "\t\t   SELECT \r\n    ui.cve_personal,\r\n    p.nombre,\r\n    p.apelldio_pateno,\r\n    p.apellido_materno,\r\n    ui.fecha_registro,\r\n    ui.hora_registro AS hora_entrada,\r\n    LEAD(ui.hora_registro) OVER (PARTITION BY ui.cve_personal, ui.fecha_registro ORDER BY ui.hora_registro) AS hora_salida,\r\n    e.descripcion_estado\r\nFROM \r\n    ultimos_ingresos ui\r\nINNER JOIN \r\n    personal p ON ui.cve_personal = p.cve_personal\r\nINNER JOIN \r\n    estados e ON ui.estado_asistencia = e.cve_estado\r\nWHERE \r\n    ui.fecha_registro = @fechaBusqueda\r\nORDER BY \r\n    ui.cve_personal, ui.fecha_registro, ui.hora_registro;\r\n";
-
+            //string query = "nFROM \r\n    ultimos_ingresos ui\r\nINNER JOIN \r\n    personal p ON ui.cve_personal = p.cve_personal\r\nINNER JOIN \r\n    estados e ON ui.estado_asistencia = e.cve_estado\r\nWHERE \r\n    ui.fecha_registro = @fechaBusqueda\r\nORDER BY \r\n    ui.cve_personal, ui.fecha_registro, ui.hora_registro;\r\n";
+            string query = "select entradas_salidas.cve_personal, personal.nombre, personal.apelldio_pateno, personal.apellido_materno ,entradas_salidas.fecha, entradas_salidas.hora_entrada, entradas_salidas.hora_salida, entradas_salidas.turno from entradas_salidas inner join personal on  entradas_salidas.cve_personal = personal.cve_personal where fecha = @fechaBusqueda";
             // Parámetro para la fecha
             SqlParameter parameter = new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date);
             parameter.Value = fecha_dia;
@@ -68,17 +70,110 @@ namespace Asisto210
                     {
                         id = reader["cve_personal"].ToString(),
                         nombre = reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString(),
-                        fechaRegistro = reader["fecha_registro"].ToString(),
+                        fechaRegistro = reader["fecha"].ToString(),
                         horaRegistroIngreso = reader["hora_entrada"].ToString(),
                         horaRegistroSalida = reader["hora_salida"].ToString(),
-                        estadoRegistro = reader["descripcion_estado"].ToString()
+                        turno = reader["turno"].ToString(),
+                        justificante = "",
                     });
                 }
                 dvgRegistroDiario.ItemsSource = registrosDiarios;
             }
-            
         }
 
+        public void logicaHorarios(string fecha_dia)
+        {
+            string queryPersonal = "SELECT DISTINCT cve_personal FROM ultimos_ingresos WHERE fecha_registro = @fechaBusqueda; DELETE FROM [dbo].[entradas_salidas] WHERE fecha = @fechaBusqueda;";
+            string queryHoras = "SELECT hora_registro FROM ultimos_ingresos WHERE fecha_registro = @fechaBusqueda AND cve_personal = @cvePersonal";
+            string queryInsert = "INSERT INTO [dbo].[entradas_salidas] ([cve_personal], [fecha], [hora_entrada], [hora_salida], [turno]) VALUES (@cve_personal, @fecha, @hora_entrada, @hora_salida, @turno)";
+
+            using (var connection = conexion.GetConnection())
+            {
+                connection.Open();
+
+                List<string> personal_registrado_dia = new List<string>();
+
+                // Obtener la lista de personal registrado en el día
+                using (var commandPersonal = new SqlCommand(queryPersonal, connection))
+                {
+                    commandPersonal.Parameters.Add(new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date) { Value = fecha_dia });
+
+                    using (var reader = commandPersonal.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            personal_registrado_dia.Add(reader["cve_personal"].ToString());
+                        }
+                    }
+                }
+
+                foreach (var cvePersonal in personal_registrado_dia)
+                {
+                    List<string> horas_personal_registrado_dia = new List<string>();
+
+                    // Obtener las horas de registro para el personal actual
+                    using (var commandHoras = new SqlCommand(queryHoras, connection))
+                    {
+                        commandHoras.Parameters.Add(new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date) { Value = fecha_dia });
+                        commandHoras.Parameters.Add(new SqlParameter("@cvePersonal", System.Data.SqlDbType.VarChar) { Value = cvePersonal });
+
+                        using (var horasReader = commandHoras.ExecuteReader())
+                        {
+                            while (horasReader.Read())
+                            {
+                                horas_personal_registrado_dia.Add(horasReader["hora_registro"].ToString());
+                            }
+                        }
+                    }
+
+                    // Insertar registros según las horas obtenidas
+                    if (horas_personal_registrado_dia.Count >= 1)
+                    {
+                        using (var commandInsertMatutino = new SqlCommand(queryInsert, connection))
+                        {
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@cve_personal", System.Data.SqlDbType.VarChar) { Value = cvePersonal });
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@fecha", System.Data.SqlDbType.Date) { Value = fecha_dia });
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@hora_entrada", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[0] });
+
+                            if (horas_personal_registrado_dia.Count >= 2)
+                            {
+                                commandInsertMatutino.Parameters.Add(new SqlParameter("@hora_salida", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[1] });
+                            }
+                            else
+                            {
+                                commandInsertMatutino.Parameters.Add(new SqlParameter("@hora_salida", DBNull.Value));
+                            }
+
+                            commandInsertMatutino.Parameters.Add(new SqlParameter("@turno", System.Data.SqlDbType.VarChar) { Value = "Matutino" });
+                            commandInsertMatutino.ExecuteNonQuery(); // Ejecutar la inserción
+                        }
+                    }
+
+                    if (horas_personal_registrado_dia.Count >= 3)
+                    {
+                        using (var commandInsertVespertino = new SqlCommand(queryInsert, connection))
+                        {
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@cve_personal", System.Data.SqlDbType.VarChar) { Value = cvePersonal });
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@fecha", System.Data.SqlDbType.Date) { Value = fecha_dia });
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@hora_entrada", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[2] });
+
+                            if (horas_personal_registrado_dia.Count >= 4)
+                            {
+                                commandInsertVespertino.Parameters.Add(new SqlParameter("@hora_salida", System.Data.SqlDbType.Time) { Value = horas_personal_registrado_dia[3] });
+                            }
+                            else
+                            {
+                                commandInsertVespertino.Parameters.Add(new SqlParameter("@hora_salida", DBNull.Value));
+                            }
+
+                            commandInsertVespertino.Parameters.Add(new SqlParameter("@turno", System.Data.SqlDbType.VarChar) { Value = "Vespertino" });
+                            commandInsertVespertino.ExecuteNonQuery(); // Ejecutar la inserción
+                        }
+                    }
+                }
+            }
+        }
+ 
         private void dtpBusqueda_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             fechaNueva = true;
@@ -104,6 +199,7 @@ namespace Asisto210
         public string fechaRegistro { get; set; }
         public string horaRegistroIngreso { get; set; }
         public string horaRegistroSalida { get; set; }
-        public string estadoRegistro { get; set; }
+        public string turno { get; set; }
+        public string justificante { get; set; }
     }
 }

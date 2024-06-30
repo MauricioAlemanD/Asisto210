@@ -50,7 +50,7 @@
 
             </DataGrid>
         </Border>
-        <Label Content="Calendario" Margin="18,10,905,492" FontFamily="Global User Interface" FontSize="18"/>
+        <Label Content="Calendario" Margin="0,0,923,502" FontFamily="Global User Interface" FontSize="18"/>
         <Label Content="Fecha y hora del sistema" Margin="18,251,849,251" FontFamily="Global User Interface" FontSize="18"/>
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="18,280,0,0" VerticalAlignment="Top" Width="216">
             <Rectangle.Effect>

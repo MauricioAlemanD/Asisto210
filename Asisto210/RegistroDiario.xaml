@@ -176,7 +176,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
 
             <Grid Height="1065" Width="1083">
-                <Label Content="Ingresos del dia" Margin="10,10,913,487" FontFamily="Poppins" FontSize="18"/>
+                <Label Content="Ingresos del dia" FontFamily="Poppins" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Border x:Name="dockerRegistroDiario" BorderThickness="1" Margin="10,44,563,0" Background="White" Height="482" VerticalAlignment="Top">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.1"/>
@@ -238,15 +238,15 @@
                         </ComboBox>
                     </Grid>
                 </Border>
-                <Border x:Name="dockerJustificacionFaltas" BorderThickness="1" Margin="542,320,32,0" Background="White" Height="206" VerticalAlignment="Top">
+                <Border x:Name="dockerJustificacionFaltas" BorderThickness="1" Margin="542,255,32,0" Background="White" Height="206" VerticalAlignment="Top">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.1"/>
                     </Border.Effect>
                     <Grid x:Name="dockJustificacion">
                         <Label x:Name="lblFiltrosGeneracion_Copiar" Content="Justificar/Contemplar inasistencia" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="327" Margin="10,10,0,0"/>
                         <Label x:Name="lblNombre" Content="Clave de personal" HorizontalAlignment="Left" Margin="17,50,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="327,77,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="25" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1"/>
-                        <Label x:Name="lblNombre_Copiar" Content="Fecha de justificación" HorizontalAlignment="Left" Margin="327,50,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="302,84,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="25" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1"/>
+                        <Label x:Name="lblNombre_Copiar" Content="Fecha de justificación" HorizontalAlignment="Left" Margin="302,50,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
                         <Border x:Name="bbtnEditarPersonal_Copiar" BorderBrush="#FF4E1417" BorderThickness="1" Margin="17,173,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="480">
                             <Label x:Name="btnEliminarPersonal2" Content="Justificar inasistencia" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="479" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
                         </Border>
