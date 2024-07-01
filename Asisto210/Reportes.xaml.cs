@@ -14,6 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using iText.Kernel.Pdf;
+using iText.Layout.Properties;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using Microsoft.Win32;
+
 
 namespace Asisto210
 {
@@ -24,6 +32,7 @@ namespace Asisto210
     {
 
         List<TablaRepotePersonal> lTablaRepotePersonal = new List<TablaRepotePersonal>();
+        List<TablaRepotePersonal> lRepotePersonal = new List<TablaRepotePersonal>();
         Conexion conexion;
 
         public Reportes()
@@ -161,6 +170,7 @@ ORDER BY entradas_salidas.fecha, personal.cve_personal";
 
             // Asigna la lista a tu DataGrid o ListView
             dvgReporte.ItemsSource = lTablaRepotePersonal;
+            lRepotePersonal = lTablaRepotePersonal;
 
         }
         public void llenadoTablaReporte(DateTime fechaInicio, DateTime fechaFin, string turno)
@@ -224,6 +234,7 @@ ORDER BY entradas_salidas.fecha, personal.cve_personal";
 
             // Asigna la lista a tu DataGrid o ListView
             dvgReporte.ItemsSource = lTablaRepotePersonal;
+            lRepotePersonal = lTablaRepotePersonal;
 
         }
 
@@ -332,7 +343,60 @@ ORDER BY entradas_salidas.fecha, personal.cve_personal";
         {
             llenadoCMBPersonal();
         }
-    }
+
+        private void btnGuardar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // Exportar a PDF
+            // Mostrar el diálogo para guardar el archivo
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            saveFileDialog.Title = "Guardar reporte como PDF";
+            saveFileDialog.FileName = "reporte.pdf";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string pdfPath = saveFileDialog.FileName;
+
+                using (PdfWriter writer = new PdfWriter(pdfPath))
+                {
+                    using (PdfDocument pdfDoc = new PdfDocument(writer))
+                    {
+                        Document document = new Document(pdfDoc);
+
+                        iText.Layout.Element.Table table = new iText.Layout.Element.Table(new float[] { 2, 4, 2, 2, 2, 2, 2, 2 });
+                        table.SetWidth(UnitValue.CreatePercentValue(100));
+
+                        // Añadir encabezados de la tabla
+                        table.AddHeaderCell("ID");
+                        table.AddHeaderCell("Nombre");
+                        table.AddHeaderCell("Rol");
+                        table.AddHeaderCell("Turno");
+                        table.AddHeaderCell("Fecha");
+                        table.AddHeaderCell("Hora Entrada");
+                        table.AddHeaderCell("Hora Salida");
+                        table.AddHeaderCell("Asistencia");
+
+                        // Añadir datos a la tabla
+                        foreach (var item in lRepotePersonal)
+                        {
+                            table.AddCell(item.id);
+                            table.AddCell(item.nombre);
+                            table.AddCell(item.rol);
+                            table.AddCell(item.turno);
+                            table.AddCell(item.fecha);
+                            table.AddCell(item.horaEntrada);
+                            table.AddCell(item.horaSalida);
+                            table.AddCell(item.asistencia);
+                        }
+
+                        document.Add(table);
+                    }
+                }
+
+                MessageBox.Show("Archivo PDF guardado exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        }
 
     public class TablaRepotePersonal
     {

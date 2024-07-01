@@ -139,7 +139,7 @@ namespace Asisto210
                 }
                 catch (Exception)
                 {
-
+                    MessageBox.Show("Algno de los campos contiene carácteres no soportados.");
                     throw;
                 }
                 actrualizarPersonal();

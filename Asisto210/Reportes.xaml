@@ -230,7 +230,7 @@
                 <ComboBox x:Name="cmbPersonal" Text="ID" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Width="234" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
                 </ComboBox>
                 <Label x:Name="btnGenerar" Content="Generar reporte" HorizontalAlignment="Center" Height="20" Width="238" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,414,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnGenerar_MouseLeftButtonUp"/>
-                <Label x:Name="btnGenerar_Copiar" Content="Guardar" HorizontalAlignment="Center" Height="20" Width="238" HorizontalContentAlignment="Center" Foreground="White" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,449,0,0" BorderBrush="White" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" Background="#FF4E1417"/>
+                <Label x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Center" Height="20" Width="238" HorizontalContentAlignment="Center" Foreground="White" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,449,0,0" BorderBrush="White" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" Background="#FF4E1417" MouseLeftButtonUp="btnGuardar_MouseLeftButtonUp"/>
                 <Label x:Name="btnRiniciarFiltro" Content="" Margin="224,207,0,0" FontFamily="Poppins" FontSize="14" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MouseLeftButtonUp="btnRiniciarFiltro_MouseLeftButtonUp" Cursor="Hand">
                     <Label.Background>
                         <ImageBrush ImageSource="/refresh-n.png"/>
