@@ -218,40 +218,24 @@
                 <DropShadowEffect Opacity="0.1"/>
             </Border.Effect>
             <Grid x:Name="dockGeneararReporte">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="14*"/>
-                    <ColumnDefinition Width="237*"/>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="lblFiltrosGeneracion" Content="Filtros de generacón" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="176" Grid.ColumnSpan="2"/>
-                <CheckBox x:Name="cmbSomo" Content="Directivos" HorizontalAlignment="Left" Margin="3,83,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <ComboBox x:Name="cmbRol_Editar" Text="ID" HorizontalAlignment="Left" Margin="0,279,0,0" VerticalAlignment="Top" Width="230" Height="20" Background="White" BorderBrush="Black" BorderThickness="1" Grid.Column="1">
-                    <ComboBoxItem Content="Diario"/>
-                    <ComboBoxItem Content="Semanal"/>
-                    <ComboBoxItem Content="Mensual"/>
+                <Label x:Name="lblFiltrosGeneracion" Content="Filtros de generacón" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="176"/>
+                <ComboBox x:Name="cmbPeriodoFiltro" Text="ID" HorizontalAlignment="Left" Margin="7,71,0,0" VerticalAlignment="Top" Width="234" Height="20" Background="White" BorderBrush="Black" BorderThickness="1"/>
+                <Label x:Name="lblFiltrosGeneracion_Copiar1" Content="Turno" HorizontalAlignment="Left" Margin="9,152,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="45"/>
+                <Label x:Name="lblFiltrosGeneracion_Copiar3" Content="Periodo de tiempo" HorizontalAlignment="Left" Margin="9,39,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="130"/>
+                <ComboBox x:Name="cmbTurnoFiltro" Text="ID" HorizontalAlignment="Left" Margin="7,179,0,0" VerticalAlignment="Top" Width="234" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
                 </ComboBox>
-                <Label x:Name="lblFiltrosGeneracion_Copiar" Content="Mostrar" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176" Grid.Column="1"/>
-                <CheckBox x:Name="cmbSomo_Copiar" Content="Administradores" HorizontalAlignment="Left" Margin="106,83,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <CheckBox x:Name="cmbSomo_Copiar1" Content="Docentes" HorizontalAlignment="Left" Margin="3,104,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <Label x:Name="lblFiltrosGeneracion_Copiar1" Content="Turno" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176" Grid.Column="1"/>
-                <CheckBox x:Name="cmbSomo_Copiar2" Content="Matutino" HorizontalAlignment="Left" Margin="3,157,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <CheckBox x:Name="cmbSomo_Copiar4" Content="Vespertino" HorizontalAlignment="Left" Margin="106,157,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <Label x:Name="lblFiltrosGeneracion_Copiar2" Content="Asistencia" HorizontalAlignment="Left" Margin="3,178,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176" Grid.Column="1"/>
-                <CheckBox x:Name="cmbSomo_Copiar5" Content="Resgistrada" HorizontalAlignment="Left" Margin="0,210,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <CheckBox x:Name="cmbSomo_Copiar6" Content="No registrada" HorizontalAlignment="Left" Margin="106,210,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <Label x:Name="lblFiltrosGeneracion_Copiar3" Content="Periodo de tiempo" HorizontalAlignment="Left" Margin="3,252,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176" Grid.Column="1"/>
-                <CheckBox x:Name="cmbSomo_Copiar7" Content="Justificada" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Thin"/>
-                <Border x:Name="bbtnElditarPersonal" BorderBrush="#FF4E1417" BorderThickness="1" Margin="6,398,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Grid.ColumnSpan="2">
-                    <Label x:Name="btnEliminarPersonal1" Content="Genearar reporte" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
-                </Border>
-                <Border x:Name="bbtnElditarPersonal_Copiar" BorderBrush="#FF4E1417" BorderThickness="1" Margin="6,434,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Grid.ColumnSpan="2" Background="#FFFFC7C7">
-                    <Label x:Name="btnEliminarPersonal2" Content="Guardar reporte" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="229" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand"/>
-                </Border>
-                <ComboBox x:Name="cmbRol_Editar_Copiar" Text="ID" HorizontalAlignment="Left" Margin="0,354,0,0" VerticalAlignment="Top" Width="230" Height="20" Background="White" BorderBrush="Black" BorderThickness="1" Grid.Column="1">
-                    <ComboBoxItem Content="Diario"/>
-                    <ComboBoxItem Content="Semanal"/>
-                    <ComboBoxItem Content="Mensual"/>
+                <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Center" Margin="0,123,0,0" VerticalAlignment="Top" Width="232" BorderBrush="{x:Null}"/>
+                <Label x:Name="lblFiltrosGeneracion_Copiar" Content="A partir del dia" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="176"/>
+                <Label x:Name="lblFiltrosGeneracion_Copiar2" Content="Personal" HorizontalAlignment="Left" Margin="9,204,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" RenderTransformOrigin="0.39,0.114" Width="70"/>
+                <ComboBox x:Name="cmbPersonal" Text="ID" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Width="234" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
                 </ComboBox>
-                <CheckBox x:Name="cmbSomo_Copiar8" Content="Personal especfíco" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14" Grid.Column="1" FontWeight="Bold" BorderBrush="Black"/>
+                <Label x:Name="btnGenerar" Content="Generar reporte" HorizontalAlignment="Center" Height="20" Width="238" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,414,0,0" BorderBrush="#FF4E1417" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" MouseLeftButtonUp="btnGenerar_MouseLeftButtonUp"/>
+                <Label x:Name="btnGenerar_Copiar" Content="Guardar" HorizontalAlignment="Center" Height="20" Width="238" HorizontalContentAlignment="Center" Foreground="White" Cursor="Hand" Padding="5,0,5,0" VerticalAlignment="Top" Margin="0,449,0,0" BorderBrush="White" BorderThickness="1,1,1,1" VerticalContentAlignment="Center" Background="#FF4E1417"/>
+                <Label x:Name="btnRiniciarFiltro" Content="" Margin="224,207,0,0" FontFamily="Poppins" FontSize="14" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MouseLeftButtonUp="btnRiniciarFiltro_MouseLeftButtonUp" Cursor="Hand">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/refresh-n.png"/>
+                    </Label.Background>
+                </Label>
             </Grid>
         </Border>
 

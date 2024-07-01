@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Asisto210
 {
@@ -20,18 +22,27 @@ namespace Asisto210
     /// </summary>
     public partial class Reportes : Page
     {
+
+        List<TablaRepotePersonal> lTablaRepotePersonal = new List<TablaRepotePersonal>();
+        Conexion conexion;
+
         public Reportes()
         {
+
+            conexion = new Conexion();
             InitializeComponent();
-            EncabezadosTablaReporte();
-            llenadoReporte();
+            EncabezadosTablaReporte();            
+            llenadoCMBPeriodo();
+            llenadoCMBTurnos();
+            llenadoCMBPersonal();
+
         }
 
         private void EncabezadosTablaReporte()
         {
             DataGridTextColumn idColumn = new DataGridTextColumn
             {
-                Header = " ID ",
+                Header = " Clave personal ",
                 Binding = new Binding("id"),
                 Width = 30,
             };
@@ -67,10 +78,17 @@ namespace Asisto210
 
             DataGridTextColumn horaColumn = new DataGridTextColumn
             {
-                Header = " Hora de registro ",
-                Binding = new Binding("hora"),
+                Header = " Hora de entrada ",
+                Binding = new Binding("horaEntrada"),
             };
             dvgReporte.Columns.Add(horaColumn);
+
+            DataGridTextColumn horasColumn = new DataGridTextColumn
+            {
+                Header = " Hora de salida ",
+                Binding = new Binding("horaSalida"),
+            };
+            dvgReporte.Columns.Add(horasColumn);
 
             DataGridTextColumn asistencaColumn = new DataGridTextColumn
             {
@@ -79,16 +97,240 @@ namespace Asisto210
             };
             dvgReporte.Columns.Add(asistencaColumn);
         }
-        public void llenadoReporte()
+
+        public void llenadoTablaReportePersonal(DateTime fechaInicio, DateTime fechaFin, string turno, string cve_personal)
         {
 
-            List<TablaRepotePersonal> lTablaRepotePersonal = new List<TablaRepotePersonal>
-            {
-                new TablaRepotePersonal { id = "123", nombre = "Mauricio Leoanrdo Aleman Diaz", rol = "Docente",turno="Matutino",fecha = "10-05-2024",hora = "13:23:00",asistencia = "Registrada"},
-            };
+            string query = @"
+SELECT
+    personal.cve_personal,
+    personal.nombre,
+    personal.apelldio_pateno, 
+    personal.apellido_materno,
+    roles.descripcion,
+    entradas_salidas.hora_entrada,
+    entradas_salidas.hora_salida,
+    entradas_salidas.turno,
+    entradas_salidas.fecha,
+    CASE
+        WHEN entradas_salidas.hora_salida IS NULL THEN 'Esperando salida'
+        ELSE 'Completo'
+    END AS estado_registro
+FROM entradas_salidas
+INNER JOIN personal ON personal.cve_personal = entradas_salidas.cve_personal
+INNER JOIN roles ON personal.rol_personal = roles.cve_rol
+WHERE entradas_salidas.fecha BETWEEN @fechaInicio AND @fechaFin 
+    AND entradas_salidas.turno = @turno 
+    AND personal.cve_personal = @cve_personal
+ORDER BY entradas_salidas.fecha, personal.cve_personal";
 
+            List<SqlParameter> parameters = new List<SqlParameter>
+    {
+        new SqlParameter("@fechaInicio", SqlDbType.Date) { Value = fechaInicio },
+        new SqlParameter("@fechaFin", SqlDbType.Date) { Value = fechaFin },
+        new SqlParameter("@turno", SqlDbType.VarChar, 10) { Value = turno },
+        new SqlParameter("@cve_personal", SqlDbType.NVarChar, 4) { Value = cve_personal }
+    };
+
+            List<TablaRepotePersonal> lTablaRepotePersonal = new List<TablaRepotePersonal>();
+
+            using (var reader = conexion.ExecuteParametrizedReader(query, parameters.ToArray()))
+            {
+                while (reader.Read())
+                {
+                    TimeSpan horaEntrada = reader["hora_entrada"] != DBNull.Value ? (TimeSpan)reader["hora_entrada"] : TimeSpan.Zero;
+                    TimeSpan horaSalida = reader["hora_salida"] != DBNull.Value ? (TimeSpan)reader["hora_salida"] : TimeSpan.Zero;
+
+                    string horaFormateada = (horaEntrada != TimeSpan.Zero && horaSalida != TimeSpan.Zero)
+                        ? $"{horaEntrada.ToString(@"hh\:mm")} - {horaSalida.ToString(@"hh\:mm")}"
+                        : (horaEntrada != TimeSpan.Zero ? horaEntrada.ToString(@"hh\:mm") : "");
+
+                    lTablaRepotePersonal.Add(new TablaRepotePersonal
+                    {
+                        id = reader["cve_personal"].ToString(),
+                        nombre = $"{reader["nombre"]} {reader["apelldio_pateno"]} {reader["apellido_materno"]}",
+                        rol = reader["descripcion"].ToString(),
+                        turno = reader["turno"].ToString(),
+                        fecha = Convert.ToDateTime(reader["fecha"]).ToString("yyyy-MM-dd"),
+                        horaEntrada = reader["hora_entrada"].ToString(),
+                        horaSalida = reader["hora_salida"].ToString(),
+                        asistencia = reader["estado_registro"].ToString()
+                    });
+                }
+            }
+
+            // Asigna la lista a tu DataGrid o ListView
             dvgReporte.ItemsSource = lTablaRepotePersonal;
 
+        }
+        public void llenadoTablaReporte(DateTime fechaInicio, DateTime fechaFin, string turno)
+        {
+
+            string query = @"
+SELECT
+    personal.cve_personal,
+    personal.nombre,
+    personal.apelldio_pateno, 
+    personal.apellido_materno,
+    roles.descripcion,
+    entradas_salidas.hora_entrada,
+    entradas_salidas.hora_salida,
+    entradas_salidas.turno,
+    entradas_salidas.fecha,
+    CASE
+        WHEN entradas_salidas.hora_salida IS NULL THEN 'Esperando salida'
+        ELSE 'Completo'
+    END AS estado_registro
+FROM entradas_salidas
+INNER JOIN personal ON personal.cve_personal = entradas_salidas.cve_personal
+INNER JOIN roles ON personal.rol_personal = roles.cve_rol
+WHERE entradas_salidas.fecha BETWEEN @fechaInicio AND @fechaFin 
+    AND entradas_salidas.turno = @turno 
+ORDER BY entradas_salidas.fecha, personal.cve_personal";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+    {
+        new SqlParameter("@fechaInicio", SqlDbType.Date) { Value = fechaInicio },
+        new SqlParameter("@fechaFin", SqlDbType.Date) { Value = fechaFin },
+        new SqlParameter("@turno", SqlDbType.VarChar, 10) { Value = turno },
+    };
+
+            List<TablaRepotePersonal> lTablaRepotePersonal = new List<TablaRepotePersonal>();
+
+            using (var reader = conexion.ExecuteParametrizedReader(query, parameters.ToArray()))
+            {
+                while (reader.Read())
+                {
+                    TimeSpan horaEntrada = reader["hora_entrada"] != DBNull.Value ? (TimeSpan)reader["hora_entrada"] : TimeSpan.Zero;
+                    TimeSpan horaSalida = reader["hora_salida"] != DBNull.Value ? (TimeSpan)reader["hora_salida"] : TimeSpan.Zero;
+
+                    string horaFormateada = (horaEntrada != TimeSpan.Zero && horaSalida != TimeSpan.Zero)
+                        ? $"{horaEntrada.ToString(@"hh\:mm")} - {horaSalida.ToString(@"hh\:mm")}"
+                        : (horaEntrada != TimeSpan.Zero ? horaEntrada.ToString(@"hh\:mm") : "");
+
+                    lTablaRepotePersonal.Add(new TablaRepotePersonal
+                    {
+                        id = reader["cve_personal"].ToString(),
+                        nombre = $"{reader["nombre"]} {reader["apelldio_pateno"]} {reader["apellido_materno"]}",
+                        rol = reader["descripcion"].ToString(),
+                        turno = reader["turno"].ToString(),
+                        fecha = Convert.ToDateTime(reader["fecha"]).ToString("yyyy-MM-dd"),
+                        horaEntrada = reader["hora_entrada"].ToString(),
+                        horaSalida = reader["hora_salida"].ToString(),
+                        asistencia = reader["estado_registro"].ToString()
+                    });
+                }
+            }
+
+            // Asigna la lista a tu DataGrid o ListView
+            dvgReporte.ItemsSource = lTablaRepotePersonal;
+
+        }
+
+        private void llenadoCMBPeriodo()
+        {
+            cmbPeriodoFiltro.Items.Clear();
+
+            cmbPeriodoFiltro.Items.Add("Semanal");
+            cmbPeriodoFiltro.Items.Add("Mensual");
+
+        }
+        private void llenadoCMBTurnos()
+        {
+            cmbTurnoFiltro.Items.Clear();
+
+            cmbTurnoFiltro.Items.Add("Matutino");
+            cmbTurnoFiltro.Items.Add("Vespertino");
+
+        }
+        private void llenadoCMBPersonal()
+        {
+            cmbPersonal.Items.Clear();            
+            string query = "select personal.cve_personal,personal.nombre,personal.apelldio_pateno,personal.apellido_materno,roles.descripcion from personal inner join roles on personal.rol_personal = roles.cve_rol";
+
+            using (var reader = conexion.ExecuteReader(query))
+                while (reader.Read())
+                {
+                    cmbPersonal.Items.Add(reader["cve_personal"].ToString() + " " + reader["nombre"].ToString() + " " + reader["apelldio_pateno"].ToString() + " " + reader["apellido_materno"].ToString());                    
+                }            
+
+        }
+
+        private void btnGenerar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!dtpFechaInicio.SelectedDate.HasValue)
+            {
+                MessageBox.Show("Por favor, seleccione una fecha de inicio.");
+                return;
+            }
+
+            DateTime fechaInicio = dtpFechaInicio.SelectedDate.Value;
+            DateTime fechaFin;
+
+            if (cmbPeriodoFiltro.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor, seleccione un período (Semanal o Mensual).");
+                return;
+            }
+
+            string periodoSeleccionado = cmbPeriodoFiltro.SelectedItem.ToString();
+
+            switch (periodoSeleccionado)
+            {
+                case "Semanal":
+                    fechaFin = fechaInicio.AddDays(6); // 7 días en total (incluyendo el día de inicio)
+                    break;
+                case "Mensual":
+                    fechaFin = fechaInicio.AddMonths(1).AddDays(-1); // Último día del mes
+                    break;
+                default:
+                    MessageBox.Show("Período no válido seleccionado.");
+                    return;
+            }
+
+            string turno = cmbTurnoFiltro.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(turno))
+            {
+                MessageBox.Show("Por favor, seleccione un turno.");
+                return;
+            }
+            try
+            {
+            string clavePersonal = cmbPersonal.SelectedItem.ToString().Substring(0, 4);
+            
+                if (string.IsNullOrEmpty(clavePersonal))
+                {
+                    MessageBox.Show("Por favor, ingrese una clave de personal.");
+                    return;
+                }
+
+                try
+                {
+                    llenadoTablaReportePersonal(fechaInicio, fechaFin, turno, clavePersonal);
+                    MessageBox.Show($"Reporte generado desde {fechaInicio.ToShortDateString()} hasta {fechaFin.ToShortDateString()}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al generar el reporte: {ex.Message}");
+                }
+            }
+            catch
+            {
+                try
+                {
+                    llenadoTablaReporte(fechaInicio, fechaFin, turno);
+                    MessageBox.Show($"Reporte generado desde {fechaInicio.ToShortDateString()} hasta {fechaFin.ToShortDateString()}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al generar el reporte: {ex.Message}");
+                }
+            }
+        }
+
+        private void btnRiniciarFiltro_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            llenadoCMBPersonal();
         }
     }
 
@@ -99,7 +341,8 @@ namespace Asisto210
         public string rol { get; set; }
         public string turno { get; set; }
         public string fecha { get; set; }
-        public string hora { get; set; }
+        public string horaEntrada { get; set; }
+        public string horaSalida { get; set; }
         public string asistencia { get; set; }
     }
 

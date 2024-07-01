@@ -132,31 +132,43 @@ namespace Asisto210
 
         }
 
-        private void llenadoTablaRegistroDiario(string fecha_dia)
+        private void llenadoTablaRegistroDiario(string fecha_dia, string cve_personal = null)
         {
             string query = @"
-    SELECT 
-        entradas_salidas.cve_personal, 
-        personal.nombre, 
-        personal.apelldio_pateno, 
-        personal.apellido_materno,
-        entradas_salidas.fecha, 
-        entradas_salidas.hora_entrada, 
-        entradas_salidas.hora_salida, 
-        entradas_salidas.turno,
-        justificantes.motivo
-    FROM entradas_salidas 
-    INNER JOIN personal ON entradas_salidas.cve_personal = personal.cve_personal 
-    LEFT JOIN justificantes ON justificantes.cve_personal = personal.cve_personal
-        AND justificantes.fecha_justificante = entradas_salidas.fecha
-        AND justificantes.turno = entradas_salidas.turno
-    WHERE entradas_salidas.fecha = @fechaBusqueda";
+SELECT 
+    entradas_salidas.cve_personal, 
+    personal.nombre, 
+    personal.apelldio_pateno, 
+    personal.apellido_materno,
+    entradas_salidas.fecha, 
+    entradas_salidas.hora_entrada, 
+    entradas_salidas.hora_salida, 
+    entradas_salidas.turno,
+    justificantes.motivo
+FROM entradas_salidas 
+INNER JOIN personal ON entradas_salidas.cve_personal = personal.cve_personal 
+LEFT JOIN justificantes ON justificantes.cve_personal = personal.cve_personal
+    AND justificantes.fecha_justificante = entradas_salidas.fecha
+    AND justificantes.turno = entradas_salidas.turno
+WHERE entradas_salidas.fecha = @fechaBusqueda";
 
-            SqlParameter parameter = new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date);
-            parameter.Value = fecha_dia;
+            if (!string.IsNullOrEmpty(cve_personal))
+            {
+                query += " AND entradas_salidas.cve_personal = @cvePersonal";
+            }
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+    {
+        new SqlParameter("@fechaBusqueda", System.Data.SqlDbType.Date) { Value = fecha_dia }
+    };
+
+            if (!string.IsNullOrEmpty(cve_personal))
+            {
+                parameters.Add(new SqlParameter("@cvePersonal", System.Data.SqlDbType.VarChar, 4) { Value = cve_personal });
+            }
+
             List<TablaRegistroDiario> registrosDiarios = new List<TablaRegistroDiario>();
-
-            using (var reader = conexion.ExecuteParametrizedReader(query, parameter))
+            using (var reader = conexion.ExecuteParametrizedReader(query, parameters.ToArray()))
             {
                 while (reader.Read())
                 {
@@ -318,17 +330,13 @@ namespace Asisto210
 
         private void btnAplicarFiltros_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (fechaNueva)
+            if (fechaNueva && dtpBusqueda.SelectedDate.HasValue)
             {
-                fechaSistema = dtpBusqueda.SelectedDate.Value.ToString("yyyy-MM-dd").Substring(0, 10);                
-                llenadoTablaRegistroDiario(fechaSistema);
-
-                string cve_filtro = "";
-                cve_filtro = cmbCVE_Filtro.SelectedItem.ToString().Substring(0, 4);
-
+                string fechaSistema = dtpBusqueda.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string cve_filtro = cmbCVE_Filtro.SelectedItem != null ? cmbCVE_Filtro.SelectedItem.ToString().Substring(0, 4) : null;
+                llenadoTablaRegistroDiario(fechaSistema, cve_filtro);
+                MessageBox.Show("Se aplicó el filtro");
             }
-
-            MessageBox.Show("Se aplicó el filtro");
         }
 
         private void btnGuardarJustificante_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -1413,13 +1421,22 @@ namespace Asisto210
 
         private void btnRiniciarFiltro_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+
+            fechaSistema = DateTime.Now.ToString("yyyy-MM-dd");
+            llenadoTablaRegistroDiario(fechaSistema);
+
             llenarCMBPersonal();
             dtpDiaAsistenciaRapida.SelectedDate = null;
         }
 
         private void cmbCVE_Filtro_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (cmbCVE_Filtro.SelectedItem != null && dtpBusqueda.SelectedDate.HasValue)
+            {
+                string cve_filtro = cmbCVE_Filtro.SelectedItem.ToString().Substring(0, 4);
+                string fechaSistema = dtpBusqueda.SelectedDate.Value.ToString("yyyy-MM-dd");
+                llenadoTablaRegistroDiario(fechaSistema, cve_filtro);
+            }
         }
     }
 
