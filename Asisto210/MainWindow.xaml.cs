@@ -120,13 +120,6 @@ namespace Asisto210
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ASISTO210 aSISTO210 = new ASISTO210();
-            aSISTO210.Show();
-            this.Close();
-        }
-
         private bool acceso(String usuario,String contraseña)
         {
             bool bandera = false;
