@@ -320,8 +320,11 @@ namespace Asisto210
         {
             if (fechaNueva)
             {
-                fechaSistema = dtpBusqueda.SelectedDate.Value.ToString("yyyy-MM-dd").Substring(0, 10);
+                fechaSistema = dtpBusqueda.SelectedDate.Value.ToString("yyyy-MM-dd").Substring(0, 10);                
                 llenadoTablaRegistroDiario(fechaSistema);
+
+                string cve_filtro = "";
+                cve_filtro = cmbCVE_Filtro.SelectedItem.ToString().Substring(0, 4);
 
             }
 
@@ -391,22 +394,34 @@ namespace Asisto210
         }
 
         private void dtpDiaAsistenciaRapida_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {            
             string cve_horario_profesor = "";
             cve_horario_profesor = cmbHorarioProfesor.SelectedItem.ToString().Substring(9, 4);
             string fechaAsistencaRapida = "";
             fechaAsistencaRapida = dtpDiaAsistenciaRapida.SelectedDate.Value.ToString("yyyy-MM-dd").Substring(0, 10);
 
-            if (cve_horario_profesor != "")
+            try
             {
-                llenadoHorarioSeleccionado(cve_horario_profesor);
-                consultaAistenciaRapida(fechaAsistencaRapida, G_turno, G_cve_profesor);
+                if (dtpDiaAsistenciaRapida.SelectedDate.HasValue)
+                {
+                    if (cve_horario_profesor != "")
+                    {
+                        limpiarTablaHorarios();
+                        llenadoHorarioSeleccionado(cve_horario_profesor);
+                        consultaAistenciaRapida(fechaAsistencaRapida, G_turno, G_cve_profesor);
+                        fechaAsistencaRapida = "";
+                        dtpDiaAsistenciaRapida.SelectedDate = null;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Seleccionar un horario.");
+                    }
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Seleccionar un horario.");
-            }
 
+            }
 
         }
 
@@ -455,10 +470,30 @@ namespace Asisto210
                 lblHoraSalida.Content = "Hora salida: " + hora_salida;
                 lblJustificante.Content = "Justificación: " + justificacion_motivo;
                 coloreadoSARBack();
+                /////////////
+                string justificante1 = "Justificación: Sin datos";
+                string justificante2 = lblJustificante.Content.ToString();
 
-                if (lblJustificante.Content != "Justificación: Sin datos")
+                //////////
+
+                if (justificante1 == justificante2)
+                {
+
+                    if (lblHoraEntrada.Content != "Hora entrada: Sin datos")
+                    {
+                        string dia_semana = lblDiaSemana.Content.ToString();
+                        coloreadoPHBack(dia_semana);
+                    }
+
+                }
+                else
                 {
                     coloreadoJUSBack();
+                    if (lblHoraEntrada.Content != "Hora entrada: Sin datos")
+                    {
+                        string dia_semana = lblDiaSemana.Content.ToString();
+                        coloreadoPHBack(dia_semana);
+                    }
                 }
                 
             }
@@ -611,6 +646,83 @@ namespace Asisto210
             }
         }
 
+        private void coloreadoPHBack(string dia_semana)
+        {
+            string hora_entrada = lblHoraEntrada.Content.ToString().Substring(14, 8);
+            string hora_salida = lblHoraSalida.Content.ToString().Substring(13, 8);
+            TimeSpan horaEntradaRegistro = TimeSpan.Parse(hora_entrada);
+            TimeSpan horaSalidaRegistro = TimeSpan.Parse(hora_salida);
+
+            // Array de horas del horario
+            TimeSpan[] horasHorario = new TimeSpan[9];
+            for (int i = 1; i <= 9; i++)
+            {
+                string horaContent = (FindName($"Hora{i}") as ContentControl)?.Content.ToString();
+                if (horaContent != null)
+                {
+                    horasHorario[i - 1] = TimeSpan.Parse(horaContent.Substring(0, 5));
+                }
+            }
+
+            // Determinar el día de la semana
+            string diaSemana = dia_semana.Split(':')[1].Trim().ToLower();
+
+            // Verificar si la entrada y salida están dentro del rango de 15 minutos
+            bool entradaAceptable = horaEntradaRegistro >= horasHorario[0].Add(TimeSpan.FromMinutes(-15)) &&
+                                    horaEntradaRegistro <= horasHorario[0].Add(TimeSpan.FromMinutes(15));
+            bool salidaAceptable = horaSalidaRegistro >= horasHorario[8].Add(TimeSpan.FromMinutes(-15)) &&
+                                   horaSalidaRegistro <= horasHorario[8].Add(TimeSpan.FromMinutes(15));
+
+            if (entradaAceptable && salidaAceptable)
+            {
+                // Si tanto la entrada como la salida son aceptables, pintar todas las horas de verde
+                for (int i = 0; i < horasHorario.Length; i++)
+                {
+                    string nombreElemento = $"H{i + 1}{char.ToUpper(diaSemana[0]) + diaSemana.Substring(1)}";
+                    var elemento = FindName(nombreElemento) as Border;
+                    if (elemento != null)
+                    {
+                        elemento.Background = new SolidColorBrush(colorVerde);
+                    }
+                }
+            }
+            else
+            {
+                // Encontrar la primera hora a la que llegó el empleado
+                int primeraHoraLlegada = -1;
+                for (int i = 0; i < horasHorario.Length; i++)
+                {
+                    if (horaEntradaRegistro <= horasHorario[i])
+                    {
+                        primeraHoraLlegada = i;
+                        break;
+                    }
+                }
+
+                if (primeraHoraLlegada != -1)
+                {
+                    // Pintar de azul desde la hora de llegada hasta la hora actual
+                    for (int i = primeraHoraLlegada; i < horasHorario.Length; i++)
+                    {
+                        string nombreElemento = $"H{i + 1}{char.ToUpper(diaSemana[0]) + diaSemana.Substring(1)}";
+                        var elemento = FindName(nombreElemento) as Border;
+                        if (elemento != null)
+                        {
+                            elemento.Background = new SolidColorBrush(colorAzul);
+                        }
+
+                        // Si llegamos a la hora actual, detenemos el pintado
+                        if (horasHorario[i] > DateTime.Now.TimeOfDay)
+                        {
+                            break;
+                        }
+                    }                    
+                }
+                else
+                {
+                }
+            }
+        }
 
         private void llenadoHorarioSeleccionado(string cve_horario_profesor)
         {
@@ -1171,6 +1283,144 @@ namespace Asisto210
             Hora9Viernes.Content = SHora9Viernes;
         }
 
+        private void limpiarTablaHorarios()
+        {
+            Hora1.Content = "Ingresa hora";
+            Hora2.Content = "Ingresa hora";
+            Hora3.Content = "Ingresa hora";
+            Hora4.Content = "Ingresa hora";
+            Hora5.Content = "Ingresa hora";
+            Hora6.Content = "Ingresa hora";
+            Hora7.Content = "Ingresa hora";
+            Hora8.Content = "Ingresa hora";
+            Hora9.Content = "Ingresa hora";
+
+            SHora1 = "0";
+            SHora2 = "0";
+            SHora3 = "0";
+            SHora4 = "0";
+            SHora5 = "0";
+            SHora6 = "0";
+            SHora7 = "0";
+            SHora8 = "0";
+            SHora9 = "0";
+
+            Hora1Lunes.Content = "Asignatura";
+            Hora2Lunes.Content = "Asignatura";
+            Hora3Lunes.Content = "Asignatura";
+            Hora4Lunes.Content = "Asignatura";
+            Hora5Lunes.Content = "Asignatura";
+            Hora6Lunes.Content = "Asignatura";
+            Hora7Lunes.Content = "Asignatura";
+            Hora8Lunes.Content = "Asignatura";
+            Hora9Lunes.Content = "Asignatura";
+
+            SHora1Lunes = "0";
+            SHora2Lunes = "0";
+            SHora3Lunes = "0";
+            SHora4Lunes = "0";
+            SHora5Lunes = "0";
+            SHora6Lunes = "0";
+            SHora7Lunes = "0";
+            SHora8Lunes = "0";
+            SHora9Lunes = "0";
+
+            Hora1Martes.Content = "Asignatura";
+            Hora2Martes.Content = "Asignatura";
+            Hora3Martes.Content = "Asignatura";
+            Hora4Martes.Content = "Asignatura";
+            Hora5Martes.Content = "Asignatura";
+            Hora6Martes.Content = "Asignatura";
+            Hora7Martes.Content = "Asignatura";
+            Hora8Martes.Content = "Asignatura";
+            Hora9Martes.Content = "Asignatura";
+
+            SHora1Martes = "0";
+            SHora2Martes = "0";
+            SHora3Martes = "0";
+            SHora4Martes = "0";
+            SHora5Martes = "0";
+            SHora6Martes = "0";
+            SHora7Martes = "0";
+            SHora8Martes = "0";
+            SHora9Martes = "0";
+
+
+            Hora1Miercoles.Content = "Asignatura";
+            Hora2Miercoles.Content = "Asignatura";
+            Hora3Miercoles.Content = "Asignatura";
+            Hora4Miercoles.Content = "Asignatura";
+            Hora5Miercoles.Content = "Asignatura";
+            Hora6Miercoles.Content = "Asignatura";
+            Hora7Miercoles.Content = "Asignatura";
+            Hora8Miercoles.Content = "Asignatura";
+            Hora9Miercoles.Content = "Asignatura";
+
+            SHora1Miercoles = "0";
+            SHora2Miercoles = "0";
+            SHora3Miercoles = "0";
+            SHora4Miercoles = "0";
+            SHora5Miercoles = "0";
+            SHora6Miercoles = "0";
+            SHora7Miercoles = "0";
+            SHora8Miercoles = "0";
+            SHora9Miercoles = "0";
+
+
+            Hora1Jueves.Content = "Asignatura";
+            Hora2Jueves.Content = "Asignatura";
+            Hora3Jueves.Content = "Asignatura";
+            Hora4Jueves.Content = "Asignatura";
+            Hora5Jueves.Content = "Asignatura";
+            Hora6Jueves.Content = "Asignatura";
+            Hora7Jueves.Content = "Asignatura";
+            Hora8Jueves.Content = "Asignatura";
+            Hora9Jueves.Content = "Asignatura";
+
+            SHora1Jueves = "0";
+            SHora2Jueves = "0";
+            SHora3Jueves = "0";
+            SHora4Jueves = "0";
+            SHora5Jueves = "0";
+            SHora6Jueves = "0";
+            SHora7Jueves = "0";
+            SHora8Jueves = "0";
+            SHora9Jueves = "0";
+
+
+            Hora2Viernes.Content = "Asignatura";
+            Hora3Viernes.Content = "Asignatura";
+            Hora4Viernes.Content = "Asignatura";
+            Hora5Viernes.Content = "Asignatura";
+            Hora1Viernes.Content = "Asignatura";
+            Hora6Viernes.Content = "Asignatura";
+            Hora7Viernes.Content = "Asignatura";
+            Hora8Viernes.Content = "Asignatura";
+            Hora9Viernes.Content = "Asignatura";
+
+            SHora1Viernes = "0";
+            SHora2Viernes = "0";
+            SHora3Viernes = "0";
+            SHora4Viernes = "0";
+            SHora5Viernes = "0";
+            SHora6Viernes = "0";
+            SHora7Viernes = "0";
+            SHora8Viernes = "0";
+            SHora9Viernes = "0";
+
+
+        }
+
+        private void btnRiniciarFiltro_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            llenarCMBPersonal();
+            dtpDiaAsistenciaRapida.SelectedDate = null;
+        }
+
+        private void cmbCVE_Filtro_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
     public class TablaRegistroDiario

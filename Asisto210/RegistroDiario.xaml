@@ -215,26 +215,29 @@
                         </Border>
                     </Grid>
                 </Border>
-                <Border x:Name="dockerRegistroDiarioFiltro" BorderThickness="1" Margin="542,44,32,0" Background="White" Height="196" VerticalAlignment="Top">
+                <Border x:Name="dockerRegistroDiarioFiltro" BorderThickness="1" Margin="542,44,32,0" Background="White" Height="156" VerticalAlignment="Top">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.085"/>
                     </Border.Effect>
                     <Grid x:Name="dockFiltro">
                         <Label x:Name="lblFiltrosGeneracion" Content="Filtro de vista de registro" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="244" Margin="10,10,0,0"/>
-                        <DatePicker x:Name="dtpBusqueda" HorizontalAlignment="Left" Margin="17,54,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="25" Foreground="Black" FontFamily="Poppins" SelectedDateChanged="dtpBusqueda_SelectedDateChanged"/>
-                        <Border x:Name="bbtnEditarPersonal" BorderBrush="#FF4E1417" BorderThickness="1" Margin="17,163,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="480">
+                        <DatePicker x:Name="dtpBusqueda" HorizontalAlignment="Left" Margin="17,82,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="24" Foreground="Black" FontFamily="Poppins" SelectedDateChanged="dtpBusqueda_SelectedDateChanged"/>
+                        <Border x:Name="bbtnEditarPersonal" BorderBrush="#FF4E1417" BorderThickness="1" Margin="17,124,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="480">
                             <Label x:Name="btnAplicarFiltros" Content="Aplicar filtros" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="479" HorizontalContentAlignment="Center" Foreground="#FF4E1417" Cursor="Hand" MouseLeftButtonUp="btnAplicarFiltros_MouseLeftButtonUp"/>
                         </Border>
-                        <Label Content="Buscar personal" Margin="17,114,330,56" FontFamily="Poppins" FontSize="14"/>
-                        <CheckBox x:Name="cmbMatutino_Copiar" Content="En espera" HorizontalAlignment="Left" Margin="122,0,0,0" VerticalAlignment="Center" FontFamily="Poppins" FontSize="14"/>
-                        <CheckBox x:Name="cmbMatutino_Copiar1" Content="Registrado" HorizontalAlignment="Left" Margin="17,0,0,0" VerticalAlignment="Center" FontFamily="Poppins" FontSize="14"/>
-                        <CheckBox x:Name="cmbMatutino_Copiar2" Content="Sin registrar" HorizontalAlignment="Left" Margin="333,59,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontSize="14"/>
-                        <Label Content="Estado de asistencia" Margin="187,53,179,109" FontFamily="Poppins" FontSize="14"/>
-                        <ComboBox x:Name="cmbCVE_Filtro" HorizontalAlignment="Left" Margin="132,116,0,0" VerticalAlignment="Top" Width="365" Height="20" Background="White" BorderBrush="Black" BorderThickness="1">
+                        <Label Content="Filtrar personal" Margin="267,50,0,0" FontFamily="Poppins" FontSize="14" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="105"/>
+                        <Label
+                        Margin="17,50,0,0" HorizontalAlignment="Left" Width="105" FontSize="14" FontFamily="Poppins" Content="Fecha de filtro" Height="32" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cmbCVE_Filtro" HorizontalAlignment="Left" Margin="267,89,0,0" VerticalAlignment="Top" Width="230" Height="20" Background="White" BorderBrush="Black" BorderThickness="1" SelectionChanged="cmbCVE_Filtro_SelectionChanged">
                         </ComboBox>
+                        <Label x:Name="btnRiniciarFiltro" Content="" Margin="476,10,0,0" FontFamily="Poppins" FontSize="14" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="21" MouseLeftButtonUp="btnRiniciarFiltro_MouseLeftButtonUp" Cursor="Hand">
+                            <Label.Background>
+                                <ImageBrush ImageSource="/refresh-n.png"/>
+                            </Label.Background>
+                        </Label>
                     </Grid>
                 </Border>
-                <Border x:Name="dockerJustificacionFaltas" BorderThickness="1" Margin="542,245,33,0" Background="White" Height="206" VerticalAlignment="Top">
+                <Border x:Name="dockerJustificacionFaltas" BorderThickness="1" Margin="542,205,33,0" Background="White" Height="206" VerticalAlignment="Top">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.1"/>
                     </Border.Effect>
@@ -487,14 +490,16 @@
                         <Label x:Name="lblJustificante" Content="Justificante" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
                     </Grid>
                 </Border>
-                <Border x:Name="dockerHorarioPersonalizado" BorderThickness="1" Background="White" Margin="542,456,0,0" HorizontalAlignment="Left" Width="508" VerticalAlignment="Top" Height="70">
+                <Border x:Name="dockerHorarioPersonalizado" BorderThickness="1" Background="White" Margin="542,416,0,0" HorizontalAlignment="Left" Width="508" VerticalAlignment="Top" Height="110">
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.12"/>
                     </Border.Effect>
                     <Grid>
                         <Label x:Name="lblFiltrosGeneracion_Copiar6" Content="Asistencia rápida" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="DemiBold" FontSize="16" RenderTransformOrigin="0.39,0.114" Width="147" Margin="10,5,0,0"/>
-                        <ComboBox x:Name="cmbHorarioProfesor" Margin="10,38,228,10" Height="20"/>
-                        <DatePicker x:Name="dtpDiaAsistenciaRapida" HorizontalAlignment="Left" Margin="312,35,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="26" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1" SelectedDateChanged="dtpDiaAsistenciaRapida_SelectedDateChanged"/>
+                        <ComboBox x:Name="cmbHorarioProfesor" Margin="10,78,228,0" Height="20" VerticalAlignment="Top"/>
+                        <DatePicker x:Name="dtpDiaAsistenciaRapida" HorizontalAlignment="Left" Margin="326,72,0,0" VerticalAlignment="Top" Width="170" BorderBrush="White" FontSize="14" Height="26" Foreground="Black" FontFamily="Poppins" Text="dddd" BorderThickness="1,1,1,1" SelectedDateChanged="dtpDiaAsistenciaRapida_SelectedDateChanged"/>
+                        <Label x:Name="lblNombre_Copiar3" Content="Horario" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
+                        <Label x:Name="lblNombre_Copiar4" Content="Fecha rápida" HorizontalAlignment="Left" Margin="326,44,0,0" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Normal" FontSize="16" RenderTransformOrigin="0.39,0.114"/>
                     </Grid>
                 </Border>
             </Grid>
